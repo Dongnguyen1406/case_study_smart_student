@@ -63,24 +63,23 @@ create table students(
 );
  
  create table student_modules(
+	student_module_id int primary key auto_increment,
 	student_id varchar(15),
     module_id int,
     registration_date date,
     `status` boolean default false,
-    primary key (student_id, module_id),
+    unique (student_id, module_id),
     foreign key (student_id) references students(student_id),
     foreign key (module_id) references modules(module_id)
  );
  
 create table scores(
 	score_id int primary key auto_increment,
-    student_id varchar(15),
-    module_id int,
+    student_module_id int,
     quiz_score double,
     practice_score double,
     average_score double,
-    foreign key (student_id) references students(student_id),
-    foreign key (module_id) references modules(module_id)
+    foreign key (student_module_id) references student_modules(student_module_id)
 );
 
 create table assessments(
