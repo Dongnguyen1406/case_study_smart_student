@@ -2,47 +2,43 @@ package Entity;
 
 import java.time.LocalDate;
 
-public class Student {
-    String studentId;
-    String studentName;
+public class Teacher {
+    String teacherId;
+    String teacherName;
     LocalDate dob;
     String gender;
     String address;
     String numberPhone;
-    String Email;
-    LocalDate startLearnDate;
-    int classId;
+    String email;
     Boolean status;
     Boolean isDelete;
 
-    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, int classId, Boolean status, Boolean isDelete) {
-        this.studentId = studentId;
-        this.studentName = studentName;
+    public Teacher(String teacherId, String teacherName, LocalDate dob, String gender, String address, String numberPhone, String email, Boolean status, Boolean isDelete) {
+        this.teacherId = teacherId;
+        this.teacherName = teacherName;
         this.dob = dob;
         this.gender = gender;
         this.address = address;
         this.numberPhone = numberPhone;
-        Email = email;
-        this.startLearnDate = startLearnDate;
-        this.classId = classId;
+        this.email = email;
         this.status = status;
         this.isDelete = isDelete;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getTeacherId() {
+        return teacherId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public LocalDate getDob() {
@@ -78,27 +74,11 @@ public class Student {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
-    }
-
-    public LocalDate getStartLearnDate() {
-        return startLearnDate;
-    }
-
-    public void setStartLearnDate(LocalDate startLearnDate) {
-        this.startLearnDate = startLearnDate;
-    }
-
-    public int getClassId() {
-        return classId;
-    }
-
-    public void setClassId(int classId) {
-        this.classId = classId;
+        this.email = email;
     }
 
     public Boolean getStatus() {
