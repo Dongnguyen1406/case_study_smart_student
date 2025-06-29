@@ -1,0 +1,33 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.main-header {
+  background: linear-gradient(to right, #0d6efd, #0a58ca);
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.main-header p {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}

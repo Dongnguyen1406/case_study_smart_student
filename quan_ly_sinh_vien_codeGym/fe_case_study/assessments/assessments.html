@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Quản Lý Điểm Học Sinh</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assessments/assessment.css">
+</head>
+<body>
+
+  <!-- Phần tiêu đề chính -->
+  <header class="main-header py-4 text-white text-center">
+    <h1 class="mb-1">Hệ Thống Quản Lý Điểm Học Sinh</h1>
+    <p class="lead">Dành cho giáo viên</p>
+  </header>
+
+  <!-- Phần nội dung chính -->
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header bg-primary text-white fw-bold">
+        Bảng đánh giá học viên
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Mã HS</th>
+                <th>Họ và tên</th>
+                <th>Điểm kiểm tra</th>
+                <th>Điểm thực hành</th>
+                <th>Điểm TB</th>
+                <th>Đạt yêu cầu</th>
+                <th>Tham gia đầy đủ</th>
+                <th>Trạng thái</th>
+                <th>Đánh giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HS001</td>
+                <td>Nguyễn Văn An</td>
+                <td><input type="number" class="form-control form-control-sm" min="0" max="10" step="0.1" value="8.5"></td>
+                <td><input type="number" class="form-control form-control-sm" min="0" max="10" step="0.1" value="7.5"></td>
+                <td>8.0</td>
+                <td class="text-center"><span class="badge bg-success">Đạt</span></td>
+                <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
+                <td class="text-center"><span class="badge bg-success">Hoàn thành</span></td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option>Chọn đánh giá</option>
+                    <option selected>Hoàn thành tốt</option>
+                    <option>Cần cố gắng thêm</option>
+                    <option>Cần hỗ trợ</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>HS002</td>
+                <td>Trần Thị Bình</td>
+                <td><input type="number" class="form-control form-control-sm" value="6.0"></td>
+                <td><input type="number" class="form-control form-control-sm" value="5.0"></td>
+                <td>5.5</td>
+                <td class="text-center"><span class="badge bg-success">Đạt</span></td>
+                <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
+                <td class="text-center"><span class="badge bg-success">Hoàn thành</span></td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option>Chọn đánh giá</option>
+                    <option selected>Cần cố gắng thêm</option>
+                    <option>Hoàn thành tốt</option>
+                    <option>Cần hỗ trợ</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>HS003</td>
+                <td>Lê Văn Cường</td>
+                <td><input type="number" class="form-control form-control-sm" value="4.5"></td>
+                <td><input type="number" class="form-control form-control-sm" value="4.5"></td>
+                <td>4.5</td>
+                <td class="text-center"><span class="badge bg-danger">Chưa đạt</span></td>
+                <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
+                <td class="text-center"><span class="badge bg-danger">Chưa hoàn thành</span></td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option>Chọn đánh giá</option>
+                    <option selected>Cần hỗ trợ</option>
+                    <option>Cần cố gắng thêm</option>
+                    <option>Hoàn thành tốt</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>HS004</td>
+                <td>Phạm Thị Dung</td>
+                <td><input type="number" class="form-control form-control-sm" value="9.0"></td>
+                <td><input type="number" class="form-control form-control-sm" value="9.5"></td>
+                <td>9.3</td>
+                <td class="text-center"><span class="badge bg-success">Đạt</span></td>
+                <td class="text-center"><input type="checkbox" class="form-check-input" checked></td>
+                <td class="text-center"><span class="badge bg-success">Hoàn thành</span></td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option>Chọn đánh giá</option>
+                    <option selected>Hoàn thành xuất sắc</option>
+                    <option>Hoàn thành tốt</option>
+                    <option>Cần cố gắng thêm</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>HS005</td>
+                <td>Hoàng Văn Em</td>
+                <td><input type="number" class="form-control form-control-sm" value="5.5"></td>
+                <td><input type="number" class="form-control form-control-sm" value="4.5"></td>
+                <td>5.0</td>
+                <td class="text-center"><span class="badge bg-success">Đạt</span></td>
+                <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                <td class="text-center"><span class="badge bg-warning text-dark">Đạt nhưng vắng</span></td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option>Chọn đánh giá</option>
+                    <option selected>Cần tham gia đầy đủ</option>
+                    <option>Cần cố gắng thêm</option>
+                    <option>Hoàn thành tốt</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Phần thống kê -->
+        <div class="d-flex justify-content-between mt-4">
+          <div>
+            <button type="button" class="btn btn-primary">Lưu đánh giá</button>
+            <button type="button" class="btn btn-outline-secondary ms-2">Xuất báo cáo</button>
+          </div>
+          <div>
+            <span class="me-3">Tổng số: <strong>5</strong> học sinh</span>
+            <span class="me-3">Đạt: <strong>4</strong> học sinh</span>
+            <span>Hoàn thành: <strong>3</strong> học sinh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">© 2023 Hệ Thống Quản Lý Điểm Học Sinh</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
