@@ -9,24 +9,35 @@ public class Student {
     String gender;
     String address;
     String numberPhone;
-    String Email;
+    String email;
     LocalDate startLearnDate;
-    int classId;
+    String className;
     Boolean status;
     Boolean isDelete;
 
-    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, int classId, Boolean status, Boolean isDelete) {
+    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className, Boolean status, Boolean isDelete) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.dob = dob;
         this.gender = gender;
         this.address = address;
         this.numberPhone = numberPhone;
-        Email = email;
+        this.email = email;
         this.startLearnDate = startLearnDate;
-        this.classId = classId;
+        this.className = className;
         this.status = status;
         this.isDelete = isDelete;
+    }
+
+    public Student(String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className) {
+        this.studentName = studentName;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.email = email;
+        this.startLearnDate = startLearnDate;
+        this.className = className;
     }
 
     public String getStudentId() {
@@ -78,11 +89,11 @@ public class Student {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public LocalDate getStartLearnDate() {
@@ -93,12 +104,12 @@ public class Student {
         this.startLearnDate = startLearnDate;
     }
 
-    public int getClassId() {
-        return classId;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public Boolean getStatus() {
