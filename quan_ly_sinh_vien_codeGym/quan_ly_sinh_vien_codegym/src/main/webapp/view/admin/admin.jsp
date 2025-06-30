@@ -38,28 +38,31 @@
                     <jsp:include page="dashboard-admin.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'studentForm'}">
-                    <jsp:include page="student-management/student-form.jsp"/>
+                    <jsp:include page="user-management/student-management/student-form.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'studentUpdate'}">
-                    <jsp:include page="student-management/student-update.jsp"/>
+                    <jsp:include page="user-management/student-management/student-update.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'teacherForm'}">
-                    <jsp:include page="teacher-management/teacher-form.jsp"/>
+                    <jsp:include page="user-management/teacher-management/teacher-form.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'teacherUpdate'}">
-                    <jsp:include page="teacher-management/teacher-update.jsp"/>
+                    <jsp:include page="user-management/teacher-management/teacher-update.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'students'}">
-                    <jsp:include page="student-management/student-list.jsp"/>
+                    <jsp:include page="user-management/student-management/student-list.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'teachers'}">
-                    <jsp:include page="teacher-management/teacher-list.jsp"/>
+                    <jsp:include page="user-management/teacher-management/teacher-list.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'courses'}">
                     <jsp:include page="course-management/course-list.jsp"/>
                 </c:when>
                 <c:when test="${param.page == 'modules'}">
                     <jsp:include page="module-management/module-list.jsp"/>
+                </c:when>
+                <c:when test="${param.page == 'classes'}">
+                    <jsp:include page="class-management/class-list.jsp"/>
                 </c:when>
                 <c:otherwise>
                     <h5>Vui lòng chọn một mục từ sidebar để bắt đầu.</h5>

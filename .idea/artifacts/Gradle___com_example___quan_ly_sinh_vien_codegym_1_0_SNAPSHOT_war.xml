@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" external-system-id="GRADLE" name="Gradle : com.example : quan_ly_sinh_vien_codegym-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$/quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym">
+        <buildTaskPath>:war</buildTaskPath>
+        <cleanTaskPath>:cleanWar</cleanTaskPath>
+      </options>
+    </properties>
+    <root id="archive" name="quan_ly_sinh_vien_codegym-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Gradle : com.example : quan_ly_sinh_vien_codegym-1.0-SNAPSHOT.war (exploded)" />
+    </root>
+  </artifact>
+</component>
