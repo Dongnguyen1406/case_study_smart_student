@@ -26,6 +26,9 @@
             <li class="nav-item mb-2">
                 <a class="nav-link text-white" href="${basePath}/view/admin/admin.jsp?page=modules">Module Management</a>
             </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="${basePath}/view/admin/admin.jsp?page=classes">Class Management</a>
+            </li>
         </ul>
     </div>
 </aside>
