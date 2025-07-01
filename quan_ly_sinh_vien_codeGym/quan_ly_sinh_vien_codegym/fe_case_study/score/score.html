@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Nhập Điểm Học Sinh</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/score/score.css">
+</head>
+<body>
+
+    <header class="main-header py-4 text-white text-center">
+    <h1 class="mb-1">Hệ Thống Quản Lý Điểm Học Sinh</h1>
+    <p class="lead">Dành cho giáo viên</p>
+  </header>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Tìm kiếm và Thống kê -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">Tìm kiếm học sinh</div>
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label">Mã học sinh</label>
+                            <input type="text" class="form-control" id="studentId" name="studentId" placeholder="Nhập mã học sinh">
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">Tên học sinh</label>
+                            <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Nhập tên học sinh">
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseSelect" class="form-label">Chọn khóa học</label>
+                            <select class="form-select" id="courseSelect" name="moduleId">
+                                <option value="">-- Chọn khóa học --</option>
+                                <option value="1">Lập trình Java cơ bản</option>
+                                <option value="2">Lập trình Web với HTML/CSS</option>
+                                <option value="3">Cơ sở dữ liệu SQL</option>
+                                <option value="4">Lập trình Python</option>
+                                <option value="5">Thiết kế UI/UX</option>
+                                <option value="6">Phát triển ứng dụng di động</option>
+                                <option value="7">DevOps cơ bản</option>
+                                <option value="8">Machine Learning</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Thống kê</div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tổng số học sinh đăng ký
+                            <span class="badge bg-primary rounded-pill">150</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Đã nhập điểm
+                            <span class="badge bg-success rounded-pill">120</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Chưa nhập điểm
+                            <span class="badge bg-danger rounded-pill">30</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Hoàn thành khóa học
+                            <span class="badge bg-info rounded-pill">95</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nhập điểm & thông tin khóa học -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Nhập điểm học sinh</span>
+                    <span class="badge bg-info">Khóa học: Lập trình Java cơ bản</span>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã HS</th>
+                                        <th>Họ và tên</th>
+                                        <th>Điểm kiểm tra</th>
+                                        <th>Điểm thực hành</th>
+                                        <th>Điểm TB</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Các hàng mẫu -->
+                                    <tr>
+                                        <td>HS001</td>
+                                        <td>Nguyễn Văn A</td>
+                                        <td><input type="number" class="form-control score-input" value="8.5" min="0" max="10" step="0.1"></td>
+                                        <td><input type="number" class="form-control score-input" value="9.0" min="0" max="10" step="0.1"></td>
+                                        <td><input type="number" class="form-control" value="8.8" readonly></td>
+                                        <td><input type="checkbox" class="form-check-input" checked> Hoàn thành</td>
+                                    </tr>
+                                    <!-- Thêm các dòng khác như HS002, HS003... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button type="submit" class="btn btn-primary">Lưu điểm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Thông tin khóa học</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Lập trình Java cơ bản</h5>
+                            <p><strong>Mã khóa học:</strong> JAVA001</p>
+                            <p><strong>Ngày bắt đầu:</strong> 01/01/2023</p>
+                            <p><strong>Ngày kết thúc:</strong> 30/06/2023</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Quy định đánh giá</h5>
+                            <ul>
+                                <li>Điểm kiểm tra và thực hành từ 0 đến 10</li>
+                                <li>Điểm TB = (KT + TH) / 2</li>
+                                <li>Đạt yêu cầu khi TB ≥ 5.0</li>
+                                <li>Hoàn thành nếu đạt yêu cầu & tham gia đầy đủ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">© 2023 Hệ Thống Quản Lý Điểm Học Sinh</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/score/score.js.js"></script>
+</body>
+</html>
