@@ -34,8 +34,7 @@
 </head>
 <body>
 <div class="container mt-4">
-
-    <!-- Course Overview Section -->
+    
     <!-- Course Overview Section -->
     <div style="background-color: #fefefe; padding: 20px; border-radius: 8px;">
         <h3>Course Overview</h3>
