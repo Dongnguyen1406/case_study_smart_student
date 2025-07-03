@@ -41,7 +41,7 @@ public class StudentController extends HttpServlet {
             default:
                 Student student = iStudentService.displayStudent(account.getUsername());
                 req.setAttribute("student", student);
-                req.getRequestDispatcher("/WEB-INF/view/student/student-form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/view/user/student-layout/student.jsp").forward(req, resp);
         }
 
 

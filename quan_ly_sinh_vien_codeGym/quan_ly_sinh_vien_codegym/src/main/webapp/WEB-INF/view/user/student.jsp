@@ -11,10 +11,10 @@
 
 <div id="main-container" class="container-fluid p-0 d-flex flex-column" style="height: 100vh;">
     <div class="row g-0 flex-grow-1" style="overflow-y: auto;">
-        <%@ include file="../common/layout/sidebar.jsp" %>
+        <%@ include file="/WEB-INF/view/common/layout/sidebar.jsp" %>
 
         <div class="col d-flex flex-column">
-            <%@ include file="../common/layout/header.jsp" %>
+            <%@ include file="/WEB-INF/view/common/layout/header.jsp" %>
 
             <!-- Nội dung thay đổi dựa vào param.page -->
             <div class="p-3 flex-grow-1" id="main-content" style="overflow-y: auto; background-color: #f1f4f5">
@@ -22,19 +22,19 @@
 
                 <c:choose>
                     <c:when test="${paramPage == 'dashboard'}">
-                        <jsp:include page="/view/user/student-layout/dashboard-student.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/student-layout/dashboard-student.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'score'}">
-                        <jsp:include page="/view/user/student-layout/score.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/student-layout/score.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'attendance'}">
-                        <jsp:include page="/view/user/student-layout/attendance.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/student-layout/attendance.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'assessment'}">
-                        <jsp:include page="/view/user/student-layout/assessment.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/student-layout/assessment.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'profile'}">
-                        <jsp:include page="/view/user/student-profile.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/student-profile.jsp"/>
                     </c:when>
                     <c:otherwise>
                         <h5>Vui lòng chọn một mục từ sidebar để xem nội dung.</h5>
@@ -43,7 +43,7 @@
 
             </div>
 
-            <%@ include file="../common/layout/footer.jsp" %>
+            <%@ include file="/WEB-INF/view/common/layout/footer.jsp" %>
         </div>
     </div>
 </div>
