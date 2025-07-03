@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.iml" filepath="$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.main.iml" filepath="$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.test.iml" filepath="$PROJECT_DIR$/.idea/modules/quan_ly_sinh_vien_codegym.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/case_study_smart_student.iml" filepath="$PROJECT_DIR$/.idea/case_study_smart_student.iml" />
     </modules>
   </component>
 </project>

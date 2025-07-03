@@ -4,6 +4,7 @@
     <file type="web" url="file://$PROJECT_DIR$/quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
