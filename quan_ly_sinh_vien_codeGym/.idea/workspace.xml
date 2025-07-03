@@ -5,10 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38fc5a42-3284-4052-b224-26358b6e9f84" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/quan_ly_sinh_vien_codeGym.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/quan_ly_sinh_vien_codeGym.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fe_case_study/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quan_ly_sinh_vien_codegym/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quan_ly_sinh_vien_codegym/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quan_ly_sinh_vien_codegym/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/quan_ly_sinh_vien_codegym/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/fe_case_study.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/assessments/assessment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/assessments/assessments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/assessments/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/attendance/attendance.css/attendance.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/attendance/attendance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/dashbord/dashbord.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/dashbord/dashbord.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/login/login.css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/login/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/login/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/score/score.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/score/score.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe_case_study/score/score.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +48,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "dong",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "F:/CodeGym/case_study/case_study_smart_student/quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym",
+    "last_opened_file_path": "F:/CodeGym/case_study/case_study_smart_student/quan_ly_sinh_vien_codeGym",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -161,6 +175,7 @@
       <workItem from="1751333007283" duration="77000" />
       <workItem from="1751343568746" duration="126000" />
       <workItem from="1751473008283" duration="753000" />
+      <workItem from="1751529900512" duration="10000" />
     </task>
     <servers />
   </component>
