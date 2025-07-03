@@ -9,7 +9,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/view/common/layout/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/user/student-css/style.css">
 
 <nav class="navbar navbar-expand-lg shadow-sm" style="height: 70px; background-color: #ffffff">
     <div class="container-fluid d-flex justify-content-between align-items-center px-3">

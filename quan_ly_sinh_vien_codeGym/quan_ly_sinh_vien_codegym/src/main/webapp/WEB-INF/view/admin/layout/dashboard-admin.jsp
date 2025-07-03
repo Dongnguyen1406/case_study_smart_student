@@ -8,49 +8,53 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h2 class="mb-4">📊 Thống kê tổng quan</h2>
+<div class="container-fluid">
+    <h2 class="mb-4">📊 Thống kê tổng quan</h2>
 
-<!-- Thống kê nhanh -->
-<div class="row">
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-primary shadow">
-            <div class="card-body">
-                <h5 class="card-title">Student</h5>
-                <p class="card-text fs-4">250</p>
+    <!-- Thống kê nhanh -->
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Student</h5>
+                    <p class="card-text fs-4">250</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Teacher</h5>
+                    <p class="card-text fs-4">45</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-warning shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Course</h5>
+                    <p class="card-text fs-4">12</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-info shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Module</h5>
+                    <p class="card-text fs-4">30</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-success shadow">
-            <div class="card-body">
-                <h5 class="card-title">Teacher</h5>
-                <p class="card-text fs-4">45</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-warning shadow">
-            <div class="card-body">
-                <h5 class="card-title">Course</h5>
-                <p class="card-text fs-4">12</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-info shadow">
-            <div class="card-body">
-                <h5 class="card-title">Module</h5>
-                <p class="card-text fs-4">30</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Biểu đồ -->
-<div class="card mb-5 shadow">
-    <div class="card-body">
-        <h5 class="card-title">Biểu đồ thống kê</h5>
-        <canvas id="dashboardChart" height="100"></canvas>
+    <!-- Biểu đồ -->
+    <div class="card mb-5 shadow">
+        <div class="card-body">
+            <h5 class="card-title">Biểu đồ thống kê</h5>
+            <div class="chart-container" style="position: relative; height: 300px;">
+                <canvas id="dashboardChart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
