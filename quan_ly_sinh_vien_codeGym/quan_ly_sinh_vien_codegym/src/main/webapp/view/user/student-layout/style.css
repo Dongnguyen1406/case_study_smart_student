@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#main-container {
+    flex: 1 0 auto;  /* phần nội dung chính sẽ chiếm không gian còn lại */
+    overflow-y: auto;
+}
+
+footer {
+    flex-shrink: 0;  /* footer không co lại */
+}
