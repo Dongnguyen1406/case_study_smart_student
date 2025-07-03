@@ -2,9 +2,14 @@ package com.example.quan_ly_sinh_vien_codegym.Controller.user;
 
 
 import com.example.quan_ly_sinh_vien_codegym.Entity.Account;
+import com.example.quan_ly_sinh_vien_codegym.Entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.Service.IAccountService;
+import com.example.quan_ly_sinh_vien_codegym.Service.IStudentService;
 import com.example.quan_ly_sinh_vien_codegym.Service.impl.AccountService;
+import com.example.quan_ly_sinh_vien_codegym.Service.impl.StudentService;
+import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +21,13 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/login","/logout"})
 public class LoginController extends HttpServlet {
     private IAccountService accountService = new AccountService();
-
+    private static IStudentService iStudentService= new StudentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//       String hashedPassword = PasswordEncodeUtil.encode("123");
+//       System.out.println("---------------------------");
+//        System.out.println(hashedPassword);
+
         String action = req.getServletPath();
         if ("/logout".equals(action)) {
             SessionUtil.remove(req, "account");
@@ -41,8 +50,15 @@ public class LoginController extends HttpServlet {
             req.getRequestDispatcher("WEB-INF/view/login/login.jsp").forward(req, resp);
         } else {
             SessionUtil.set(req, "account", account);
-            SessionUtil.set(req, "message", "login-success");
-            resp.sendRedirect("WEB-INF/view/student/student_form");
+            if(account.getRoleId()==1){
+//           admin
+            } else if (account.getRoleId()==2) {
+                resp.sendRedirect("/student");
+            }else {
+//                teacher
+            }
+
+
         }
     }
 }

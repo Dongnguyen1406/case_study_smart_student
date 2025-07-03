@@ -34,16 +34,18 @@
             <div class="login-form w-100">
                 <h2 class="text-center mb-3">Welcome Back!</h2>
                 <p class="text-center mb-4">Please log in to your teacher account</p>
-
-                <form id="loginForm">
+<%--                <form class="d-flex justify-content-end mb-3" method="get" action="/admin/product-management">--%>
+<%--                    <input type="hidden" name="action" value="search"/>--%>
+                <form action="/login"  method="post" id="loginForm">
+                    <input type="hidden" name="action" value="login"/>
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                        <input type="text" class="form-control" id="username" placeholder="user name" required>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="user name" required>
                     </div>
 
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                     </div>
 
                     <div class="mb-3 d-flex justify-content-between align-items-center">

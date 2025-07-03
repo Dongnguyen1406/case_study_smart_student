@@ -25,6 +25,9 @@ public class AccountRepository implements IAccountRepository {
                 account.setToken(resultSet.getString("token"));
                 account.setStatus(resultSet.getBoolean("status"));
                 account.setRoleId(resultSet.getInt("role_id"));
+                account.setStudentId(resultSet.getString("student_id"));
+                account.setTeacherId(resultSet.getString("teacher_id"));
+
                 return account;
             }
         } catch (SQLException e) {

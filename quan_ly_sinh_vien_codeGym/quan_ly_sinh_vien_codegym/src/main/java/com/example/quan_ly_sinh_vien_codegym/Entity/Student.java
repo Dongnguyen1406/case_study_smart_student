@@ -43,6 +43,18 @@ public class Student {
         this.className = className;
     }
 
+    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.email = email;
+        this.startLearnDate = startLearnDate;
+        this.className = className;
+    }
+
     public String getStudentId() {
         return studentId;
     }
