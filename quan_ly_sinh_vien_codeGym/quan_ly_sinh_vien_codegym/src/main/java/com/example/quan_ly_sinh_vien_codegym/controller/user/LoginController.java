@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/login","/logout"})
@@ -50,7 +51,8 @@ public class LoginController extends HttpServlet {
             if(account.getRoleId()==1){
 //           admin
             } else if (account.getRoleId()==2) {
-
+                HttpSession session = req.getSession();
+                session.setAttribute("successMessage", "Đăng nhập thành công!");
                 resp.sendRedirect("/student");
             }else {
 //                teacher
