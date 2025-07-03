@@ -1,35 +1,64 @@
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
-  Date: 6/29/2025
-  Time: 10:41 AM
+  Date: 7/2/2025
+  Time: 11:24 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<aside class="bg-dark text-white vh-100 position-fixed" style="width: 220px;">
-    <div class="sidebar-sticky pt-3 px-3">
-        <h5 class="text-white mb-4">Bảng điều khiển</h5>
-        <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=students">Student Management</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=teachers">Teacher Management</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=courses">Course Management</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=modules">Module Management</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white" href="${basePath}/WEB-INF/view/admin/admin.jsp?page=classes">Class Management</a>
-            </li>
-        </ul>
+<head>
+    <link rel="stylesheet" href="layout/style.css">
+</head>
+<div id="sidebar" class="p-0 m-0 d-flex flex-column" style="height: 100vh; width: 250px; transition: width 0.3s; background-color: #ffffff">
+    <!-- Logo -->
+    <div id="sidebar-logo" class="d-flex align-items-center justify-content-center" style="height: 70px; border-bottom: 1px solid #ddd; ">
+        <img id="logo-img" src="${pageContext.request.contextPath}/assets/user/img/logo2.png" alt="Logo" style="height: 50px; object-fit: contain;">
     </div>
-</aside>
+
+
+    <!-- Menu -->
+    <!-- sidebar.jsp -->
+    
+    <ul class="nav flex-column px-2" id="sidebar-menu">
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=dashboard">
+                <i class="bi bi-house-door fs-5"></i>
+                <span class="ms-2 sidebar-text">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=score">
+                <i class="bi bi-award fs-5"></i>
+                <span class="ms-2 sidebar-text">Quản lý học sinh</span>
+            </a>
+        </li>
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=attendance">
+                <i class="bi bi-calendar-check fs-5"></i>
+                <span class="ms-2 sidebar-text">Quản lý giáo viên</span>
+            </a>
+        </li>
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=assessment">
+                <i class="bi bi-star fs-5"></i>
+                <span class="ms-2 sidebar-text">Quản lý lớp học</span>
+            </a>
+        </li>
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=assessment">
+                <i class="bi bi-star fs-5"></i>
+                <span class="ms-2 sidebar-text">Quản lý khóa học</span>
+            </a>
+        </li>
+        <li class="nav-item d-flex align-items-center py-2">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/WEB-INF/view/admin/admin.jsp?page=assessment">
+                <i class="bi bi-star fs-5"></i>
+                <span class="ms-2 sidebar-text">Quản lý module</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+
 
