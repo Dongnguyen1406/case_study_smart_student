@@ -9,6 +9,7 @@
     <orderEntry type="module" module-name="quan_ly_sinh_vien_codegym.main" />
     <orderEntry type="library" name="Gradle: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.mindrot:jbcrypt:0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.10.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.25.1" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.10.2" level="project" />
