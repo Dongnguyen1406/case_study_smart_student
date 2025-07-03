@@ -38,12 +38,24 @@ public class StudentController extends HttpServlet {
             case "attendance":
                 displayAttendance(req, resp);
                 break;
+            case "display":
+                displayStudent(req ,resp);
+                break;
             default:
-                Student student = iStudentService.displayStudent(account.getUsername());
-                req.setAttribute("student", student);
-                req.getRequestDispatcher("/WEB-INF/view/user/student-layout/student.jsp").forward(req, resp);
+
+                req.getRequestDispatcher("WEB-INF/view/user/student.jsp").forward(req, resp);
         }
 
+
+    }
+
+    private void displayStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = (Account) SessionUtil.get(req, "account");
+        if (account != null) {
+            Student student = iStudentService.displayStudent(account.getUsername());
+            req.setAttribute("student", student);
+            req.getRequestDispatcher("WEB-INF/view/student/module-attendance.jsp").forward(req, resp);
+        }
 
     }
 

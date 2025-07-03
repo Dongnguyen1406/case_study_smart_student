@@ -43,12 +43,46 @@
 
             </div>
 
-            <%@ include file="/WEB-INF/view/common/layout/footer.jsp" %>
+        </div>
+        <div class="p-3">
+            <h2 class="mb-4">📝 Đánh giá</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-primary">
+                <tr>
+                    <th> Tên</th>
+                    <th> Ngày sinh</th>
+                    <th> Giới tính</th>
+                    <th> Địa chỉ</th>
+                    <th> Số điện thoại</th>
+                    <th> Email</th>
+                    <th> Ngày bắt đầu nhập học</th>
+                    <th> Tên lớp</th>
+                    <th> Chỉnh sửa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${student.studentName}</td>
+                    <td>${student.dob}</td>
+                    <td>${student.gender}</td>
+                    <td>${student.address}</td>
+                    <td>${student.numberPhone}</td>
+                    <td>${student.email}</td>
+                    <td>${student.startLearnDate}</td>
+                    <td>${student.className}</td>
+                    <td><button onclick="window.location.href=`/student?action=update`"><i
+                            class="bi bi-pencil text-primary"></i></button>
+                    </td>
+                    </button>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
 </div>
 
 
-
+<%@ include file="/WEB-INF/view/common/layout/footer.jsp" %>
 
 
