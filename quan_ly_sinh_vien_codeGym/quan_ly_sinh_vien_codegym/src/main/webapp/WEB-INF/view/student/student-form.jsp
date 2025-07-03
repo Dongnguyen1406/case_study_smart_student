@@ -15,6 +15,7 @@
 </head>
 <body>
 <a href="/student?action=score">xem điểm</a>
+<a href="/student?action=attendance">xem điểm danh</a>
 <table>
     <tr>
         <th> Tên</th>
