@@ -33,7 +33,6 @@ public class LoginController extends HttpServlet {
         }else {
             req.getRequestDispatcher("WEB-INF/view/login/login.jsp").forward(req,resp);
         }
-
     }
 
     @Override

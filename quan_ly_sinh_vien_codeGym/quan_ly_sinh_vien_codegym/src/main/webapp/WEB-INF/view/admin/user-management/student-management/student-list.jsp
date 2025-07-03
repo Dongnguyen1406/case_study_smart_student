@@ -12,8 +12,8 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button type="button" class="btn btn-primary" id="btnAddStudent">
-        ➕ Thêm học sinh
+    <button type="button" class="btn" id="btnAddStudent" style="background-color: #272882; color: #ffffff">
+        Thêm học sinh
     </button>
 </div>
 
@@ -21,7 +21,7 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover align-middle">
         <thead class="table-light text-center">
-        <tr>
+        <tr >
             <th>STT</th>
             <th>Họ tên</th>
             <th>Giới tính</th>
@@ -41,13 +41,13 @@
             <td>vana@example.com</td>
             <td>0912345678</td>
             <td class="text-center">
-                <span class="badge bg-success">Hoạt động</span>
+                <span class="badge" style="background-color: #272882;">Hoạt động</span>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-warning btn-edit" data-id="1" data-fullname="Nguyễn Văn A" data-gender="Nam" data-dob="2005-01-12" data-email="vana@example.com" data-phone="0912345678" data-status="1">
-                    ✏️ Sửa
+                    ✏️
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
             </td>
         </tr>
         <tr>
@@ -62,9 +62,9 @@
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-warning btn-edit" data-id="2" data-fullname="Trần Thị B" data-gender="Nữ" data-dob="2006-03-25" data-email="thib@example.com" data-phone="0901234567" data-status="0">
-                    ✏️ Sửa
+                    ✏️ 
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         </tbody>
