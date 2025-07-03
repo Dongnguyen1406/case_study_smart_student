@@ -18,7 +18,7 @@
 
             <!-- Nội dung thay đổi dựa vào param.page -->
             <div class="p-3 flex-grow-1" id="main-content" style="overflow-y: auto; background-color: #f1f4f5">
-                <c:set var="paramPage" value="${param.page != null ? param.page : 'dashboard'}"/>
+            <c:set var="paramPage" value="${empty param.page ? 'dashboard' : param.page}"/>
 
                 <c:choose>
                     <c:when test="${paramPage == 'dashboard'}">
@@ -27,20 +27,8 @@
                     <c:when test="${paramPage == 'students'}">
                         <jsp:include page="/WEB-INF/view/admin/user-management/student-management/student-list.jsp"/>
                     </c:when>
-                    <c:when test="${param.page == 'studentForm'}">
-                        <jsp:include page="/WEB-INF/view/admin/user-management/student-management/student-form.jsp"/>
-                    </c:when>
-                    <c:when test="${param.page == 'studentUpdate'}">
-                        <jsp:include page="/WEB-INF/view/admin/user-management/student-management/student-update.jsp"/>
-                    </c:when>
                     <c:when test="${paramPage == 'teachers'}">
                         <jsp:include page="/WEB-INF/view/admin/user-management/teacher-management/teacher-list.jsp"/>
-                    </c:when>
-                    <c:when test="${param.page == 'teacherForm'}">
-                        <jsp:include page="/WEB-INF/view/admin/user-management/teacher-management/teacher-form.jsp"/>
-                    </c:when>
-                    <c:when test="${param.page == 'teacherUpdate'}">
-                        <jsp:include page="/WEB-INF/view/admin/user-management/teacher-management/teacher-update.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'classes'}">
                         <jsp:include page="/WEB-INF/view/admin/class-management/class-list.jsp"/>
