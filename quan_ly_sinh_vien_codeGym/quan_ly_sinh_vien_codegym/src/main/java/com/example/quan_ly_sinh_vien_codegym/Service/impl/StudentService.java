@@ -4,6 +4,7 @@ import com.example.quan_ly_sinh_vien_codegym.Entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.Repository.IStudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.Repository.impl.StudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.Service.IStudentService;
+import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
 
 import java.util.List;
 
@@ -15,7 +16,18 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public List<Student> displayStudent(String username) {
+    public Student displayStudent(String username) {
         return iStudentRepository.displayStudent(username);
     }
+
+    @Override
+    public boolean updateStudent(Student student) {
+        return iStudentRepository.updateStudent(student);
+    }
+    @Override
+   public ModuleScore displayScore(String userName){
+        return iStudentRepository.displayScore(userName);
+    }
+
+
 }
