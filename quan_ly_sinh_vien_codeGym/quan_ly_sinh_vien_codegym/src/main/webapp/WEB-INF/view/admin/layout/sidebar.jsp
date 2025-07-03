@@ -13,9 +13,9 @@
      style="height: 100vh; width: 250px; transition: width 0.3s; background-color: #ffffff">
     <!-- Logo -->
     <div id="sidebar-logo" class="d-flex align-items-center justify-content-center"
-         style="height: 70px; border-bottom: 1px solid #ddd; ">
+         style="height: 70px; border-bottom: 1px solid #ddd; background-color: #282781 ">
         <img id="logo-img" src="${pageContext.request.contextPath}/assets/user/img/logo2.png" alt="Logo"
-             style="height: 50px; object-fit: contain;">
+             style="height: 50px; object-fit: contain; padding: 2px">
     </div>
 
     <!-- Menu -->
@@ -29,36 +29,35 @@
         </li>
         <li class="nav-item d-flex align-items-center py-2">
             <a class="nav-link text-dark" href="${basePath}/admin?page=students">
-                <i class="bi bi-award fs-5"></i>
+                <i class="bi bi-person-lines-fill fs-5"></i>
                 <span class="ms-2 sidebar-text">Quản lý học sinh</span>
             </a>
         </li>
         <li class="nav-item d-flex align-items-center py-2">
             <a class="nav-link text-dark" href="${basePath}/admin?page=teachers">
-                <i class="bi bi-calendar-check fs-5"></i>
+                <i class="bi bi-person-badge fs-5"></i>
                 <span class="ms-2 sidebar-text">Quản lý giáo viên</span>
             </a>
         </li>
         <li class="nav-item d-flex align-items-center py-2">
             <a class="nav-link text-dark" href="${basePath}/admin?page=classes">
-                <i class="bi bi-star fs-5"></i>
+                <i class="bi bi-diagram-3 fs-5"></i>
                 <span class="ms-2 sidebar-text">Quản lý lớp học</span>
             </a>
         </li>
         <li class="nav-item d-flex align-items-center py-2">
             <a class="nav-link text-dark" href="${basePath}/admin?page=courses">
-                <i class="bi bi-star fs-5"></i>
+                <i class="bi bi-journal-bookmark fs-5"></i>
                 <span class="ms-2 sidebar-text">Quản lý khóa học</span>
             </a>
         </li>
         <li class="nav-item d-flex align-items-center py-2">
             <a class="nav-link text-dark" href="${basePath}/admin?page=modules">
-                <i class="bi bi-star fs-5"></i>
+                <i class="bi bi-sliders fs-5"></i>
                 <span class="ms-2 sidebar-text">Quản lý module</span>
             </a>
         </li>
     </ul>
-
 </div>
 
 

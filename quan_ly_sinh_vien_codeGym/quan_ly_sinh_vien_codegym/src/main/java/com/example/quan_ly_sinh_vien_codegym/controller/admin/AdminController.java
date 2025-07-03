@@ -1,4 +1,4 @@
-package Controller;
+package com.example.quan_ly_sinh_vien_codegym.controller.admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

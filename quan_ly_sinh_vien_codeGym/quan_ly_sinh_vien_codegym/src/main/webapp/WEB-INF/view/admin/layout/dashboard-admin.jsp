@@ -47,15 +47,33 @@
         </div>
     </div>
 
-    <!-- Biểu đồ -->
-    <div class="card mb-5 shadow">
-        <div class="card-body">
-            <h5 class="card-title">Biểu đồ thống kê</h5>
-            <div class="chart-container" style="position: relative; height: 300px;">
-                <canvas id="dashboardChart"></canvas>
+    <!-- Biểu đồ thống kê cột và tròn -->
+    <div class="row mb-5">
+        <!-- Biểu đồ cột -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Biểu đồ thống kê</h5>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="dashboardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biểu đồ tròn học sinh theo lớp -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Học sinh theo lớp</h5>
+                    <div class="chart-container" style="position: relative; width: 100%; height: 300px;">
+                        <canvas id="classPieChart" style="max-width: 100%; height: auto;"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <!-- Chart.js CDN + Script -->
@@ -87,6 +105,32 @@
         }
     });
 </script>
+<script>
+    const pieCtx = document.getElementById('classPieChart').getContext('2d');
+    const classPieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Lớp 10A1', 'Lớp 10B2'],
+            datasets: [{
+                label: 'Sĩ số học sinh',
+                data: [40, 38], // Lấy từ bảng lớp phía dưới
+                backgroundColor: ['#FF6384', '#36A2EB'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+
 
 
 

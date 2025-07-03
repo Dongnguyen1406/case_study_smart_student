@@ -12,7 +12,7 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button class="btn btn-primary" id="btnAddModule">➕ Thêm học phần</button>
+    <button class="btn" id="btnAddModule" style="background-color: #272882; color: #ffffff">Thêm học phần</button>
 </div>
 
 <!-- Bảng danh sách -->
@@ -34,14 +34,14 @@
             <td>Java Core</td>
             <td>MOD101</td>
             <td>Giới thiệu Java cơ bản và lập trình hướng đối tượng</td>
-            <td class="text-center"><span class="badge bg-success">Hoạt động</span></td>
+            <td class="text-center"><span class="badge" style="background-color: #272882;">Hoạt động</span></td>
             <td class="text-center">
                 <button class="btn btn-sm btn-warning btn-edit"
                         data-id="1" data-name="Java Core" data-code="MOD101"
                         data-desc="Giới thiệu Java cơ bản và lập trình hướng đối tượng" data-status="1">
-                    ✏️ Sửa
+                    ✏️ 
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         <tr>
@@ -54,9 +54,9 @@
                 <button class="btn btn-sm btn-warning btn-edit"
                         data-id="2" data-name="Web Development" data-code="MOD102"
                         data-desc="Thiết kế và phát triển website bằng HTML, CSS, JavaScript" data-status="0">
-                    ✏️ Sửa
+                    ✏️ 
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         </tbody>
