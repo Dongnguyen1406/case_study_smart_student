@@ -1,15 +1,9 @@
 package com.example.quan_ly_sinh_vien_codegym.controller.admin;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.ClassResponseDto;
-import com.example.quan_ly_sinh_vien_codegym.entity.Account;
-import com.example.quan_ly_sinh_vien_codegym.entity.Student;
-import com.example.quan_ly_sinh_vien_codegym.entity.Teacher;
-import com.example.quan_ly_sinh_vien_codegym.service.IClassService;
-import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
-import com.example.quan_ly_sinh_vien_codegym.service.ITeacherService;
-import com.example.quan_ly_sinh_vien_codegym.service.impl.ClassService;
-import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
-import com.example.quan_ly_sinh_vien_codegym.service.impl.TeacherService;
+import com.example.quan_ly_sinh_vien_codegym.entity.*;
+import com.example.quan_ly_sinh_vien_codegym.service.*;
+import com.example.quan_ly_sinh_vien_codegym.service.impl.*;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
 
 import javax.servlet.ServletException;
@@ -26,7 +20,8 @@ public class AdminController extends HttpServlet {
     private static IStudentService iStudentService = new StudentService();
     private static ITeacherService teacherService = new TeacherService();
     private static IClassService classService = new ClassService();
-
+    private static ICourseService courseService = new CourseService();
+    private static IModuleService moduleService = new ModuleService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,9 +43,11 @@ public class AdminController extends HttpServlet {
             case "classes":
                 displayClass(req, resp);
                 break;
-            case "display-course":
+            case "courses":
+                displayCourse(req, resp);
                 break;
-            case "display-module":
+            case "modules":
+//                displayModule(req, resp);
                 break;
             default:
                 req.getRequestDispatcher("/WEB-INF/view/admin/admin.jsp").forward(req, resp);
@@ -128,5 +125,52 @@ public class AdminController extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=classes").forward(req, resp);
     }
 
+    private void displayCourse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int pageSize = 5;
+        int currentPage = 1;
+
+        String pageParam = req.getParameter("currentPage");
+        if (pageParam != null) {
+            currentPage = Integer.parseInt(pageParam);
+        }
+
+        List<Course> allCourses = courseService.findAll();
+        int totalCourses = allCourses.size();
+        int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
+
+        int startIndex = (currentPage - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, totalCourses);
+        List<Course> paginatedList = allCourses.subList(startIndex, endIndex);
+
+        req.setAttribute("courses", paginatedList);
+        req.setAttribute("totalPages", totalPages);
+        req.setAttribute("currentPage", currentPage);
+
+        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=courses").forward(req, resp);
+    }
+
+//    private void displayModule(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        int pageSize = 5;
+//        int currentPage = 1;
+//
+//        String pageParam = req.getParameter("currentPage");
+//        if (pageParam != null) {
+//            currentPage = Integer.parseInt(pageParam);
+//        }
+//
+//        List<Module> allModules = moduleService.findAll();
+//        int totalModules = allModules.size();
+//        int totalPages = (int) Math.ceil((double) totalModules / pageSize);
+//
+//        int startIndex = (currentPage - 1) * pageSize;
+//        int endIndex = Math.min(startIndex + pageSize, totalModules);
+//        List<Module> paginatedList = allModules.subList(startIndex, endIndex);
+//
+//        req.setAttribute("modules", paginatedList);
+//        req.setAttribute("totalPages", totalPages);
+//        req.setAttribute("currentPage", currentPage);
+//
+//        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=modules").forward(req, resp);
+//    }
 
 }

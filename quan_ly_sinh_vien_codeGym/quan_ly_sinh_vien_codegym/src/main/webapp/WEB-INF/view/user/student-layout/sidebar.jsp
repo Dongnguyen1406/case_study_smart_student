@@ -7,15 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <link rel="stylesheet" href="layout/style.css">
+    <link rel="stylesheet" href="/assets/user/style.css">
 </head>
 <div id="sidebar" class="p-0 m-0 d-flex flex-column" style="height: 100vh; width: 250px; transition: width 0.3s; background-color: #ffffff">
     <!-- Logo -->
-    <div id="sidebar-logo" class="d-flex align-items-center justify-content-center" style="height: 70px; border-bottom: 1px solid #ddd; ">
+    <div id="sidebar-logo" class="d-flex align-items-center justify-content-center" style="height: 70px; border-bottom: 1px solid #ddd; background-color: #282781">
         <img id="logo-img" src="${pageContext.request.contextPath}/assets/user/img/logo2.png" alt="Logo" style="height: 50px; object-fit: contain;">
     </div>
-
-
+    
     <!-- Menu -->
     <!-- sidebar.jsp -->
     
