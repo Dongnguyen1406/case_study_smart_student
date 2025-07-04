@@ -2,9 +2,12 @@ package com.example.quan_ly_sinh_vien_codegym.controller.user;
 
 
 import com.example.quan_ly_sinh_vien_codegym.entity.Account;
+import com.example.quan_ly_sinh_vien_codegym.entity.Role;
 import com.example.quan_ly_sinh_vien_codegym.service.IAccountService;
+import com.example.quan_ly_sinh_vien_codegym.service.IRoleService;
 import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.AccountService;
+import com.example.quan_ly_sinh_vien_codegym.service.impl.RoleService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
 import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
@@ -16,11 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/login","/logout"})
 public class LoginController extends HttpServlet {
+    private IRoleService iRoleService= new RoleService();
     private IAccountService accountService = new AccountService();
-    private static IStudentService iStudentService= new StudentService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //       String hashedPassword = PasswordEncodeUtil.encode("123");
@@ -40,8 +45,8 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
         Account account = accountService.checkLogin(username, password);
+
         if (account == null) {
             req.setAttribute("username", username);
             req.setAttribute("message", "login-error");

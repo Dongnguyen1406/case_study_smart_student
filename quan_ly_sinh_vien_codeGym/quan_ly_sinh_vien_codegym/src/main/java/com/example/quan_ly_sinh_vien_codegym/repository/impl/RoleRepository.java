@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleRepository implements IRoleRepository {
-    private final String SElECT_ROLE = "select role_id,rode_name form roles";
+    private final String SElECT_ROLE = "select role_id,role_name from roles";
 
     @Override
     public List<Role> findAll() {
@@ -21,7 +21,7 @@ public class RoleRepository implements IRoleRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
           int id=    resultSet.getInt("role_id");
-           String name=   resultSet.getString("rode_name");
+           String name=   resultSet.getString("role_name");
               roles.add(new Role(id,name));
             }
         } catch (SQLException e) {
