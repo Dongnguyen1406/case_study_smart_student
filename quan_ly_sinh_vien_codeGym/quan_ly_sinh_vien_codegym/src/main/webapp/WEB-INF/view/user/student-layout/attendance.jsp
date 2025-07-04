@@ -11,18 +11,19 @@
     <table class="table table-hover table-bordered">
         <thead class="table-primary">
         <tr>
-            <th>STT</th>
-            <th>Họ tên</th>
-            <th>Ngày</th>
-            <th>Trạng thái</th>
+            <th>Tên module</th>
+            <th>Ngày đăng kí module</th>
+            <th>số ngày vắng</th>
+            <th>Kết quả</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1</td>
-            <td>Nguyễn Văn A</td>
-            <td>02/07/2025</td>
-            <td>✅ Có mặt</td>
+            <td>${moduleAttendance.moduleName}</td>
+            <td>${moduleAttendance.registrationDate}</td>
+            <td>${moduleAttendance.unexcusedAbsences}</td>
+            <td>${moduleAttendance.result}</td>
+<%--            <td>✅ Có mặt</td>--%>
         </tr>
         </tbody>
     </table>
