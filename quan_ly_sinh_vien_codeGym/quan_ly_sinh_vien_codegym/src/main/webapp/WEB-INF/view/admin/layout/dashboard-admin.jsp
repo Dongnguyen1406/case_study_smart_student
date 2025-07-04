@@ -7,7 +7,53 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${not empty sessionScope.successMessage}">
+    <div id="toast-alert" class="custom-toast animate-slide-down">
+            ${sessionScope.successMessage}
+    </div>
+    <c:remove var="successMessage" scope="session" />
 
+    <style>
+        .custom-toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            color: black;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            font-weight: bold;
+            opacity: 0.95;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -50px);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.5s ease-out;
+        }
+    </style>
+
+    <script>
+        setTimeout(function() {
+            var toast = document.getElementById("toast-alert");
+            if (toast) {
+                toast.style.display = "none";
+            }
+        }, 3000);
+    </script>
+</c:if>
 <div class="container-fluid">
     <h2 class="mb-4">📊 Thống kê tổng quan</h2>
 

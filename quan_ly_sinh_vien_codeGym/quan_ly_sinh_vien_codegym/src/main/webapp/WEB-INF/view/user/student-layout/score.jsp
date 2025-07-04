@@ -12,6 +12,7 @@
     <table class="table table-hover table-bordered">
         <thead class="table-primary">
         <tr>
+
             <th> Tên Module </th>
             <th> Điểm lý thuyết </th>
             <th> Điểm thực hành</th>
@@ -20,13 +21,16 @@
         </tr>
         </thead>
         <tbody>
+
         <tr>
+
             <td>${moduleScore.module}</td>
             <td>${moduleScore.quizScore}</td>
             <td>${moduleScore.practiceScore}</td>
             <td>${moduleScore.averageScore}</td>
             <td> <c:if test="${moduleScore.averageScore>=7.5}">Đạt</c:if></td>
         </tr>
+
         </tbody>
     </table>
 </div>
