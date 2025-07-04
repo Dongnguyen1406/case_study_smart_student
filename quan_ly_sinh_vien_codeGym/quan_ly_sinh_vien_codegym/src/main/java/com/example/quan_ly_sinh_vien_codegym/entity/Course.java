@@ -9,6 +9,10 @@ public class Course {
         this.courseName = courseName;
     }
 
+    public Course(String courseName) {
+        this.courseName = courseName;
+    }
+
     public int getCourseId() {
         return courseId;
     }

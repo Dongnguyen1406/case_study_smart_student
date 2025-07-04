@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 
 <h2 class="mb-4">📚 Danh sách khóa học</h2>
@@ -22,43 +23,26 @@
         <tr>
             <th>STT</th>
             <th>Tên khóa học</th>
-            <th>Mã khóa học</th>
-            <th>Thời gian (tháng)</th>
-            <th>Trạng thái</th>
+<%--            <th>Trạng thái</th>--%>
             <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="text-center">1</td>
-            <td>Java Core</td>
-            <td>JC101</td>
-            <td class="text-center">6</td>
-            <td class="text-center">
-                <span class="badge" style="background-color: #272882;">Đang mở</span>
-            </td>
-            <td class="text-center">
-                <button class="btn btn-sm btn-warning btn-edit"
-                        data-id="1" data-name="Java Core" data-code="JC101"
-                        data-duration="6" data-status="1">✏️ </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td>
-            <td>Web Development</td>
-            <td>WD202</td>
-            <td class="text-center">4</td>
-            <td class="text-center">
-                <span class="badge bg-secondary">Đã đóng</span>
-            </td>
-            <td class="text-center">
-                <button class="btn btn-sm btn-warning btn-edit"
-                        data-id="2" data-name="Web Development" data-code="WD202"
-                        data-duration="4" data-status="0">✏️</button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
-            </td>
-        </tr>
+        <c:forEach items="${courses}" var="course" varStatus="temp">
+            <tr>
+                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${course.courseName}</td>
+<%--                <td class="text-center">--%>
+<%--                    <span class="badge" style="background-color: #272882;">Đang mở</span>--%>
+<%--                </td>--%>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-warning btn-edit"
+                            data-id="1" data-name="Java Core" data-code="JC101"
+                            data-duration="6" data-status="1">✏️ </button>
+                    <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
