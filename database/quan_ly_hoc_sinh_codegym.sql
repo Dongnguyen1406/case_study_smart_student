@@ -373,6 +373,7 @@ END;
 DELIMITER ;
 CALL check_exam_eligibility('HS011');
 
+drop procedure check_exam_eligibility;
 
 
 
