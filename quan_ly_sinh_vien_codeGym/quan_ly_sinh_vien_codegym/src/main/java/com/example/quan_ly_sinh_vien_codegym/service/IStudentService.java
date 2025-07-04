@@ -4,7 +4,7 @@ import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
 
-public interface IStudentService extends Service<Student>{
+public interface IStudentService extends IService<Student> {
      Student displayStudent(String username);
      boolean updateStudent( Student student);
      ModuleScore displayScore(String userName);

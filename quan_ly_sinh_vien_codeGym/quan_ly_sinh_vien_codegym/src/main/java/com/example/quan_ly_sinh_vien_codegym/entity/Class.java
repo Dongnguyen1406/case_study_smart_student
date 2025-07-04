@@ -23,6 +23,15 @@ public class Class {
         this.isDelete = isDelete;
     }
 
+    public Class(String className, int moduleId, int courseId, String teacherId, LocalDate startDate, int quantityStudent) {
+        this.className = className;
+        this.moduleId = moduleId;
+        this.courseId = courseId;
+        this.teacherId = teacherId;
+        this.startDate = startDate;
+        this.quantityStudent = quantityStudent;
+    }
+
     public int getClassId() {
         return classId;
     }

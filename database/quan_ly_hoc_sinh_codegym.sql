@@ -8,6 +8,7 @@ create table modules(
 
 create table courses(
 	course_id int primary key auto_increment,
+	course_id int primary key auto_increment,
     course_name varchar(100) not null
 );
 create table roles(
@@ -373,6 +374,12 @@ END;
 DELIMITER ;
 CALL check_exam_eligibility('HS011');
 
+select c.class_name, m.module_name, co.course_name, t.teacher_name , c.start_date, c.quantity_student
+from classes c
+join modules m on c.module_id = m.module_id
+join courses co on co.course_id = c.course_id
+join teachers t on t.teacher_id = c.teacher_id
+where c.is_delete = false and t.is_delete = false;
 
 
 
