@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 
 <h2 class="mb-4">👩‍🏫 Danh sách giáo viên</h2>
@@ -26,53 +27,41 @@
             <th>Họ tên</th>
             <th>Giới tính</th>
             <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
             <th>Email</th>
             <th>Số điện thoại</th>
-            <th>Trạng thái</th>
+<%--            <th>Trạng thái</th>--%>
             <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="text-center">1</td>
-            <td>Phạm Văn C</td>
-            <td>Nam</td>
-            <td>1980-07-15</td>
-            <td>phamc@example.com</td>
-            <td>0987654321</td>
-            <td class="text-center">
-                <span class="badge" style="background-color: #272882;">Hoạt động</span>
-            </td>
-            <td class="text-center">
-                <button type="button" class="btn btn-sm btn-warning btn-edit"
-                        data-id="1" data-fullname="Phạm Văn C" data-gender="Nam" data-dob="1980-07-15"
-                        data-email="phamc@example.com" data-phone="0987654321" data-status="1">
-                    ✏️ 
-                </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td>
-            <td>Trần Thị D</td>
-            <td>Nữ</td>
-            <td>1985-11-23</td>
-            <td>trand@example.com</td>
-            <td>0976543210</td>
-            <td class="text-center">
-                <span class="badge bg-secondary" >Không hoạt động</span>
-            </td>
-            <td class="text-center">
-                <button type="button" class="btn btn-sm btn-warning btn-edit"
-                        data-id="2" data-fullname="Trần Thị D" data-gender="Nữ" data-dob="1985-11-23"
-                        data-email="trand@example.com" data-phone="0976543210" data-status="0">
-                    ✏️ 
-                </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
-            </td>
-        </tr>
+        <c:forEach items="${teachers}" var="teacher" varStatus="temp">
+            <tr>
+                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${teacher.teacherName}</td>
+                <td class="text-center">${teacher.gender}</td>
+                <td class="text-center">${teacher.dob}</td>
+                <td class="text-center">${teacher.address}</td>
+                <td class="text-center">${teacher.email}</td>
+                <td class="text-center">${teacher.numberPhone}</td>
+<%--                <td class="text-center">--%>
+<%--                    <span class="badge" style="background-color: #272882;">Hoạt động</span>--%>
+<%--                </td>--%>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                            data-id="1" data-fullname="Phạm Văn C" data-gender="Nam" data-dob="1980-07-15"
+                            data-email="phamc@example.com" data-phone="0987654321" data-status="1">
+                        ✏️
+                    </button>
+                    <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-3">
+        <jsp:include page="/WEB-INF/view/common/pagination.jsp"/>
+    </div>
 </div>
 
 <!-- Include modal thêm mới và sửa -->

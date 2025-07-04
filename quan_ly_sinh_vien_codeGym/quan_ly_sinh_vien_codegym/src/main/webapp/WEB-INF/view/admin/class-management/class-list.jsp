@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 
 <h2 class="mb-4">🏫 Danh sách lớp học</h2>
@@ -22,53 +23,41 @@
         <thead class="table-light text-center">
         <tr>
             <th>STT</th>
-            <th>Mã lớp</th>
             <th>Tên lớp</th>
-            <th>Giáo viên chủ nhiệm</th>
-            <th>Sĩ số</th>
-            <th>Trạng thái</th>
+            <th>Module</th>
+            <th>Course</th>
+            <th>Giáo viên dạy</th>
+            <th>Ngày bắt đầu</th>
+            <th>Số lượng học sinh</th>
             <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="text-center">1</td>
-            <td>LH01</td>
-            <td>Lớp 10A1</td>
-            <td>Nguyễn Văn C</td>
-            <td class="text-center">40</td>
-            <td class="text-center">
-                <span class="badge" style="background-color: #272882;">Đang hoạt động</span>
-            </td>
-            <td class="text-center">
-                <button type="button" class="btn btn-sm btn-warning btn-edit-class"
-                        data-id="1" data-code="LH01" data-name="Lớp 10A1"
-                        data-teacher="Nguyễn Văn C" data-size="40" data-status="1">
-                    ✏️
-                </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td>
-            <td>LH02</td>
-            <td>Lớp 10B2</td>
-            <td>Trần Thị D</td>
-            <td class="text-center">38</td>
-            <td class="text-center">
-                <span class="badge bg-secondary">Ngưng hoạt động</span>
-            </td>
-            <td class="text-center">
-                <button type="button" class="btn btn-sm btn-warning btn-edit-class"
-                        data-id="2" data-code="LH02" data-name="Lớp 10B2"
-                        data-teacher="Trần Thị D" data-size="38" data-status="0">
-                    ✏️
-                </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
-            </td>
-        </tr>
+        <c:forEach items="${classes}" var="clazz" varStatus="temp">
+            <tr>
+                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${clazz.className}</td>
+                <td class="text-center">${clazz.moduleName}</td>
+                <td class="text-center">${clazz.courseName}</td>
+                <td class="text-center">${clazz.teacherName}</td>
+                <td class="text-center">${clazz.startDate}</td>
+                <td class="text-center">${clazz.quantity}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-warning btn-edit-class"
+                            data-id="1" data-code="LH01" data-name="Lớp 10A1"
+                            data-teacher="Nguyễn Văn C" data-size="40" data-status="1">
+                        ✏️
+                    </button>
+                    <a href="#" class="btn btn-sm btn-danger">🗑️</a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-3">
+        <jsp:include page="/WEB-INF/view/common/pagination.jsp"/>
+    </div>
+
 </div>
 
 <!-- Include modal thêm mới và sửa -->
