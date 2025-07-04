@@ -6,6 +6,7 @@ import com.example.quan_ly_sinh_vien_codegym.service.IAccountService;
 import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.AccountService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
+import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
 
 import javax.servlet.ServletException;
@@ -22,9 +23,9 @@ public class LoginController extends HttpServlet {
     private static IStudentService iStudentService= new StudentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//       String hashedPassword = PasswordEncodeUtil.encode("123");
-//       System.out.println("---------------------------");
-//        System.out.println(hashedPassword);
+       String hashedPassword = PasswordEncodeUtil.encode("123");
+       System.out.println("---------------------------");
+        System.out.println(hashedPassword);
 
         String action = req.getServletPath();
         if ("/logout".equals(action)) {
