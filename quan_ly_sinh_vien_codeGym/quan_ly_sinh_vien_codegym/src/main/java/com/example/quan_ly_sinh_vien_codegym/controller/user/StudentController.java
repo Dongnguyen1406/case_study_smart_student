@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -24,11 +25,11 @@ public class StudentController extends HttpServlet {
         if (account == null) {
             resp.sendRedirect("/login");
         }
-        String action = req.getParameter("action");
-        if (action == null) {
-            action = "";
+        String page = req.getParameter("page");
+        if (page == null) {
+            page = "";
         }
-        switch (action) {
+        switch (page) {
             case "update":
                 update(req, resp);
                 break;
@@ -42,11 +43,20 @@ public class StudentController extends HttpServlet {
                 displayStudent(req ,resp);
                 break;
             default:
-
+                Student student = iStudentService.displayStudent(account.getUsername());
+                HttpSession session = req.getSession();
+                session.setAttribute("student", student);
                 req.getRequestDispatcher("WEB-INF/view/user/student.jsp").forward(req, resp);
         }
 
 
+    }
+    private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = (Account) SessionUtil.get(req, "account");
+        if (account != null) {
+            req.setAttribute("student", iStudentService.displayStudent(account.getUsername()));
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=update").forward(req, resp);
+        }
     }
 
     private void displayStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -54,7 +64,7 @@ public class StudentController extends HttpServlet {
         if (account != null) {
             Student student = iStudentService.displayStudent(account.getUsername());
             req.setAttribute("student", student);
-            req.getRequestDispatcher("WEB-INF/view/student/module-attendance.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=display").forward(req, resp);
         }
 
     }
@@ -63,7 +73,7 @@ public class StudentController extends HttpServlet {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
             req.setAttribute("moduleAttendance", iStudentService.displayAttendance(account.getUsername()));
-            req.getRequestDispatcher("WEB-INF/view/student/module-attendance.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=attendance").forward(req, resp);
         }
     }
 
@@ -73,26 +83,20 @@ public class StudentController extends HttpServlet {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
             req.setAttribute("moduleScore", iStudentService.displayScore(account.getUsername()));
-            req.getRequestDispatcher("WEB-INF/view/student/module-score.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=score").forward(req, resp);
         }
 
     }
 
-    private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Account account = (Account) SessionUtil.get(req, "account");
-        if (account != null) {
-            req.setAttribute("student", iStudentService.displayStudent(account.getUsername()));
-            req.getRequestDispatcher("WEB-INF/view/student/update.jsp").forward(req, resp);
-        }
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action == null) {
-            action = "";
+        String page = req.getParameter("page");
+        if (page == null) {
+            page = "";
         }
-        switch (action) {
+        switch (page) {
             case "update":
                 edit(req, resp);
                 break;
@@ -114,7 +118,7 @@ public class StudentController extends HttpServlet {
             String className = req.getParameter("className");
             Student student = new Student(account.getStudentId(), studentName, dob, gender, address, numberPhone, email, startLearnDate, className);
             iStudentService.updateStudent(student);
-            resp.sendRedirect("/student");
+            resp.sendRedirect(req.getContextPath() + "/student?page=display");
 
         }
     }

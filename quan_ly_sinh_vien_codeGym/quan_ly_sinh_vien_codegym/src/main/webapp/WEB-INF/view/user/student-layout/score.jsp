@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -11,18 +12,20 @@
     <table class="table table-hover table-bordered">
         <thead class="table-primary">
         <tr>
-            <th>STT</th>
-            <th>Họ tên</th>
-            <th>Môn học</th>
-            <th>Điểm</th>
+            <th> Tên Module </th>
+            <th> Điểm lý thuyết </th>
+            <th> Điểm thực hành</th>
+            <th> Điểm trung bình </th>
+            <th> Kết quả </th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1</td>
-            <td>Lê Văn C</td>
-            <td>Java Web</td>
-            <td>8.5</td>
+            <td>${moduleScore.module}</td>
+            <td>${moduleScore.quizScore}</td>
+            <td>${moduleScore.practiceScore}</td>
+            <td>${moduleScore.averageScore}</td>
+            <td> <c:if test="${moduleScore.averageScore>=7.5}">Đạt</c:if></td>
         </tr>
         </tbody>
     </table>

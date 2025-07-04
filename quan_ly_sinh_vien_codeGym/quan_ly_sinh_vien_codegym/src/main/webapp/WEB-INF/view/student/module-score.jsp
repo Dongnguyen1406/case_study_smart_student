@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LENOVO
@@ -17,12 +18,14 @@
     <th> Điểm lý thuyết </th>
     <th> Điểm thực hành</th>
     <th> Điểm trung bình </th>
+    <th> Kết quả </th>
   </tr>
   <tr>
     <td>${moduleScore.module}</td>
     <td>${moduleScore.quizScore}</td>
     <td>${moduleScore.practiceScore}</td>
     <td>${moduleScore.averageScore}</td>
+    <c:if test="${moduleScore.averageScore>=7.5}">Đạt</c:if>
   </tr>
 </table>
 </body>

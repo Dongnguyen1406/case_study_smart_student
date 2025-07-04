@@ -40,22 +40,22 @@
         <h3>Course Overview</h3>
         <div class="row g-3">
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Full Stack</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Front-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Back-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">DevOps</div>
                 </div>
             </div>
@@ -67,22 +67,22 @@
         <h3>Recently Accessed Courses</h3>
         <div class="row g-3">
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Full Stack</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Front-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">Back-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/WEB-INF/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
                     <div class="card-overlay">DevOps</div>
                 </div>
             </div>
