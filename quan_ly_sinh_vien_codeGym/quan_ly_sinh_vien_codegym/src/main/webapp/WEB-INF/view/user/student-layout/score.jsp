@@ -25,7 +25,9 @@
             <td>${moduleScore.quizScore}</td>
             <td>${moduleScore.practiceScore}</td>
             <td>${moduleScore.averageScore}</td>
-            <td> <c:if test="${moduleScore.averageScore>=7.5}">Đạt</c:if></td>
+            <td> <c:if test="${moduleScore.averageScore>=7.5}">Đạt</c:if>
+          <c:if test="${moduleScore.averageScore<7.5}">Không đạt</c:if></td>
+
         </tr>
         </tbody>
     </table>
