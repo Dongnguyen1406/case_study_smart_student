@@ -118,6 +118,8 @@ public class StudentController extends HttpServlet {
             String className = req.getParameter("className");
             Student student = new Student(account.getStudentId(), studentName, dob, gender, address, numberPhone, email, startLearnDate, className);
             iStudentService.updateStudent(student);
+            HttpSession session = req.getSession();
+            session.setAttribute("successMessage", "Cập nhật thành công!");
             resp.sendRedirect(req.getContextPath() + "/student?page=display");
 
         }

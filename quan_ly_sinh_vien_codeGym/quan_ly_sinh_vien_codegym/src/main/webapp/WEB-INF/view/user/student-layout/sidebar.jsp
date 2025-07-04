@@ -21,7 +21,7 @@
     
     <ul class="nav flex-column px-2" id="sidebar-menu">
         <li class="nav-item d-flex align-items-center py-2">
-            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/view/user/student.jsp?page=dashboard">
+            <a class="nav-link text-dark" href="${pageContext.request.contextPath}/student">
                 <i class="bi bi-house-door fs-5"></i>
                 <span class="ms-2 sidebar-text">Trang chủ</span>
             </a>
