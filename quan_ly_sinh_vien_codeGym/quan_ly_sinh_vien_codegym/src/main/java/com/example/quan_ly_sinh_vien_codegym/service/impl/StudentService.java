@@ -17,6 +17,26 @@ public class StudentService implements IStudentService {
     }
 
     @Override
+    public Student select(int id) {
+        return null;
+    }
+
+    @Override
+    public boolean update(Student student) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public void add(Student student) {
+
+    }
+
+    @Override
     public Student displayStudent(String username) {
         return iStudentRepository.displayStudent(username);
     }
@@ -36,7 +56,4 @@ public class StudentService implements IStudentService {
     public ModuleAttendance displayAttendance(String userName) {
         return iStudentRepository.displayAttendance(userName);
     }
-
-
-
 }

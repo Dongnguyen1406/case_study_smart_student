@@ -43,9 +43,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
 <%--                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/view/user/student.jsp?page=profile">👤 Profile</a></li>--%>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+<%--                    <li>--%>
+<%--                        <hr class="dropdown-divider">--%>
+<%--                    </li>--%>
                     <li><a class="dropdown-item" href="/login">🚪 Logout</a></li>
 
                 </ul>

@@ -25,6 +25,15 @@ public class Teacher {
         this.isDelete = isDelete;
     }
 
+    public Teacher(String teacherName, LocalDate dob, String gender, String address, String numberPhone, String email) {
+        this.teacherName = teacherName;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.email = email;
+    }
+
     public String getTeacherId() {
         return teacherId;
     }

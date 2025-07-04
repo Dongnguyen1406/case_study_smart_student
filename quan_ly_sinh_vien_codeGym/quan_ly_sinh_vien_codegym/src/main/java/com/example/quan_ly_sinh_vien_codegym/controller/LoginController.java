@@ -1,4 +1,4 @@
-package com.example.quan_ly_sinh_vien_codegym.controller.user;
+package com.example.quan_ly_sinh_vien_codegym.controller;
 
 
 import com.example.quan_ly_sinh_vien_codegym.entity.Account;
@@ -9,7 +9,6 @@ import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.AccountService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.RoleService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
-import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
 
 import javax.servlet.ServletException;
