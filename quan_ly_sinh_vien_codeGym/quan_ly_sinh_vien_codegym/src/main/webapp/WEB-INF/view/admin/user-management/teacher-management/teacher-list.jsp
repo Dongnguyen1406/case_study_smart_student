@@ -12,8 +12,8 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button type="button" class="btn btn-primary" id="btnAddTeacher">
-        ➕ Thêm giáo viên
+    <button type="button" class="btn" id="btnAddTeacher" style="background-color: #272882; color: #ffffff">
+        Thêm giáo viên
     </button>
 </div>
 
@@ -41,15 +41,15 @@
             <td>phamc@example.com</td>
             <td>0987654321</td>
             <td class="text-center">
-                <span class="badge bg-success">Hoạt động</span>
+                <span class="badge" style="background-color: #272882;">Hoạt động</span>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-warning btn-edit"
                         data-id="1" data-fullname="Phạm Văn C" data-gender="Nam" data-dob="1980-07-15"
                         data-email="phamc@example.com" data-phone="0987654321" data-status="1">
-                    ✏️ Sửa
+                    ✏️ 
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         <tr>
@@ -60,15 +60,15 @@
             <td>trand@example.com</td>
             <td>0976543210</td>
             <td class="text-center">
-                <span class="badge bg-secondary">Không hoạt động</span>
+                <span class="badge bg-secondary" >Không hoạt động</span>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-warning btn-edit"
                         data-id="2" data-fullname="Trần Thị D" data-gender="Nữ" data-dob="1985-11-23"
                         data-email="trand@example.com" data-phone="0976543210" data-status="0">
-                    ✏️ Sửa
+                    ✏️ 
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         </tbody>

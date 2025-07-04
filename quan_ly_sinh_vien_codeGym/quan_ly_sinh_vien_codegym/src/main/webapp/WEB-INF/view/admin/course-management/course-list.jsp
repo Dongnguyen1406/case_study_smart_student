@@ -12,7 +12,7 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button class="btn btn-primary" id="btnAddCourse">➕ Thêm khóa học</button>
+    <button class="btn" id="btnAddCourse" style="background-color: #272882; color: #ffffff">Thêm khóa học</button>
 </div>
 
 <!-- Bảng danh sách -->
@@ -35,13 +35,13 @@
             <td>JC101</td>
             <td class="text-center">6</td>
             <td class="text-center">
-                <span class="badge bg-success">Đang mở</span>
+                <span class="badge" style="background-color: #272882;">Đang mở</span>
             </td>
             <td class="text-center">
                 <button class="btn btn-sm btn-warning btn-edit"
                         data-id="1" data-name="Java Core" data-code="JC101"
-                        data-duration="6" data-status="1">✏️ Sửa</button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                        data-duration="6" data-status="1">✏️ </button>
+                <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
             </td>
         </tr>
         <tr>
@@ -55,8 +55,8 @@
             <td class="text-center">
                 <button class="btn btn-sm btn-warning btn-edit"
                         data-id="2" data-name="Web Development" data-code="WD202"
-                        data-duration="4" data-status="0">✏️ Sửa</button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                        data-duration="4" data-status="0">✏️</button>
+                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
             </td>
         </tr>
         </tbody>

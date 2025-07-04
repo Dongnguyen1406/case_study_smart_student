@@ -8,50 +8,72 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h2 class="mb-4">📊 Thống kê tổng quan</h2>
+<div class="container-fluid">
+    <h2 class="mb-4">📊 Thống kê tổng quan</h2>
 
-<!-- Thống kê nhanh -->
-<div class="row">
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-primary shadow">
-            <div class="card-body">
-                <h5 class="card-title">Student</h5>
-                <p class="card-text fs-4">250</p>
+    <!-- Thống kê nhanh -->
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Student</h5>
+                    <p class="card-text fs-4">250</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Teacher</h5>
+                    <p class="card-text fs-4">45</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-warning shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Course</h5>
+                    <p class="card-text fs-4">12</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-white bg-info shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Module</h5>
+                    <p class="card-text fs-4">30</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-success shadow">
-            <div class="card-body">
-                <h5 class="card-title">Teacher</h5>
-                <p class="card-text fs-4">45</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-warning shadow">
-            <div class="card-body">
-                <h5 class="card-title">Course</h5>
-                <p class="card-text fs-4">12</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-info shadow">
-            <div class="card-body">
-                <h5 class="card-title">Module</h5>
-                <p class="card-text fs-4">30</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Biểu đồ -->
-<div class="card mb-5 shadow">
-    <div class="card-body">
-        <h5 class="card-title">Biểu đồ thống kê</h5>
-        <canvas id="dashboardChart" height="100"></canvas>
+    <!-- Biểu đồ thống kê cột và tròn -->
+    <div class="row mb-5">
+        <!-- Biểu đồ cột -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Biểu đồ thống kê</h5>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="dashboardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biểu đồ tròn học sinh theo lớp -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Học sinh theo lớp</h5>
+                    <div class="chart-container" style="position: relative; width: 100%; height: 300px;">
+                        <canvas id="classPieChart" style="max-width: 100%; height: auto;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <!-- Chart.js CDN + Script -->
@@ -83,6 +105,32 @@
         }
     });
 </script>
+<script>
+    const pieCtx = document.getElementById('classPieChart').getContext('2d');
+    const classPieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Lớp 10A1', 'Lớp 10B2'],
+            datasets: [{
+                label: 'Sĩ số học sinh',
+                data: [40, 38], // Lấy từ bảng lớp phía dưới
+                backgroundColor: ['#FF6384', '#36A2EB'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+
 
 
 

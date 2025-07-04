@@ -12,8 +12,7 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button type="button" class="btn btn-primary" id="btnAddClass">
-        ➕ Thêm lớp học
+    <button type="button" class="btn" id="btnAddClass" style="background-color: #272882; color: #ffffff">Thêm lớp học
     </button>
 </div>
 
@@ -39,15 +38,15 @@
             <td>Nguyễn Văn C</td>
             <td class="text-center">40</td>
             <td class="text-center">
-                <span class="badge bg-success">Đang hoạt động</span>
+                <span class="badge" style="background-color: #272882;">Đang hoạt động</span>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-warning btn-edit-class"
                         data-id="1" data-code="LH01" data-name="Lớp 10A1"
                         data-teacher="Nguyễn Văn C" data-size="40" data-status="1">
-                    ✏️ Sửa
+                    ✏️
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
             </td>
         </tr>
         <tr>
@@ -63,9 +62,9 @@
                 <button type="button" class="btn btn-sm btn-warning btn-edit-class"
                         data-id="2" data-code="LH02" data-name="Lớp 10B2"
                         data-teacher="Trần Thị D" data-size="38" data-status="0">
-                    ✏️ Sửa
+                    ✏️
                 </button>
-                <a href="#" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                <a href="#" class="btn btn-sm btn-danger">🗑️</a>
             </td>
         </tr>
         </tbody>
