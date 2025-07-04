@@ -23,9 +23,9 @@ public class LoginController extends HttpServlet {
     private static IStudentService iStudentService= new StudentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String hashedPassword = PasswordEncodeUtil.encode("123");
-       System.out.println("---------------------------");
-        System.out.println(hashedPassword);
+//       String hashedPassword = PasswordEncodeUtil.encode("123");
+//       System.out.println("---------------------------");
+//        System.out.println(hashedPassword);
 
         String action = req.getServletPath();
         if ("/logout".equals(action)) {

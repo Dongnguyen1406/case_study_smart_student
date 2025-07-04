@@ -23,6 +23,9 @@
     height: 50px;
     transition: height 0.3s ease;
 }
+.required-star {
+    color: red  !important;
+}
 
 #sidebar.collapsed #sidebar-logo img {
     height: 40px !important;

@@ -32,37 +32,45 @@
                     <form action="${basePath}/student" method="post">
                         <input type="hidden" name="page" value="update"/>
                         <div class="mb-3">
-                            <label for="studentName" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" name="studentName" id="studentName" required value="${student.studentName}">
+                            <label for="studentName" class="form-label">Họ và tên <span style="color:red">*</span></label>
+                            <input  type="text" class="form-control" name="studentName" id="studentName"  pattern="[A-Za-zÀ-ỹà-ỹ\s]{2,50}" title="Chỉ nhập chữ và khoảng trắng, độ dài 2-50 ký tự" required value="${student.studentName}">
                         </div>
                         <div class="mb-3">
-                            <label for="dob" class="form-label">Ngày sinh</label>
-                            <input type="text" class="form-control" name="dob" id="dob" required value="${student.dob}">
+                            <label for="dob" class="form-label">Ngày sinh <span style="color:red">*</span></label>
+                            <input type="date" class="form-control" name="dob" id="dob" required value="${student.dob}">
                         </div>
                         <div class="mb-3">
-                            <label for="gender" class="form-label">Giới tính</label>
-                            <input type="text" class="form-control"  name="gender" id="gender" required value="${student.gender}">
+                            <label for="gender" class="form-label">Giới tính <span style="color:red">*</span></label>
+                            <select class="form-select" name="gender" id="gender" required>
+                                <option value="">-- Chọn giới tính --</option>
+                                <option value="Nam" <c:if test="${student.gender == 'Nam'}">selected</c:if>>Nam</option>
+                                <option value="Nữ" <c:if test="${student.gender == 'Nữ'}">selected</c:if>>Nữ</option>
+                                <option value="Khác" <c:if test="${student.gender == 'Khác'}">selected</c:if>>Khác</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span style="color:red">*</span></label>
+                            <input type="email" class="form-control"  name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Nhập đúng định dạng email" required value="${student.email}">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control"  name="email" id="email" required value="${student.email}">
+                            <label for="numberPhone" class="form-label">Số điện thoại <span style="color:red">*</span></label>
+                            <input type="text" class="form-control"  name="numberPhone"  pattern="^(0|\+84)[0-9]{9}$"
+                                   title="Số điện thoại phải bắt đầu bằng 0 hoặc +84 và có đúng 9 chữ số sau đó"  id="numberPhone" required value="${student.numberPhone}">
                         </div>
                         <div class="mb-3">
-                            <label for="numberPhone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control"  name="numberPhone" id="numberPhone" required value="${student.numberPhone}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control"  name="address" id="address" required
+                            <label for="address" class="form-label">Địa chỉ <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" pattern="[\wÀ-ỹà-ỹ\s,.-]{5,100}" title="Địa chỉ tối thiểu 5 ký tự" name="address" id="address" required
                                    value="${student.address}">
                         </div>
                         <div class="mb-3">
-                            <label for="startLearnDate" class="form-label"> Ngày bắt đầu nhập học</label>
-                            <input type="text" class="form-control"  name="startLearnDate" id="startLearnDate" required value="${student.startLearnDate}">
+                            <label for="startLearnDate" class="form-label"> Ngày bắt đầu nhập học <span style="color:red">*</span></label>
+                            <input type="date" class="form-control"  name="startLearnDate" id="startLearnDate" required value="${student.startLearnDate}">
                         </div>
                         <div class="mb-3">
-                            <label for="className" class="form-label">Tên lớp</label>
-                            <input type="text" class="form-control"  name="className" id="className" required value="${student.className}">
+                            <label for="className" class="form-label">Tên lớp <span style="color:red">*</span></label>
+                            <input type="text" class="form-control"  name="className"  pattern="^C\d{4}G\d$"
+                                   title="Tên lớp phải theo định dạng CxxxxGx, ví dụ: C0225G1"  id="className" required value="${student.className}">
                         </div>
                         <button type="submit" class="btn btn-primary">Thay đổi </button>
                     </form>
