@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:forward page="/WEB-INF/view/user/student.jsp" />
 <!DOCTYPE html>
@@ -10,6 +11,6 @@
 <body>
 <h1><%= "Hello World!" %></h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<c:redirect url="/login"></c:redirect>
 </body>
 </html>

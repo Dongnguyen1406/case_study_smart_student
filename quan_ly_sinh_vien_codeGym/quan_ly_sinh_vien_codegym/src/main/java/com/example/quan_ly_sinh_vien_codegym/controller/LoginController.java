@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
             SessionUtil.set(req, "account", account);
             if(account.getRoleId()==1){
                 HttpSession session = req.getSession();
-                session.setAttribute("success", "Đăng nhập admin thành công!");
+                session.setAttribute("successMessage", "Đăng nhập admin thành công!");
                 resp.sendRedirect("/admin");
             } else if (account.getRoleId()==2) {
                 HttpSession session = req.getSession();
