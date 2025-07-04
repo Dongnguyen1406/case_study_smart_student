@@ -29,4 +29,24 @@ public class RoleRepository implements IRoleRepository {
         }
         return roles;
     }
+
+    @Override
+    public Role select(int id) {
+        return null;
+    }
+
+    @Override
+    public boolean update(Role role) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public void add(Role role) {
+
+    }
 }
