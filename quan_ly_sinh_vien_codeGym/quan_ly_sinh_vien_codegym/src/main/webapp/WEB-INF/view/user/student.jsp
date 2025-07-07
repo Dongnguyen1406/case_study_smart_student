@@ -39,6 +39,9 @@
                     <c:when test="${paramPage == 'display'}">
                         <jsp:include page="/WEB-INF/view/user/student-profile.jsp"/>
                     </c:when>
+                    <c:when test="${paramPage == 'updatePassword'}">
+                        <jsp:include page="/WEB-INF/view/user/update-password.jsp"/>
+                    </c:when>
 
                     <c:otherwise>
                         <h5>Vui lòng chọn một mục từ sidebar để xem nội dung.</h5>

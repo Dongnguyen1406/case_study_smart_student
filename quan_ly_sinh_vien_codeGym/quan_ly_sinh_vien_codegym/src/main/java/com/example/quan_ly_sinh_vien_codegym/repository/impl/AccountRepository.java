@@ -38,6 +38,18 @@ public class AccountRepository implements IAccountRepository {
         return null;
     }
 
+    @Override
+    public void updatePassword(int Id, String encodePassword) {
+        String sql = "UPDATE accounts SET password = ? WHERE account_id = ?";
+        try (Connection conn = BaseRepository.getConnectDB();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, (encodePassword));
+            ps.setInt(2,(Id));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+    }
 
 
 }
