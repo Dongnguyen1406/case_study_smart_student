@@ -11,7 +11,11 @@ import java.util.List;
 
 public class CourseRepository implements ICourseRepository {
     private final String SELECT_COURSE = "select course_id, course_name from courses;";
-    
+    private final String UPDATE_COURSE =
+            "UPDATE courses SET course_name=? WHERE course_id=?";
+    private final String DELETE_COURSE = "DELETE FROM courses WHERE course_id = ?";
+    private final String INSERT_COURSE = "INSERT INTO courses (course_name) VALUES (?)";
+
     @Override
     public List<Course> findAll() {
         List<Course> courses = new ArrayList<>();
@@ -36,6 +40,15 @@ public class CourseRepository implements ICourseRepository {
 
     @Override
     public boolean update(Course course) {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COURSE)) {
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setInt(2, course.getCourseId());
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow == 1;
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi cập nhật học sinh: " + e.getMessage());
+        }
         return false;
     }
 
@@ -46,11 +59,25 @@ public class CourseRepository implements ICourseRepository {
 
     @Override
     public boolean deleteById(int id) {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_COURSE)) {
+            preparedStatement.setInt(1, id);
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows == 1;
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi xóa course: " + e.getMessage());
+        }
         return false;
     }
 
     @Override
     public void add(Course course) {
-
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_COURSE)) {
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm khóa học: " + e.getMessage());
+        }
     }
 }

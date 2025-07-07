@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 6/29/2025
-  Time: 11:59 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
@@ -31,14 +24,16 @@
             <tr>
                 <td class="text-center">${startIndex + temp.count}</td>
                 <td class="text-center">${module.moduleName}</td>
-<%--                <td class="text-center"><span class="badge" style="background-color: #272882;">Hoạt động</span></td>--%>
                 <td class="text-center">
-                    <button class="btn btn-sm btn-warning btn-edit"
-                            data-id="1" data-name="Java Core" data-code="MOD101"
-                            data-desc="Giới thiệu Java cơ bản và lập trình hướng đối tượng" data-status="1">
+                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                            data-id="${module.moduleId}"
+                            data-name="${module.moduleName}">
                         ✏️
                     </button>
-                    <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
+                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                            data-id="${module.moduleId}">
+                        🗑️
+                    </button>
                 </td>
             </tr>
         </c:forEach>
@@ -49,26 +44,107 @@
     </div>
 </div>
 
-<!-- Gọi modal thêm & sửa -->
-<jsp:include page="module-form.jsp"/>
-<jsp:include page="module-update.jsp"/>
+<!-- Modal Thêm Module -->
+<div class="modal fade" id="addModuleModal" tabindex="-1" aria-labelledby="addModuleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=addModule" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">➕ Thêm học phần</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tên học phần</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cập Nhật Module -->
+<div class="modal fade" id="editModuleModal" tabindex="-1" aria-labelledby="editModuleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=updateModule" method="post">
+                <input type="hidden" name="id" id="editModuleId">
+                <div class="modal-header">
+                    <h5 class="modal-title">✏️ Cập nhật học phần</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tên học phần</label>
+                        <input type="text" name="name" id="editModuleName" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác Nhận Xóa -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=deleteModule" method="post">
+                <input type="hidden" id="deleteModuleId" name="id">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa học phần</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa học phần này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script xử lý modal -->
 <script>
-    // Modal thêm
+    // Mở modal thêm
     document.getElementById('btnAddModule').addEventListener('click', () => {
-        new bootstrap.Modal(document.getElementById('addModuleModal')).show();
+        let modal = new bootstrap.Modal(document.getElementById('addModuleModal'));
+        modal.show();
     });
 
-    // Modal sửa
+    // Mở modal sửa
     document.querySelectorAll('.btn-edit').forEach(button => {
         button.addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('editModuleModal'));
             document.getElementById('editModuleId').value = button.dataset.id;
             document.getElementById('editModuleName').value = button.dataset.name;
-            document.getElementById('editModuleCode').value = button.dataset.code;
-            document.getElementById('editModuleDesc').value = button.dataset.desc;
-            document.getElementById('editModuleStatus').value = button.dataset.status;
-            new bootstrap.Modal(document.getElementById('editModuleModal')).show();
+            modal.show();
         });
     });
-</script>
 
+    
+    // Mở modal xác nhận xóa
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            document.getElementById('deleteModuleId').value = button.dataset.id; 
+            modal.show();
+        });
+    });
+
+</script>
