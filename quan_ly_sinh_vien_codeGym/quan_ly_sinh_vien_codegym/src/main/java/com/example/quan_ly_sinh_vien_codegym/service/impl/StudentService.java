@@ -10,7 +10,8 @@ import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
 import java.util.List;
 
 public class StudentService implements IStudentService {
-    private static final IStudentRepository iStudentRepository= new StudentRepository();
+    private static final IStudentRepository iStudentRepository = new StudentRepository();
+
     @Override
     public List<Student> findAll() {
         return iStudentRepository.findAll();
@@ -19,6 +20,11 @@ public class StudentService implements IStudentService {
     @Override
     public Student select(int id) {
         return null;
+    }
+
+    @Override
+    public List<Student> findByClassId(int classId) {
+        return iStudentRepository.findByClassId(classId);
     }
 
     @Override
@@ -55,7 +61,6 @@ public class StudentService implements IStudentService {
     public ModuleScore displayScore(String userName) {
         return iStudentRepository.displayScore(userName);
     }
-
 
     @Override
     public ModuleAttendance displayAttendance(String userName) {

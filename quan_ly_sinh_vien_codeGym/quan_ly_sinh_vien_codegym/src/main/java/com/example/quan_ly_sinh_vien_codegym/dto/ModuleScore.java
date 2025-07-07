@@ -5,6 +5,8 @@ public class ModuleScore {
     double quizScore;
     double practiceScore;
     double averageScore;
+    String studentId; // Thêm
+    int moduleId;     // Thêm
 
     public ModuleScore(String module, double quizScore, double practiceScore, double averageScore) {
         this.module = module;
@@ -43,5 +45,21 @@ public class ModuleScore {
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public int getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(int moduleId) {
+        this.moduleId = moduleId;
     }
 }
