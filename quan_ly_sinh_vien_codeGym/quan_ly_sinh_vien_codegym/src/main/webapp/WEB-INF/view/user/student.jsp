@@ -34,7 +34,7 @@
                         <jsp:include page="/WEB-INF/view/user/student-layout/assessment.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'update'}">
-                    <jsp:include page="/WEB-INF/view/user/update.jsp"/>
+                        <jsp:include page="/WEB-INF/view/user/update.jsp"/>
                     </c:when>
                     <c:when test="${paramPage == 'display'}">
                         <jsp:include page="/WEB-INF/view/user/student-profile.jsp"/>
@@ -44,17 +44,12 @@
                         <h5>Vui lòng chọn một mục từ sidebar để xem nội dung.</h5>
                     </c:otherwise>
                 </c:choose>
-
             </div>
-
-
+            <%@ include file="/WEB-INF/view/common/layout/footer.jsp" %>
         </div>
-
     </div>
-
 </div>
 
 
-<%@ include file="/WEB-INF/view/common/layout/footer.jsp" %>
 
 

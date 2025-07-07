@@ -12,6 +12,9 @@ public class Class {
     int quantityStudent;
     Boolean isDelete;
 
+    public Class() {
+    }
+
     public Class(int classId, String className, int moduleId, int courseId, String teacherId, LocalDate startDate, int quantityStudent, Boolean isDelete) {
         this.classId = classId;
         this.className = className;
