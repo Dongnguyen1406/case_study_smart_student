@@ -22,4 +22,9 @@ public class AccountService implements IAccountService {
         }
         return null;
     }
+
+    @Override
+    public void updatePassword(int id, String encodePassword) {
+        iAccountRepository.updatePassword(id,encodePassword);
+    }
 }

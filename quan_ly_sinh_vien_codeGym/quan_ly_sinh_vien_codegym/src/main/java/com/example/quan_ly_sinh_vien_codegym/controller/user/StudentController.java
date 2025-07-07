@@ -2,8 +2,11 @@ package com.example.quan_ly_sinh_vien_codegym.controller.user;
 
 import com.example.quan_ly_sinh_vien_codegym.entity.Account;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
+import com.example.quan_ly_sinh_vien_codegym.service.IAccountService;
 import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
+import com.example.quan_ly_sinh_vien_codegym.service.impl.AccountService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
+import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
 
 import javax.servlet.ServletException;
@@ -18,10 +21,20 @@ import java.time.LocalDate;
 @WebServlet(urlPatterns = "/student")
 public class StudentController extends HttpServlet {
     private static IStudentService iStudentService = new StudentService();
-
+private static IAccountService iAccountService= new AccountService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
+        HttpSession session = req.getSession();
+        String role = null;
+        if (session != null) {
+            role = (String) session.getAttribute("role");
+        }
+        if (role == null || !role.equals("user")) {
+            resp.sendRedirect("/access-denied.jsp");
+            return;
+        }
+
         if (account == null) {
             resp.sendRedirect("/login");
         }
@@ -40,17 +53,24 @@ public class StudentController extends HttpServlet {
                 displayAttendance(req, resp);
                 break;
             case "display":
-                displayStudent(req ,resp);
+                displayStudent(req, resp);
                 break;
+            case "updatePassword":
+                updatePassword(req,resp);
             default:
                 Student student = iStudentService.displayStudent(account.getUsername());
-                HttpSession session = req.getSession();
                 session.setAttribute("student", student);
                 req.getRequestDispatcher("WEB-INF/view/user/student.jsp").forward(req, resp);
         }
 
 
     }
+
+    private void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=updatePassword").forward(req, resp);
+
+    }
+
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
@@ -78,7 +98,6 @@ public class StudentController extends HttpServlet {
     }
 
 
-
     private void displayScore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
@@ -87,7 +106,6 @@ public class StudentController extends HttpServlet {
         }
 
     }
-
 
 
     @Override
@@ -100,8 +118,52 @@ public class StudentController extends HttpServlet {
             case "update":
                 edit(req, resp);
                 break;
+            case "updatePassword":
+                savePassword(req,resp);
+                break;
         }
     }
+
+    private void savePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String currentPassword = req.getParameter("currentPassword");
+        String newPassword = req.getParameter("newPassword");
+        String confirmNewPassword = req.getParameter("confirmNewPassword");
+
+        Account account = (Account) SessionUtil.get(req, "account");
+        System.out.println(account.getUsername());
+        System.out.println(account.getPassword());
+        if (account.getPassword()==null||!PasswordEncodeUtil.check(currentPassword, account.getPassword())) {
+            req.setAttribute("error", "Mật khẩu hiện tại không đúng");
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=updatePassword").forward(req, resp);
+            return;
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            req.setAttribute("newError", "Mật khẩu mới không khớp");
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=updatePassword").forward(req, resp);
+            return;
+        }
+
+        String encodedPassword = PasswordEncodeUtil.encode(newPassword);
+        iAccountService.updatePassword(account.getAccountId(), encodedPassword);
+
+        // Cách 1: Hiển thị tại form đổi mật khẩu (nên dùng nếu người dùng muốn kiểm tra lại)
+//        req.setAttribute("success", "Đổi mật khẩu thành công");
+//        req.getRequestDispatcher("/WEB-INF/view/account/update-password.jsp").forward(req, resp);
+
+        // --- HOẶC ---
+        // Cách 2: Chuyển về trang chính
+
+    HttpSession session = req.getSession();
+    session.setAttribute("successMessage", "Cập nhật mật khẩu thành công!");
+    resp.sendRedirect(req.getContextPath() + "/student?page=display");
+
+    }
+
+
+
+
+
 
     private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
