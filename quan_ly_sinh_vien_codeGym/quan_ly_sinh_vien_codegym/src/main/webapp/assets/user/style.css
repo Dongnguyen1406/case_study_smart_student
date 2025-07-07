@@ -23,9 +23,14 @@
     height: 50px;
     transition: height 0.3s ease;
 }
-.required-star {
-    color: red  !important;
-}
+
+
+ .btn-no-hover-light:hover {
+     background-color: #f8f9fa !important; /* màu gốc của btn-light */
+     color: black !important;
+     border-color: #dee2e6 !important;
+ }
+
 
 #sidebar.collapsed #sidebar-logo img {
     height: 40px !important;

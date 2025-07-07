@@ -84,7 +84,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="dob" class="form-label">Ngày sinh</label>
-                            <input type="text" class="form-control" id="dob" readonly value="${student.dob}">
+                            <input type="text" class="form-control" id="dob" readonly value="${student.dob}" >
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Giới tính</label>
