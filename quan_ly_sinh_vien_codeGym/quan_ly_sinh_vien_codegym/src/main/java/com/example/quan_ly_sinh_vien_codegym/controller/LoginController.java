@@ -28,9 +28,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//       String hashedPassword = PasswordEncodeUtil.encode("123");
-//       System.out.println("---------------------------");
-//        System.out.println(hashedPassword);
+//      String hashedPassword = PasswordEncodeUtil.encode("1234");
+//      System.out.println("---------------------------");
+//       System.out.println(hashedPassword);
 
         String action = req.getServletPath();
         if ("/logout".equals(action)) {
@@ -39,6 +39,7 @@ public class LoginController extends HttpServlet {
         }else {
             req.getRequestDispatcher("WEB-INF/view/login/login.jsp").forward(req,resp);
         }
+
     }
 
     @Override
@@ -52,17 +53,20 @@ public class LoginController extends HttpServlet {
             req.setAttribute("message", "login-error");
             req.getRequestDispatcher("WEB-INF/view/login/login.jsp").forward(req, resp);
         } else {
-            SessionUtil.set(req, "account", account);
+            Account account1= accountService.findByUsername(username);
+            SessionUtil.set(req, "account", account1);
             if(account.getRoleId()==1){
                 HttpSession session = req.getSession();
+                session.setAttribute("role","admin");
                 session.setAttribute("successMessage", "Đăng nhập admin thành công!");
                 resp.sendRedirect("/admin");
             } else if (account.getRoleId()==2) {
                 HttpSession session = req.getSession();
+                session.setAttribute("role","user");
                 session.setAttribute("successMessage", "Đăng nhập thành công!");
                 resp.sendRedirect("/student");
             }else {
-//                teacher
+////                teacher
             }
 
 

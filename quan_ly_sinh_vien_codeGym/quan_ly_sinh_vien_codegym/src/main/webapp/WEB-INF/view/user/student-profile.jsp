@@ -14,7 +14,7 @@
         <div id="toast-alert" class="custom-toast animate-slide-down">
                 ${sessionScope.successMessage}
         </div>
-        <c:remove var="successMessage" scope="session" />
+        <c:remove var="successMessage" scope="session"/>
 
         <style>
             .custom-toast {
@@ -49,7 +49,7 @@
         </style>
 
         <script>
-            setTimeout(function() {
+            setTimeout(function () {
                 var toast = document.getElementById("toast-alert");
                 if (toast) {
                     toast.style.display = "none";
@@ -79,7 +79,8 @@
                     <form>
                         <div class="mb-3">
                             <label for="studentName" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="studentName" readonly value="${student.studentName}">
+                            <input type="text" class="form-control" id="studentName" readonly
+                                   value="${student.studentName}">
                         </div>
                         <div class="mb-3">
                             <label for="dob" class="form-label">Ngày sinh</label>
@@ -95,7 +96,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="numberPhone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="numberPhone" readonly value="${student.numberPhone}">
+                            <input type="text" class="form-control" id="numberPhone" readonly
+                                   value="${student.numberPhone}">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ</label>
@@ -104,15 +106,31 @@
                         </div>
                         <div class="mb-3">
                             <label for="startLearnDate" class="form-label"> Ngày bắt đầu nhập học</label>
-                            <input type="text" class="form-control" id="startLearnDate" readonly value="${student.startLearnDate}">
+                            <input type="text" class="form-control" id="startLearnDate" readonly
+                                   value="${student.startLearnDate}">
                         </div>
                         <div class="mb-3">
                             <label for="className" class="form-label">Tên lớp</label>
-                            <input type="text" class="form-control" id="className" readonly value="${student.className}">
+                            <input type="text" class="form-control" id="className" readonly
+                                   value="${student.className}">
                         </div>
-                        <button type="button" onclick="window.location.href='${basePath}/student?page=update'" class="btn btn-primary">
-                            Thay đổi thông tin
-                        </button>
+
+                        <div class="d-flex flex-column align-items-start gap-2 mt-3">
+                            <button type="button"
+                                    onclick="window.location.href='${basePath}/student?page=updatePassword'"
+                                    class="btn btn-light px-4">
+                                Thay đổi mật khẩu
+                            </button>
+                            <button type="button"
+                                    onclick="window.location.href='${basePath}/student?page=update'"
+                                    class="btn btn-primary px-4">
+                                Thay đổi thông tin
+                            </button>
+                        </div>
+
+
+
+
                     </form>
                 </div>
             </div>

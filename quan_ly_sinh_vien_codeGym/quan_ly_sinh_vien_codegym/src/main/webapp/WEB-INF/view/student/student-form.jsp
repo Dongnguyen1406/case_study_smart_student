@@ -30,18 +30,19 @@
         <th> Chỉnh sửa</th>
     </tr>
     <tr>
-    <td>${student.studentName}</td>
-    <td>${student.dob}</td>
-    <td>${student.gender}</td>
-    <td>${student.address}</td>
-    <td>${student.numberPhone}</td>
-    <td>${student.email}</td>
-    <td>${student.startLearnDate}</td>
-    <td>${student.className}</td>
-      <td><button onclick="window.location.href=`/student?action=update`"><i
-              class="bi bi-pencil text-primary"></i></button>
-      </td>
-        </button>
+        <td>${student.studentName}</td>
+        <td>${student.dob}</td>
+        <td>${student.gender}</td>
+        <td>${student.address}</td>
+        <td>${student.numberPhone}</td>
+        <td>${student.email}</td>
+        <td>${student.startLearnDate}</td>
+        <td>${student.className}</td>
+        <td>
+            <button onclick="window.location.href=`/student?action=update`"><i
+                    class="bi bi-pencil text-primary"></i></button>
+        </td>
+
     </tr>
 </table>
 </body>
