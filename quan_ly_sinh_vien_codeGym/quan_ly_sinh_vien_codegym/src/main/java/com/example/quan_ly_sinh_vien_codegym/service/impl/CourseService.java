@@ -24,7 +24,7 @@ public class CourseService implements ICourseService {
 
     @Override
     public boolean update(Course course) {
-        return false;
+        return courseRepository.update(course);
     }
 
     @Override
@@ -34,11 +34,11 @@ public class CourseService implements ICourseService {
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return courseRepository.deleteById(id);
     }
 
     @Override
     public void add(Course course) {
-
+        courseRepository.add(course);
     }
 }

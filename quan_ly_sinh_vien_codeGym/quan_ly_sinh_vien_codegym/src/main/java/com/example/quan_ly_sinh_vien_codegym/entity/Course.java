@@ -4,6 +4,9 @@ public class Course {
     int courseId;
     String courseName;
 
+    public Course() {
+    }
+
     public Course(int courseId, String courseName) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -12,6 +15,7 @@ public class Course {
     public Course(String courseName) {
         this.courseName = courseName;
     }
+    
 
     public int getCourseId() {
         return courseId;

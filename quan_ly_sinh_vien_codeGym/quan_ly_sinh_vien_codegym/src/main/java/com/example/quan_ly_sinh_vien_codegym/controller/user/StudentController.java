@@ -30,6 +30,7 @@ private static IAccountService iAccountService= new AccountService();
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
+        // thêm access quyền admin
         if (role == null || !role.equals("user")) {
             resp.sendRedirect("/access-denied.jsp");
             return;

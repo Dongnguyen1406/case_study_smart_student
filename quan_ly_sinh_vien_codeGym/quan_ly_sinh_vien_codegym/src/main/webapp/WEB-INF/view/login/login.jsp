@@ -39,7 +39,7 @@
                 <form action="/login"  method="post" id="loginForm">
                     <input type="hidden" name="action" value="login"/>
                     <div class="mb-3 input-group">
-                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
                         <input type="text" class="form-control" name="username" id="username" placeholder="user name" required>
                     </div>
 
