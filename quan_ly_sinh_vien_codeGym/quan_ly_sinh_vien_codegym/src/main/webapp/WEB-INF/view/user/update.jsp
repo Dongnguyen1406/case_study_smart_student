@@ -68,9 +68,9 @@
                             <input type="date" class="form-control"  name="startLearnDate" id="startLearnDate" required value="${student.startLearnDate}">
                         </div>
                         <div class="mb-3">
-                            <label for="className" class="form-label">Tên lớp <span style="color:red">*</span></label>
+                            <label for="className" class="form-label">Tên lớp</label>
                             <input type="text" class="form-control"  name="className"  pattern="^C\d{4}G\d$"
-                                   title="Tên lớp phải theo định dạng CxxxxGx, ví dụ: C0225G1"  id="className" required value="${student.className}">
+                                   title="Tên lớp phải theo định dạng CxxxxGx, ví dụ: C0225G1"  id="className" required readonly value="${student.className}">
                         </div>
                         <button type="submit" class="btn btn-primary">Thay đổi </button>
                     </form>
