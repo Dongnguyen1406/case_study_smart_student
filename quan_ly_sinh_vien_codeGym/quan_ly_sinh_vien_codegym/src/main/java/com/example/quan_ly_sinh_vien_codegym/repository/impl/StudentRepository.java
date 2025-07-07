@@ -1,5 +1,6 @@
 package com.example.quan_ly_sinh_vien_codegym.repository.impl;
 
+import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.repository.IStudentRepository;
@@ -21,6 +22,12 @@ public class StudentRepository implements IStudentRepository {
     private final String UPDATE_STUDENT = " update students  set student_name=?, dob=? ,gender=?,address=?,number_phone=?,email=?where student_id=?";
     private final String SELECT_SCORE = "select s.student_id,m.module_name, sc.quiz_score, sc.practice_score,sc.average_score from students s join student_modules sm on s.student_id= sm.student_id join modules m on sm.module_id=m.module_id join scores sc on sm.student_module_id=sc.student_module_id join accounts a on s.student_id=a.student_id where a.username=?;";
     private final String SELECT_ATTENDANCE = "CALL check_exam_eligibility(?);";
+    private final String SELECT_MODULE_ATTENDANCE ="elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
+            "join attendance a on s.student_id=a.student_id \n" +
+            "join student_modules st  on s.student_id=st.student_id\n" +
+            "join modules m on st.module_id=m.module_id\n" +
+            "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? and  m.module_id=? ;";
+
     @Override
     public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
@@ -132,6 +139,12 @@ public class StudentRepository implements IStudentRepository {
 
         return moduleScore;
     }
+
+    @Override
+    public AttendanceDateDto displayAttendanceDate(String id) {
+        return null;
+    }
+
     public ModuleAttendance displayAttendance(String userName){
         ModuleAttendance moduleAttendance = null;
         try (Connection connection = BaseRepository.getConnectDB();
