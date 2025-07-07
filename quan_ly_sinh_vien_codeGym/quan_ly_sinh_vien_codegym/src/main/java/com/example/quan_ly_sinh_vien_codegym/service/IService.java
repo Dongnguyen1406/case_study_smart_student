@@ -6,6 +6,7 @@ public interface IService<T> {
     List<T> findAll();
     T select(int id);
     boolean update(T t);
-    boolean delete(int id);
+    boolean delete(String id);
+    boolean deleteById(int id);
     void add(T t);
 }

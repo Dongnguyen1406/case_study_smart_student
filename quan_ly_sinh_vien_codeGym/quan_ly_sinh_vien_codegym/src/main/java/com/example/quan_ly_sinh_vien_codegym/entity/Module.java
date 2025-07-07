@@ -4,6 +4,9 @@ public class Module {
     int moduleId;
     String moduleName;
 
+    public Module() {
+    }
+
     public Module(int moduleId, String moduleName) {
         this.moduleId = moduleId;
         this.moduleName = moduleName;

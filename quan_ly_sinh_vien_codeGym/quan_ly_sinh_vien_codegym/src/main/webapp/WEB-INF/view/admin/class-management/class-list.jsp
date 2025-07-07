@@ -23,6 +23,7 @@
         <thead class="table-light text-center">
         <tr>
             <th>STT</th>
+            <th>Mã</th>
             <th>Tên lớp</th>
             <th>Module</th>
             <th>Course</th>
@@ -35,7 +36,8 @@
         <tbody>
         <c:forEach items="${classes}" var="clazz" varStatus="temp">
             <tr>
-                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${startIndex + temp.count}</td>
+                <td class="text-center">${clazz.classId}</td>
                 <td class="text-center">${clazz.className}</td>
                 <td class="text-center">${clazz.moduleName}</td>
                 <td class="text-center">${clazz.courseName}</td>
@@ -44,11 +46,19 @@
                 <td class="text-center">${clazz.quantity}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-sm btn-warning btn-edit-class"
-                            data-id="1" data-code="LH01" data-name="Lớp 10A1"
-                            data-teacher="Nguyễn Văn C" data-size="40" data-status="1">
+                            data-id="${clazz.classId}"
+                            data-name="${clazz.className}"
+                            data-module="${clazz.moduleName}"
+                            data-course="${clazz.courseName}"
+                            data-teacher="${clazz.teacherName}"
+                            data-start="${clazz.startDate}"
+                            data-size="${clazz.quantity}">
                         ✏️
                     </button>
-                    <a href="#" class="btn btn-sm btn-danger">🗑️</a>
+                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                            data-id="${clazz.classId}">
+                        🗑️
+                    </button>
                 </td>
             </tr>
         </c:forEach>
@@ -57,13 +67,162 @@
     <div class="d-flex justify-content-center mt-3">
         <jsp:include page="/WEB-INF/view/common/pagination.jsp"/>
     </div>
+    <!-- Modal Thêm Lớp -->
+    <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="${basePath}/admin?page=addClass" method="post" class="needs-validation" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addClassModalLabel">➕ Thêm lớp học mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="addClassCode" class="form-label">Mã lớp</label>
+                                <input type="text" class="form-control" id="addClassCode" name="classCode" required>
+                                <div class="invalid-feedback">Vui lòng nhập mã lớp.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addClassName" class="form-label">Tên lớp</label>
+                                <input type="text" class="form-control" id="addClassName" name="className" required>
+                                <div class="invalid-feedback">Vui lòng nhập tên lớp.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addModule" class="form-label">Module</label>
+                                <select id="addModule" name="module" class="form-select" required>
+                                    <c:forEach items="${modules}" var="module">
+                                        <option value="${module.moduleId}">${module.moduleName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn module</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addCourse" class="form-label">Course</label>
+                                <select id="addCourse" name="course" class="form-select" required>
+                                    <c:forEach items="${courses}" var="course">
+                                        <option value="${course.courseId}">${course.courseName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn course</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addClassTeacher" class="form-label">Giáo viên chủ nhiệm</label>
+                                <select id="addClassTeacher" name="teacher" class="form-select" required>
+                                    <c:forEach items="${teachers}" var="teacher">
+                                        <option value="${teacher.teacherId}">${teacher.teacherName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng nhập tên giáo viên.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addClassSize" class="form-label">Sĩ số</label>
+                                <input type="number" class="form-control" id="addClassSize" name="size" min="1" required>
+                                <div class="invalid-feedback">Vui lòng nhập sĩ số hợp lệ.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="addStartDate" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" id="addStartDate" name="startDate" required>
+                                <div class="invalid-feedback">Vui lòng chọn ngày bắt đầu.</div>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Cập Nhật Lớp -->
+    <div class="modal fade" id="editClassModal" tabindex="-1" aria-labelledby="editClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="${basePath}/admin?page=updateClass" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" id="editClassId" name="id"/>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editClassModalLabel">✏️ Cập nhật lớp học</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="editClassName" class="form-label">Tên lớp</label>
+                                <input type="text" class="form-control" id="editClassName" name="className" required>
+                                <div class="invalid-feedback">Vui lòng nhập tên lớp.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="editModule" class="form-label">Module</label>
+                                <select id="editModule" name="module" class="form-select" required>
+                                    <c:forEach items="${modules}" var="module">
+                                        <option value="${module.moduleId}">${module.moduleName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn module</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="editCourse" class="form-label">Course</label>
+                                <select id="editCourse" name="course" class="form-select" required>
+                                    <c:forEach items="${courses}" var="course">
+                                        <option value="${course.courseId}">${course.courseName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn course</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editClassTeacher" class="form-label">Giáo viên chủ nhiệm</label>
+                                <select id="editClassTeacher" name="teacher" class="form-select" required>
+                                    <c:forEach items="${teachers}" var="teacher">
+                                        <option value="${teacher.teacherId}">${teacher.teacherName}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng nhập tên giáo viên.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="editClassSize" class="form-label">Sĩ số</label>
+                                <input type="number" class="form-control" id="editClassSize" name="size" min="1" required>
+                                <div class="invalid-feedback">Vui lòng nhập sĩ số hợp lệ.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="editStartDate" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" id="editStartDate" name="startDate" required>
+                                <div class="invalid-feedback">Vui lòng chọn ngày bắt đầu.</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Xác Nhận Xóa -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="${basePath}/admin?page=deleteClass" method="post">
+                    <input type="hidden" id="deleteId" name="id">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận xóa module</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có chắc chắn muốn xóa module này không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!-- Include modal thêm mới và sửa -->
-<jsp:include page="class-form.jsp"/>
-<jsp:include page="class-update.jsp"/>
-
 <script>
     // Mở modal thêm mới khi bấm nút
     document.getElementById('btnAddClass').addEventListener('click', () => {
@@ -72,26 +231,26 @@
     });
 
     // Khi bấm nút Sửa thì mở modal sửa và điền dữ liệu
-    const editButtons = document.querySelectorAll('.btn-edit-class');
-    editButtons.forEach(btn => {
+    const editClassButtons = document.querySelectorAll('.btn-edit-class');
+    editClassButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const modal = new bootstrap.Modal(document.getElementById('editClassModal'));
+            document.getElementById('editClassId').value = btn.dataset.id;
+            document.getElementById('editClassName').value = btn.dataset.name;
+            document.getElementById('editModule').value = btn.dataset.module;
+            document.getElementById('editCourse').value = btn.dataset.course;
+            document.getElementById('editClassTeacher').value = btn.dataset.teacher;
+            document.getElementById('editClassSize').value = btn.dataset.size;
 
-            const id = btn.getAttribute('data-id');
-            const code = btn.getAttribute('data-code');
-            const name = btn.getAttribute('data-name');
-            const teacher = btn.getAttribute('data-teacher');
-            const size = btn.getAttribute('data-size');
-            const status = btn.getAttribute('data-status');
+            modal.show();
+        });
+    });
 
-            // Gán dữ liệu vào form sửa
-            document.getElementById('editClassId').value = id;
-            document.getElementById('editClassCode').value = code;
-            document.getElementById('editClassName').value = name;
-            document.getElementById('editClassTeacher').value = teacher;
-            document.getElementById('editClassSize').value = size;
-            document.getElementById('editClassStatus').value = status;
-
+    const deleteClassButtons = document.querySelectorAll('.btn-delete');
+    deleteClassButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            document.getElementById('deleteId').value = btn.dataset.id;
             modal.show();
         });
     });

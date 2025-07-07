@@ -28,7 +28,12 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteById(int id) {
         return false;
     }
 
