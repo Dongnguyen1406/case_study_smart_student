@@ -29,7 +29,7 @@
         <tbody>
         <c:forEach items="${modules}" var="module" varStatus="temp">
             <tr>
-                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${startIndex + temp.count}</td>
                 <td class="text-center">${module.moduleName}</td>
 <%--                <td class="text-center"><span class="badge" style="background-color: #272882;">Hoạt động</span></td>--%>
                 <td class="text-center">
@@ -44,6 +44,9 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-3">
+        <jsp:include page="/WEB-INF/view/common/pagination.jsp"/>
+    </div>
 </div>
 
 <!-- Gọi modal thêm & sửa -->

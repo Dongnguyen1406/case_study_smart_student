@@ -22,11 +22,16 @@ public class TeacherService implements ITeacherService {
 
     @Override
     public boolean update(Teacher teacher) {
-        return false;
+        return teacherRepository.update(teacher);
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
+        return teacherRepository.delete(id);
+    }
+
+    @Override
+    public boolean deleteById(int id) {
         return false;
     }
 

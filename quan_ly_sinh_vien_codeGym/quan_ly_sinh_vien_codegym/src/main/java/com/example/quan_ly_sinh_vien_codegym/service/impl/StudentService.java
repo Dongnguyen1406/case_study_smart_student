@@ -23,17 +23,22 @@ public class StudentService implements IStudentService {
 
     @Override
     public boolean update(Student student) {
-        return false;
+        return iStudentRepository.update(student);
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
+        return iStudentRepository.delete(id);
+    }
+
+    @Override
+    public boolean deleteById(int id) {
         return false;
     }
 
     @Override
     public void add(Student student) {
-
+        iStudentRepository.add(student);
     }
 
     @Override

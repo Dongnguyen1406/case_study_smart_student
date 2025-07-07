@@ -25,16 +25,21 @@ public class ClassService implements IClassService {
 
     @Override
     public boolean update(ClassResponseDto classResponseDto) {
+        return classRepository.update(classResponseDto);
+    }
+
+    @Override
+    public boolean delete(String id) {
         return false;
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public boolean deleteById(int id) {
+        return classRepository.deleteById(id);
     }
 
     @Override
     public void add(ClassResponseDto classResponseDto) {
-
+        classRepository.add(classResponseDto);
     }
 }
