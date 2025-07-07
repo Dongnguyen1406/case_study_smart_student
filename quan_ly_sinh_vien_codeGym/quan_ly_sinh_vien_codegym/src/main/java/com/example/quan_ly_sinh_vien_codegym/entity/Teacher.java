@@ -13,6 +13,9 @@ public class Teacher {
     Boolean status;
     Boolean isDelete;
 
+    public Teacher() {
+    }
+
     public Teacher(String teacherId, String teacherName, LocalDate dob, String gender, String address, String numberPhone, String email, Boolean status, Boolean isDelete) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
@@ -25,7 +28,8 @@ public class Teacher {
         this.isDelete = isDelete;
     }
 
-    public Teacher(String teacherName, LocalDate dob, String gender, String address, String numberPhone, String email) {
+    public Teacher(String teacherId, String teacherName, LocalDate dob, String gender, String address, String numberPhone, String email) {
+        this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.dob = dob;
         this.gender = gender;

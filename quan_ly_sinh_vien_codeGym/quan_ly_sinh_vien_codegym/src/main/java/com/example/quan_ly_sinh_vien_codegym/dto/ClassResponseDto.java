@@ -87,7 +87,12 @@ public class ClassResponseDto {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        
     }
-    
+
+    public void setModuleId(int moduleId) {
+    }
+
+    public void setCourseId(int courseId) {
+    }
 }

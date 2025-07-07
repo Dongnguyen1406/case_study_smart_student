@@ -13,7 +13,9 @@
 
 <!-- Nút thêm -->
 <div class="mb-3 text-end">
-    <button class="btn" id="btnAddCourse" style="background-color: #272882; color: #ffffff">Thêm khóa học</button>
+    <button type="button" class="btn" id="btnAddCourse" style="background-color: #272882; color: #ffffff">
+        Thêm khóa học
+    </button>
 </div>
 
 <!-- Bảng danh sách -->
@@ -23,55 +25,137 @@
         <tr>
             <th>STT</th>
             <th>Tên khóa học</th>
-<%--            <th>Trạng thái</th>--%>
             <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${courses}" var="course" varStatus="temp">
             <tr>
-                <td class="text-center">${temp.count}</td>
+                <td class="text-center">${startIndex + temp.count}</td>
                 <td class="text-center">${course.courseName}</td>
-<%--                <td class="text-center">--%>
-<%--                    <span class="badge" style="background-color: #272882;">Đang mở</span>--%>
-<%--                </td>--%>
                 <td class="text-center">
-                    <button class="btn btn-sm btn-warning btn-edit"
-                            data-id="1" data-name="Java Core" data-code="JC101"
-                            data-duration="6" data-status="1">✏️ </button>
-                    <a href="#" class="btn btn-sm btn-danger">🗑️ </a>
+                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                            data-id="${course.courseId}"
+                            data-name="${course.courseName}">
+                        ✏️
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                            data-id="${course.courseId}">
+                        🗑️
+                    </button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-3">
+        <jsp:include page="/WEB-INF/view/common/pagination.jsp"/>
+    </div>
 </div>
 
-<!-- Gọi modal thêm & sửa -->
-<jsp:include page="course-form.jsp"/>
-<jsp:include page="course-update.jsp"/>
+<!-- Modal Thêm Khóa Học -->
+<div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=addCourse" method="post" class="needs-validation" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title">➕ Thêm khóa học</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tên khóa học</label>
+                        <input type="text" name="name" class="form-control" required>
+                        <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cập Nhật Khóa Học -->
+<div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=updateCourse" method="post" class="needs-validation" novalidate>
+                <input type="hidden" name="id" id="editCourseId">
+                <div class="modal-header">
+                    <h5 class="modal-title">✏️ Cập nhật khóa học</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tên khóa học</label>
+                        <input type="text" name="name" id="editCourseName" class="form-control" required>
+                        <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác Nhận Xóa -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${basePath}/admin?page=deleteCourse" method="post">
+                <input type="hidden" id="deleteId" name="id">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa khóa học</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa khóa học này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Modal thêm
+    // Mở modal thêm mới
     document.getElementById('btnAddCourse').addEventListener('click', () => {
-        const modal = new bootstrap.Modal(document.getElementById('addCourseModal'));
+        let modal = new bootstrap.Modal(document.getElementById('addCourseModal'));
         modal.show();
     });
 
-    // Modal sửa
+    // Mở modal sửa và đổ dữ liệu
     document.querySelectorAll('.btn-edit').forEach(button => {
         button.addEventListener('click', () => {
             const modal = new bootstrap.Modal(document.getElementById('editCourseModal'));
-
             document.getElementById('editCourseId').value = button.dataset.id;
             document.getElementById('editCourseName').value = button.dataset.name;
-            document.getElementById('editCourseCode').value = button.dataset.code;
-            document.getElementById('editCourseDuration').value = button.dataset.duration;
-            document.getElementById('editCourseStatus').value = button.dataset.status;
+            modal.show();
+        });
+    });
 
+    // Mở modal xác nhận xóa
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            document.getElementById('deleteId').value = button.dataset.id;
             modal.show();
         });
     });
 </script>
+
 
 

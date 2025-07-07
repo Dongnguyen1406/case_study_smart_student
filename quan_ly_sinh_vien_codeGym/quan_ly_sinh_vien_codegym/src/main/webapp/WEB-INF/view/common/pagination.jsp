@@ -12,7 +12,7 @@
         <ul class="pagination justify-content-center">
             <!-- Nút Previous -->
             <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                <a class="page-link" href="?page=students&currentPage=${currentPage - 1}" aria-label="Previous">
+                <a class="page-link" href="?page=${pageType}&currentPage=${currentPage - 1}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -20,13 +20,13 @@
             <!-- Các số trang -->
             <c:forEach begin="1" end="${totalPages}" var="i">
                 <li class="page-item ${i == currentPage ? 'active' : ''}">
-                    <a class="page-link" href="?page=students&currentPage=${i}">${i}</a>
+                    <a class="page-link" href="?page=${pageType}&currentPage=${i}">${i}</a>
                 </li>
             </c:forEach>
 
             <!-- Nút Next -->
             <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                <a class="page-link" href="?page=students&currentPage=${currentPage + 1}" aria-label="Next">
+                <a class="page-link" href="?page=${pageType}&currentPage=${currentPage + 1}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
