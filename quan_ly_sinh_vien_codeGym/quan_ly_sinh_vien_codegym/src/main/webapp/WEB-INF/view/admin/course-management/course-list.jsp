@@ -99,7 +99,6 @@
                     <div class="mb-3">
                         <label class="form-label">Tên khóa học</label>
                         <input type="text" name="name" id="editCourseName" class="form-control"
-                               pattern="[0-9]+" title="chi nhập số"
                                required>
 
                         <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
