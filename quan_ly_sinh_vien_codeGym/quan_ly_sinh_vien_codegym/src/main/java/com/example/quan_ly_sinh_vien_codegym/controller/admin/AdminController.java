@@ -72,29 +72,29 @@ public class AdminController extends HttpServlet {
         }
     }
     private void displayStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int pageSize = 5; // mỗi trang 5 học sinh
-        int currentPage = 1;
-
-        String pageParam = req.getParameter("currentPage");
-        if (pageParam != null) {
-            currentPage = Integer.parseInt(pageParam);
-        }
-
-        List<StudentDto> allStudents = iStudentService.findAll();
-        int totalStudents = allStudents.size();
-        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
-
-        int startIndex = (currentPage - 1) * pageSize;
-        req.setAttribute("startIndex", startIndex);
-        int endIndex = Math.min(startIndex + pageSize, totalStudents);
-        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
-
-        req.setAttribute("students", paginatedList);
-        req.setAttribute("classes", classService.findAll());
-        req.setAttribute("totalPages", totalPages);
-        req.setAttribute("currentPage", currentPage);
-        req.setAttribute("pageType", "students");
-        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
+//        int pageSize = 5; // mỗi trang 5 học sinh
+//        int currentPage = 1;
+//
+//        String pageParam = req.getParameter("currentPage");
+//        if (pageParam != null) {
+//            currentPage = Integer.parseInt(pageParam);
+//        }
+//
+//        List<StudentDto> allStudents = iStudentService.findAll();
+//        int totalStudents = allStudents.size();
+//        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
+//
+//        int startIndex = (currentPage - 1) * pageSize;
+//        req.setAttribute("startIndex", startIndex);
+//        int endIndex = Math.min(startIndex + pageSize, totalStudents);
+//        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
+//
+//        req.setAttribute("students", paginatedList);
+//        req.setAttribute("classes", classService.findAll());
+//        req.setAttribute("totalPages", totalPages);
+//        req.setAttribute("currentPage", currentPage);
+//        req.setAttribute("pageType", "students");
+//        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
     }
 
     private void displayTeacher(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -298,33 +298,33 @@ public class AdminController extends HttpServlet {
 
 
     private void handleUpdateStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String id = req.getParameter("id");
-        String fullName = req.getParameter("fullname");
-        String gender = req.getParameter("gender");
-        String dob = req.getParameter("dob");
-        String address = req.getParameter("address");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        int classId = Integer.parseInt(req.getParameter("classId")) ; 
-        
-        LocalDate parsedDob = LocalDate.parse(dob);
-
-        StudentDto studentDto = new StudentDto(id, fullName, parsedDob, gender, address, email, phone, classId);
-        studentDto.setStudentId(id);
-        studentDto.setStudentName(fullName);
-        studentDto.setGender(gender);
-        studentDto.setDob(parsedDob);
-        studentDto.setAddress(address);
-        studentDto.setEmail(email);
-        studentDto.setNumberPhone(phone);
-        studentDto.setClassId(classId);
-
-        boolean isUpdated = iStudentService.update(studentDto);
-        if (isUpdated) {
-            resp.sendRedirect("/admin?page=students");
-        } else {
-            resp.sendRedirect("/admin?page=students&error=updateFailed");
-        }
+//        String id = req.getParameter("id");
+//        String fullName = req.getParameter("fullname");
+//        String gender = req.getParameter("gender");
+//        String dob = req.getParameter("dob");
+//        String address = req.getParameter("address");
+//        String email = req.getParameter("email");
+//        String phone = req.getParameter("phone");
+//        int classId = Integer.parseInt(req.getParameter("classId")) ;
+//
+//        LocalDate parsedDob = LocalDate.parse(dob);
+//
+//        StudentDto studentDto = new StudentDto(id, fullName, parsedDob, gender, address, email, phone, classId);
+//        studentDto.setStudentId(id);
+//        studentDto.setStudentName(fullName);
+//        studentDto.setGender(gender);
+//        studentDto.setDob(parsedDob);
+//        studentDto.setAddress(address);
+//        studentDto.setEmail(email);
+//        studentDto.setNumberPhone(phone);
+//        studentDto.setClassId(classId);
+//
+//        boolean isUpdated = iStudentService.update(studentDto);
+//        if (isUpdated) {
+//            resp.sendRedirect("/admin?page=students");
+//        } else {
+//            resp.sendRedirect("/admin?page=students&error=updateFailed");
+//        }
     }
 
     private void handleUpdateTeacher(HttpServletRequest req, HttpServletResponse resp) throws IOException {
