@@ -36,7 +36,7 @@
                 <p class="text-center mb-4">Please log in to your teacher account</p>
 <%--                <form class="d-flex justify-content-end mb-3" method="get" action="/admin/product-management">--%>
 <%--                    <input type="hidden" name="action" value="search"/>--%>
-                <form action="/login"  method="post" id="loginForm">
+                <form action="${pageContext.request.contextPath}/login"  method="post" id="loginForm">
                     <input type="hidden" name="action" value="login"/>
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>

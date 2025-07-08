@@ -5,6 +5,8 @@ import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.repository.IStudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
+import com.example.quan_ly_sinh_vien_codegym.entity.Assessment;
+import com.example.quan_ly_sinh_vien_codegym.dto.AssessmentDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +21,8 @@ public class StudentRepository implements IStudentRepository {
     private final String SELECT_STUDENT_USERNAME = "SELECT s.student_id, s.student_name, s.dob, s.gender, s.address, s.number_phone, s.email, s.start_learn_date, c.class_name FROM students s JOIN classes c ON s.class_id = c.class_id JOIN accounts a ON s.student_id = a.student_id WHERE a.username = ?;";
     private final String UPDATE_STUDENT = "UPDATE students SET student_name = ?, dob = ?, gender = ?, address = ?, number_phone = ?, email = ? WHERE student_id = ?;";
     private final String SELECT_SCORE = "SELECT s.student_id, m.module_name, sc.quiz_score, sc.practice_score, sc.average_score FROM students s JOIN student_modules sm ON s.student_id = sm.student_id JOIN modules m ON sm.module_id = m.module_id JOIN scores sc ON sm.student_module_id = sc.student_module_id JOIN accounts a ON s.student_id = a.student_id WHERE a.username = ?;";
-    private final String SELECT_ATTENDANCE = "CALL check_exam_eligibility(?);";
+    private final String SELECT_ATTENDANCE = "SELECT s.student_id, sm.module_id, m.module_name, sm.registration_date, COUNT(CASE WHEN a.status_id = 1 THEN 1 END) AS unexcused_absences, CASE WHEN COUNT(CASE WHEN a.status_id = 1 THEN 1 END) >= 3 THEN 'Không đủ điều kiện thi' ELSE 'Đủ điều kiện thi' END AS result FROM students s JOIN student_modules sm ON s.student_id = sm.student_id JOIN modules m ON sm.module_id = m.module_id LEFT JOIN attendance a ON s.student_id = a.student_id JOIN accounts acc ON s.student_id = acc.student_id WHERE acc.username = ? GROUP BY s.student_id, sm.module_id, m.module_name, sm.registration_date;";
+    private final String SELECT_ASSESSMENTS = "SELECT a.assessment_id, a.average_score, a.status, m.module_name FROM assessments a JOIN modules m ON a.module_id = m.module_id JOIN students s ON a.student_id = s.student_id JOIN accounts acc ON s.student_id = acc.student_id WHERE acc.username = ?;";
     private final String SELECT_MODULE_ATTENDANCE = "SELECT s.student_id, m.module_id, a.attendance_date, ast.status_name FROM students s JOIN attendance a ON s.student_id = a.student_id JOIN student_modules st ON s.student_id = st.student_id JOIN modules m ON st.module_id = m.module_id JOIN attendance_statuses ast ON a.status_id = ast.status_id WHERE s.student_id = ? AND m.module_id = ?;";
     private final String DELETE_STUDENT = "UPDATE students SET is_delete = 1 WHERE student_id = ?;";
     private final String UPDATE_STUDENT_S = "UPDATE students SET student_name = ?, dob = ?, gender = ?, address = ?, number_phone = ?, email = ?, status = ? WHERE student_id = ?;";
@@ -207,5 +210,32 @@ public class StudentRepository implements IStudentRepository {
             System.out.println("Lỗi kết nối database: " + e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public List<AssessmentDto> displayAssessments(String userName) {
+        List<AssessmentDto> assessments = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ASSESSMENTS)) {
+            preparedStatement.setString(1, userName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int assessmentId = resultSet.getInt("assessment_id");
+                double averageScore = resultSet.getDouble("average_score");
+                boolean status = resultSet.getBoolean("status");
+                String moduleName = resultSet.getString("module_name");
+                
+                AssessmentDto assessment = new AssessmentDto();
+                assessment.setAssessmentId(assessmentId);
+                assessment.setAverageScore(averageScore);
+                assessment.setStatus(status);
+                assessment.setModuleName(moduleName);
+                
+                assessments.add(assessment);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi kết nối database: " + e.getMessage());
+        }
+        return assessments;
     }
 }

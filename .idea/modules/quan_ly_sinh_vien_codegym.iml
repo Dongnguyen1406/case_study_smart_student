@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="quan_ly_sinh_vien_codegym" external.linked.project.path="$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym" external.root.project.path="$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym" external.system.id="GRADLE" external.system.module.group="com.example" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym">
       <excludeFolder url="file://$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym/.gradle" />

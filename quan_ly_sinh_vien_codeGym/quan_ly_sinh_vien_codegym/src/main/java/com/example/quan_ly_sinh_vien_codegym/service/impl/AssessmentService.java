@@ -9,6 +9,7 @@ import com.example.quan_ly_sinh_vien_codegym.repository.impl.StudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.service.IAssessmentService;
 
 import java.util.List;
+import java.util.Map;
 
 public class AssessmentService implements IAssessmentService {
     private final IAssessmentRepository assessmentRepository = new AssessmentRepository();
@@ -22,5 +23,20 @@ public class AssessmentService implements IAssessmentService {
     @Override
     public void saveAssessments(List<Assessment> assessments) {
         assessmentRepository.saveAssessments(assessments);
+    }
+    
+    @Override
+    public Map<String, Assessment> findAssessmentsByClassAndModule(int classId, int moduleId) {
+        return assessmentRepository.findAssessmentsByClassAndModule(classId, moduleId);
+    }
+    
+    @Override
+    public void deleteAssessmentsByClassAndModule(int classId, int moduleId) {
+        assessmentRepository.deleteAssessmentsByClassAndModule(classId, moduleId);
+    }
+    
+    @Override
+    public void deleteStudentAssessmentByModuleId(String studentId, int moduleId) {
+        assessmentRepository.deleteStudentAssessmentByModuleId(studentId, moduleId);
     }
 }

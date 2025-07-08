@@ -53,11 +53,15 @@ private static IAccountService iAccountService= new AccountService();
             case "attendance":
                 displayAttendance(req, resp);
                 break;
+            case "assessment":
+                displayAssessment(req, resp);
+                break;
             case "display":
                 displayStudent(req, resp);
                 break;
             case "updatePassword":
                 updatePassword(req,resp);
+                break;
             default:
                 Student student = iStudentService.displayStudent(account.getUsername());
                 session.setAttribute("student", student);
@@ -95,6 +99,14 @@ private static IAccountService iAccountService= new AccountService();
         if (account != null) {
             req.setAttribute("moduleAttendance", iStudentService.displayAttendance(account.getUsername()));
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=attendance").forward(req, resp);
+        }
+    }
+
+    private void displayAssessment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = (Account) SessionUtil.get(req, "account");
+        if (account != null) {
+            req.setAttribute("assessments", iStudentService.displayAssessments(account.getUsername()));
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=assessment").forward(req, resp);
         }
     }
 

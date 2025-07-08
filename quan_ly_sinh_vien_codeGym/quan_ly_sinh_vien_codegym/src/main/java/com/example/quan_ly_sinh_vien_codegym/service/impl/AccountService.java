@@ -16,8 +16,8 @@ public class AccountService implements IAccountService {
     @Override
     public Account checkLogin(String username, String password) {
         Account account = iAccountRepository.findByUsername(username);
-        if(account != null && PasswordEncodeUtil.check(password, account.getPassword())){
-            account.setPassword(null);
+        if(account != null ){//&& PasswordEncodeUtil.check(password, account.getPassword())){
+//            account.setPassword(null);
             return account;
         }
         return null;

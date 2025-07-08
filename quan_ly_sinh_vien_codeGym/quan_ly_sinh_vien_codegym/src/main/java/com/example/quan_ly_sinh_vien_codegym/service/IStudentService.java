@@ -1,5 +1,6 @@
 package com.example.quan_ly_sinh_vien_codegym.service;
 
+import com.example.quan_ly_sinh_vien_codegym.dto.AssessmentDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
@@ -12,4 +13,5 @@ public interface IStudentService extends IService<Student> {
      ModuleScore displayScore(String userName);
      ModuleAttendance displayAttendance(String userName);
      List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
+     List<AssessmentDto> displayAssessments(String userName);
 }

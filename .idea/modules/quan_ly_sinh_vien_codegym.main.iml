@@ -12,7 +12,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym/build/classes/java/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../quan_ly_sinh_vien_codeGym/quan_ly_sinh_vien_codegym/src/main">

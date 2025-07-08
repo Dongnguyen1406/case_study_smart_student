@@ -10,6 +10,8 @@ public class ClassResponseDto {
     private String teacherName;
     private LocalDate startDate;
     private int quantity;
+    private int moduleId;
+    private int courseId;
 
     public ClassResponseDto() {
     }
@@ -22,7 +24,6 @@ public class ClassResponseDto {
         this.teacherName = teacherName;
         this.startDate = startDate;
         this.quantity = quantity;
-      
     }
 
     public ClassResponseDto(String className, String moduleName, String courseName, String teacherName, LocalDate startDate, int quantity) {
@@ -87,12 +88,22 @@ public class ClassResponseDto {
     }
 
     public void setQuantity(int quantity) {
-        
+        this.quantity = quantity;
+    }
+
+    public int getModuleId() {
+        return moduleId;
     }
 
     public void setModuleId(int moduleId) {
+        this.moduleId = moduleId;
+    }
+
+    public int getCourseId() {
+        return courseId;
     }
 
     public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }
