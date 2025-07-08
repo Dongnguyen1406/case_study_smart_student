@@ -46,11 +46,11 @@
                          class="rounded-circle" style="object-fit: cover;">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/student?page=display">👤 Profile</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/student?page=display">👤 Thông tin cá nhân</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="/login">🚪 Logout</a></li>
+                    <li><a class="dropdown-item" href="/login">🚪 Đăng xuất</a></li>
 
                 </ul>
             </div>

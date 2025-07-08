@@ -322,7 +322,13 @@ select s.student_name, atts.status_name,ass.status  from students s
  join attendance_statuses atts on att.status_id=atts.status_id
  join assessments ass on s.student_id=ass.student_id;
 
- 
+   select s.student_id,  m.module_name,a.attendance_date,ast.status_name  from students s 
+            join attendance a on s.student_id=a.student_id 
+            join student_modules st  on s.student_id=st.student_id
+            join modules m on st.module_id=m.module_id
+            join attendance_statuses ast on a.status_id=ast.status_id 
+            join accounts acc on s.student_id=acc.student_id where s.student_id='HS001';
+
  select s.student_id,m.module_name, sc.quiz_score, sc.practice_score,sc.average_score 
  from students s 
  join student_modules sm on s.student_id= sm.student_id

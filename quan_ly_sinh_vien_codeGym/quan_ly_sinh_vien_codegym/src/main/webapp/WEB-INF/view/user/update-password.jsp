@@ -39,7 +39,7 @@
               <div style="color: red">${newError}</div>
             </c:if>
 
-            <button type="submit" class="btn btn-primary">Thay đổi </button>
+            <button type="submit" class="btn btn-primary">Thay đổi mật khẩu</button>
           </form>
         </div>
       </div>

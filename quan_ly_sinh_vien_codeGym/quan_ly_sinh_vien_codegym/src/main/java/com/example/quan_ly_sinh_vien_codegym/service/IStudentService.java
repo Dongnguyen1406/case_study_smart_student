@@ -14,12 +14,14 @@ public interface IStudentService extends IService<Student> {
      ModuleScore displayScore(String userName);
      ModuleAttendance displayAttendance(String userName);
      List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
-<<<<<<< Updated upstream
+
      AttendanceDateDto displayAttendanceDate(String idStudent);
-=======
+
      List<AttendanceDateDto> displayAttendanceDate(String idStudent);
 
      List<StudentDto> findAllDto();
 
->>>>>>> Stashed changes
-}
+
+
+     List<AttendanceDateDto> displayAttendanceDate(String idStudent);
+

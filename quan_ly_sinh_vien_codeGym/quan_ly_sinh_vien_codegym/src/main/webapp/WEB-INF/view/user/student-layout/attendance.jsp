@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="p-3">
-    <h2 class="mb-4">📋 Danh sách điểm danh</h2>
+    <h2 class="mb-4">📋 Danh sách điểm danh theo module</h2>
 <%--    <form action="${basePath}/student" method="post">--%>
 <%--        <input type="hidden" name="page" value="update"/>--%>
 <%--        <div class="mb-3">--%>
@@ -25,26 +25,32 @@
 <%--            </select>--%>
 <%--            <button type="submit" class="btn btn-primary">Chọn</button>--%>
 <%--        </div>--%>
-<%--        <table class="table table-hover table-bordered">--%>
-<%--            <thead class="table-primary">--%>
-<%--            <tr>--%>
-<%--                <th>Ngày điểm danh</th>--%>
-<%--                <th>Trạng thái</th>--%>
-<%--            </tr>--%>
-<%--            </thead>--%>
-<%--            <tbody>--%>
-<%--            <tr>--%>
-<%--                <td>${attendanceDate.attendanceDate}</td>--%>
-<%--                <td>${attendanceDate.status}</td>--%>
+        <table class="table table-hover table-bordered">
+            <thead class="table-primary">
+            <tr>
+                <th>STT</th>
+                <th>Tên module</th>
+                <th>Ngày điểm danh</th>
+                <th>Trạng thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${attendanceDate}" var="attendanceDate" varStatus="temp">
+                <tr>
+                    <td>${temp.count}</td>
+                    <td>${attendanceDate.moduleName}</td>
+                    <td>${attendanceDate.attendanceDate}</td>
+                    <td>${attendanceDate.status}</td>
+         <%--            <td>✅ Có mặt</td>--%>
+                </tr>
+            </c:forEach>
 
-<%--                &lt;%&ndash;            <td>✅ Có mặt</td>&ndash;%&gt;--%>
-<%--            </tr>--%>
-<%--            </tbody>--%>
-<%--        </table>--%>
+            </tbody>
+        </table>
 
 <%--    </form>--%>
 
-
+    <h2 class="mb-4">📋 kết quả </h2>
     <table class="table table-hover table-bordered">
         <thead class="table-primary">
         <tr>

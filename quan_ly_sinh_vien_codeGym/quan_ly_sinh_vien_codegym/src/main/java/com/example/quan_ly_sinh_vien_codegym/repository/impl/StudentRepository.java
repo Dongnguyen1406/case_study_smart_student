@@ -29,13 +29,13 @@ public class StudentRepository implements IStudentRepository {
 
     private final String SELECT_BY_CLASS = "SELECT s.student_id, s.student_name, s.dob, s.gender, s.address, s.number_phone, s.email, s.start_learn_date, c.class_name FROM students s JOIN classes c ON s.class_id = c.class_id WHERE s.is_delete = 0 AND c.class_id = ?;";
 
-    private final String SELECT_MODULE_ATTENDANCE = "elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
+    private final String SELECT_MODULE_ATTENDANCE = "select s.student_id,  m.module_name,a.attendance_date,ast.status_name  from students s \n" +
             "join attendance a on s.student_id=a.student_id \n" +
             "join student_modules st  on s.student_id=st.student_id\n" +
             "join modules m on st.module_id=m.module_id\n" +
-<<<<<<< Updated upstream
+
             "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? ;";
-=======
+
             "join attendance_statuses ast on a.status_id=ast.status_id " +
             "join accounts acc on s.student_id=acc.student_id where s.student_id=? ;";
     
@@ -46,7 +46,11 @@ public class StudentRepository implements IStudentRepository {
 
     private final String INSERT_STUDENT = "INSERT INTO students (student_id, student_name, dob, gender, address, number_phone, email, start_learn_date, class_id, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2);";
 
->>>>>>> Stashed changes
+
+
+            "join attendance_statuses ast on a.status_id=ast.status_id " +
+            "join accounts acc on s.student_id=acc.student_id where s.student_id=? ;";
+
 
     @Override
     public List<Student> findAll() {
@@ -263,21 +267,18 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public AttendanceDateDto displayAttendanceDate(String idStudent) {
-        AttendanceDateDto attendanceDateDto = null;
+    public List<AttendanceDateDto>  displayAttendanceDate(String idStudent) {
+        List<AttendanceDateDto> attendanceDateDto = new ArrayList<>();
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MODULE_ATTENDANCE)) {
             preparedStatement.setString(1, idStudent);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
+                String studentId = resultSet.getString("student_id");
                 String moduleName = resultSet.getString("module_name");
                 LocalDate attendanceDate = LocalDate.parse(resultSet.getString("attendance_date"));
                 String statusName = resultSet.getString("status_name");
-                String studentId = resultSet.getString("student_id");
-
-                int moduleId = resultSet.getInt("module_id");
-                 attendanceDateDto = new AttendanceDateDto(moduleName, moduleId, studentId, attendanceDate, statusName);
+                 attendanceDateDto.add(new AttendanceDateDto(moduleName, studentId, attendanceDate, statusName));
             }
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");

@@ -80,11 +80,9 @@ public class AdminController extends HttpServlet {
             currentPage = Integer.parseInt(pageParam);
         }
 
-<<<<<<< Updated upstream
         List<StudentDto> allStudents = iStudentService.findAll();
-=======
+
         List<StudentDto> allStudents = iStudentService.findAllDto();
->>>>>>> Stashed changes
         int totalStudents = allStudents.size();
         int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
 
@@ -99,6 +97,30 @@ public class AdminController extends HttpServlet {
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("pageType", "students");
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
+
+//        int pageSize = 5; // mỗi trang 5 học sinh
+//        int currentPage = 1;
+//
+//        String pageParam = req.getParameter("currentPage");
+//        if (pageParam != null) {
+//            currentPage = Integer.parseInt(pageParam);
+//        }
+//
+//        List<StudentDto> allStudents = iStudentService.findAll();
+//        int totalStudents = allStudents.size();
+//        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
+//
+//        int startIndex = (currentPage - 1) * pageSize;
+//        req.setAttribute("startIndex", startIndex);
+//        int endIndex = Math.min(startIndex + pageSize, totalStudents);
+//        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
+//
+//        req.setAttribute("students", paginatedList);
+//        req.setAttribute("classes", classService.findAll());
+//        req.setAttribute("totalPages", totalPages);
+//        req.setAttribute("currentPage", currentPage);
+//        req.setAttribute("pageType", "students");
+//        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
     }
     
 
@@ -332,71 +354,7 @@ public class AdminController extends HttpServlet {
 
 
     private void handleUpdateStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-<<<<<<< Updated upstream
-        String id = req.getParameter("id");
-        String fullName = req.getParameter("fullname");
-        String gender = req.getParameter("gender");
-        String dob = req.getParameter("dob");
-        String address = req.getParameter("address");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        int classId = Integer.parseInt(req.getParameter("classId")) ; 
-        
-        LocalDate parsedDob = LocalDate.parse(dob);
 
-        StudentDto studentDto = new StudentDto(id, fullName, parsedDob, gender, address, email, phone, classId);
-        studentDto.setStudentId(id);
-        studentDto.setStudentName(fullName);
-        studentDto.setGender(gender);
-        studentDto.setDob(parsedDob);
-        studentDto.setAddress(address);
-        studentDto.setEmail(email);
-        studentDto.setNumberPhone(phone);
-        studentDto.setClassId(classId);
-
-        boolean isUpdated = iStudentService.update(studentDto);
-        if (isUpdated) {
-            resp.sendRedirect("/admin?page=students");
-        } else {
-            resp.sendRedirect("/admin?page=students&error=updateFailed");
-        }
-=======
-//        try {
-//            String studentId = req.getParameter("studentId");
-//            String fullName = req.getParameter("fullname");
-//            String gender = req.getParameter("gender");
-//            String dob = req.getParameter("dob");
-//            String address = req.getParameter("address");
-//            String email = req.getParameter("email");
-//            String phone = req.getParameter("phone");
-//            String startLearnDateStr = req.getParameter("startLearnDate");
-//            int classId = Integer.parseInt(req.getParameter("classId"));
-//
-//            LocalDate parsedDob = LocalDate.parse(dob);
-//            LocalDate parsedStartDate = LocalDate.parse(startLearnDateStr);
-//
-//            Student student = new Student();
-//            student.setStudentId(studentId);
-//            student.setStudentName(fullName);
-//            student.setGender(gender);
-//            student.setDob(parsedDob);
-//            student.setAddress(address);
-//            student.setEmail(email);
-//            student.setNumberPhone(phone);
-//            student.setStartLearnDate(parsedStartDate);
-//            student.setClassId(classId);
-//
-//            boolean isUpdated = iStudentService.update(student);
-//            if (isUpdated) {
-//                resp.sendRedirect("/admin?page=students");
-//            } else {
-//                resp.sendRedirect("/admin?page=students&error=updateFailed");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            resp.sendRedirect("/admin?page=students&error=invalidInput");
-//        }
->>>>>>> Stashed changes
     }
 
 

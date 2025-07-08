@@ -1,5 +1,6 @@
 package com.example.quan_ly_sinh_vien_codegym.service.impl;
 
+import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
@@ -69,7 +70,7 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public AttendanceDateDto displayAttendanceDate(String idStudent) {
+    public List<AttendanceDateDto> displayAttendanceDate(String idStudent) {
         return  iStudentRepository.displayAttendanceDate(idStudent);
     }
 
