@@ -61,6 +61,7 @@ public class StudentController extends HttpServlet {
                 break;
             case "updatePassword":
                 updatePassword(req, resp);
+                break;
             default:
                 Student student = iStudentService.displayStudent(account.getUsername());
                 session.setAttribute("student", student);
