@@ -34,14 +34,14 @@
                 <td class="text-center">${startIndex + temp.count}</td>
                 <td class="text-center">${course.courseName}</td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                    <button type="button" class="btn btn-sm  btn-edit"
                             data-id="${course.courseId}"
                             data-name="${course.courseName}">
-                        ✏️
+                        <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                    <button type="button" class="btn btn-sm  btn-delete"
                             data-id="${course.courseId}">
-                        🗑️
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </td>
             </tr>
@@ -59,20 +59,24 @@
         <div class="modal-content">
             <form action="${basePath}/admin?page=addCourse" method="post" class="needs-validation" novalidate>
                 <div class="modal-header">
-                    <h5 class="modal-title">➕ Thêm khóa học</h5>
+                    <h5 class="modal-title">Thêm khóa học</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Tên khóa học</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control"
+                               pattern="^[a-zA-Z0-9\s]{3,50}$"
+                               title="Tên khóa học chỉ được chứa chữ, số và khoảng trắng. Tối thiểu 3 ký tự."
+                               required>
+
                         <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>
@@ -87,20 +91,24 @@
             <form action="${basePath}/admin?page=updateCourse" method="post" class="needs-validation" novalidate>
                 <input type="hidden" name="id" id="editCourseId">
                 <div class="modal-header">
-                    <h5 class="modal-title">✏️ Cập nhật khóa học</h5>
+                    <h5 class="modal-title">Cập nhật khóa học</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Tên khóa học</label>
-                        <input type="text" name="name" id="editCourseName" class="form-control" required>
+                        <input type="text" name="name" id="editCourseName" class="form-control"
+                               pattern="[0-9]+" title="chi nhập số"
+                               required>
+
                         <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Cập nhật
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>
@@ -122,7 +130,8 @@
                     Bạn có chắc chắn muốn xóa khóa học này không?
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Xác nhận
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>

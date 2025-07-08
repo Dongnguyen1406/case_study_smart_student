@@ -15,7 +15,7 @@ public class Student {
     Boolean status;
     Boolean isDelete;
 
-    public Student() {
+    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, String className, int classId) {
     }
 
     public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className, Boolean status, Boolean isDelete) {

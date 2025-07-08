@@ -24,16 +24,16 @@
         <div class="col-lg-6 d-none d-lg-flex login-image">
             <div>
                 <i class="fas fa-school school-icon"></i>
-                <h2>Teacher Portal</h2>
-                <p>Access your classroom resources, student information, and teaching tools in one place.</p>
+                <h2>Cổng thông tin giáo viên</h2>
+                <p>Truy cập các tài nguyên lớp học, thông tin học sinh và công cụ giảng dạy ở cùng một nơi.</p>
             </div>
         </div>
 
         <!-- Right: form -->
         <div class="col-lg-6 bg-white d-flex align-items-center">
             <div class="login-form w-100">
-                <h2 class="text-center mb-3">Welcome Back!</h2>
-                <p class="text-center mb-4">Please log in to your teacher account</p>
+                <h2 class="text-center mb-3">Chào mừng!</h2>
+                <p class="text-center mb-4">Vui lòng đăng nhập vào tài khoản giáo viên hoặc học sinh của bạn</p>
 <%--                <form class="d-flex justify-content-end mb-3" method="get" action="/admin/product-management">--%>
 <%--                    <input type="hidden" name="action" value="search"/>--%>
                 <form action="/login"  method="post" id="loginForm">
@@ -51,23 +51,20 @@
                     <div class="mb-3 d-flex justify-content-between align-items-center">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                            <label class="form-check-label" for="rememberMe">Lưu mật khẩu</label>
                         </div>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
+                        <a href="#" class="forgot-password">Quên mật khẩu?</a>
                     </div>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-login">Login</button>
+                        <button type="submit" class="btn btn-login">Đăng nhập</button>
                     </div>
 
                     <div class="divider"><span>or</span></div>
 
                     <div class="d-grid gap-2">
                         <button type="button" class="btn btn-google btn-login">
-                            <i class="fab fa-google me-2"></i> Sign in with Google
-                        </button>
-                        <button type="button" class="btn btn-microsoft btn-login">
-                            <i class="fab fa-microsoft me-2"></i> Sign in with Microsoft
+                            <i class="fab fa-google me-2"></i> Đăng nhập bằng Google
                         </button>
                     </div>
                 </form>

@@ -25,14 +25,14 @@
                 <td class="text-center">${startIndex + temp.count}</td>
                 <td class="text-center">${module.moduleName}</td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                    <button type="button" class="btn btn-sm  btn-edit"
                             data-id="${module.moduleId}"
                             data-name="${module.moduleName}">
-                        ✏️
+                        <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                    <button type="button" class="btn btn-sm btn-delete"
                             data-id="${module.moduleId}">
-                        🗑️
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </td>
             </tr>
@@ -50,7 +50,7 @@
         <div class="modal-content">
             <form action="${basePath}/admin?page=addModule" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title">➕ Thêm học phần</h5>
+                    <h5 class="modal-title">Thêm học phần</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>
@@ -89,7 +89,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Cập nhật
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>
@@ -111,7 +112,8 @@
                     Bạn có chắc chắn muốn xóa học phần này không?
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                    <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Xác nhận
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </form>
@@ -137,12 +139,12 @@
         });
     });
 
-    
+
     // Mở modal xác nhận xóa
     document.querySelectorAll('.btn-delete').forEach(button => {
         button.addEventListener('click', () => {
             const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-            document.getElementById('deleteModuleId').value = button.dataset.id; 
+            document.getElementById('deleteModuleId').value = button.dataset.id;
             modal.show();
         });
     });

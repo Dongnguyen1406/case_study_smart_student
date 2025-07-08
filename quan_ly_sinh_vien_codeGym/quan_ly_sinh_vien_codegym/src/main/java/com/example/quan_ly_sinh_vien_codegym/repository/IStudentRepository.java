@@ -2,10 +2,11 @@ package com.example.quan_ly_sinh_vien_codegym.repository;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
+import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
 
-public interface IStudentRepository extends IRepository<Student> {
+public interface IStudentRepository extends IRepository<StudentDto> {
     Student displayStudent(String username);
 
     boolean updateStudent(Student student);

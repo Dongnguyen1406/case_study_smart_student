@@ -1,6 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.controller.admin;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.ClassResponseDto;
+import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.service.*;
 import com.example.quan_ly_sinh_vien_codegym.entity.Account;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
@@ -10,7 +11,6 @@ import com.example.quan_ly_sinh_vien_codegym.entity.Module;
 
 import com.example.quan_ly_sinh_vien_codegym.service.impl.*;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
-import com.example.quan_ly_sinh_vien_codegym.entity.Module;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,16 +80,17 @@ public class AdminController extends HttpServlet {
             currentPage = Integer.parseInt(pageParam);
         }
 
-        List<Student> allStudents = iStudentService.findAll();
+        List<StudentDto> allStudents = iStudentService.findAll();
         int totalStudents = allStudents.size();
         int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
 
         int startIndex = (currentPage - 1) * pageSize;
         req.setAttribute("startIndex", startIndex);
         int endIndex = Math.min(startIndex + pageSize, totalStudents);
-        List<Student> paginatedList = allStudents.subList(startIndex, endIndex);
+        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
 
         req.setAttribute("students", paginatedList);
+        req.setAttribute("classes", classService.findAll());
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("pageType", "students");
@@ -115,6 +116,7 @@ public class AdminController extends HttpServlet {
         List<Teacher> paginatedList = allTeachers.subList(startIndex, endIndex);
         
         req.setAttribute("teachers", paginatedList);
+        req.setAttribute("classes", classService.findAll());
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("pageType", "teachers");
@@ -294,25 +296,21 @@ public class AdminController extends HttpServlet {
         String address = req.getParameter("address");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
-        String className = req.getParameter("className");
-        String statusStr = req.getParameter("status");
-
-        // Chuyển đổi kiểu dữ liệu
+        int classId = Integer.parseInt(req.getParameter("classId")) ; 
+        
         LocalDate parsedDob = LocalDate.parse(dob);
-        boolean status = "1".equals(statusStr);
 
-        Student student = new Student();
-        student.setStudentId(id);
-        student.setStudentName(fullName);
-        student.setGender(gender);
-        student.setDob(parsedDob);
-        student.setAddress(address);
-        student.setEmail(email);
-        student.setNumberPhone(phone);
-        student.setClassName(className);
-        student.setStatus(status);
+        StudentDto studentDto = new StudentDto(id, fullName, parsedDob, gender, address, email, phone, classId);
+        studentDto.setStudentId(id);
+        studentDto.setStudentName(fullName);
+        studentDto.setGender(gender);
+        studentDto.setDob(parsedDob);
+        studentDto.setAddress(address);
+        studentDto.setEmail(email);
+        studentDto.setNumberPhone(phone);
+        studentDto.setClassId(classId);
 
-        boolean isUpdated = iStudentService.updateStudent(student);
+        boolean isUpdated = iStudentService.update(studentDto);
         if (isUpdated) {
             resp.sendRedirect("/admin?page=students");
         } else {

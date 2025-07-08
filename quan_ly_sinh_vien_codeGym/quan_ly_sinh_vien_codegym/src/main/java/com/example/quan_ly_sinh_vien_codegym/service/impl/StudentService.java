@@ -1,6 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.service.impl;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
+import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.repository.IStudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.repository.impl.StudentRepository;
@@ -12,17 +13,17 @@ import java.util.List;
 public class StudentService implements IStudentService {
     private static final IStudentRepository iStudentRepository= new StudentRepository();
     @Override
-    public List<Student> findAll() {
+    public List<StudentDto> findAll() {
         return iStudentRepository.findAll();
     }
 
     @Override
-    public Student select(int id) {
+    public StudentDto select(int id) {
         return null;
     }
 
     @Override
-    public boolean update(Student student) {
+    public boolean update(StudentDto student) {
         return iStudentRepository.update(student);
     }
 
@@ -37,7 +38,7 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void add(Student student) {
+    public void add(StudentDto student) {
         iStudentRepository.add(student);
     }
 
