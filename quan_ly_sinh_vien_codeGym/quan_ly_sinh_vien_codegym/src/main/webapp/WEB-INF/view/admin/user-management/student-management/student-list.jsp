@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <h2 class="mb-4">👨‍🎓 Danh sách học sinh</h2>
 
@@ -45,7 +46,7 @@
                     <%--                    <span class="badge" style="background-color: #272882;">Hoạt động</span>--%>
                     <%--                </td>--%>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                    <button type="button" class="btn btn-sm btn-edit"
                             data-id="${student.studentId}"
                             data-fullname="${student.studentName}"
                             data-gender="${student.gender}"
@@ -54,12 +55,12 @@
                             data-email="${student.email}"
                             data-phone="${student.numberPhone}"
                             data-classname="${student.className}"
-                            data-status="${student.status ? 1 : 0}">
-                        ✏️
+                            data-classid="${student.classId}">
+                        <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                    <button type="button" class="btn btn-sm btn-delete"
                             data-id="${student.studentId}">
-                        🗑️
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </td>
             </tr>
@@ -76,7 +77,7 @@
             <div class="modal-content">
                 <form action="${basePath}/admin?page=addStudent" method="post" class="needs-validation" novalidate>
                 <div class="modal-header">
-                        <h5 class="modal-title" id="addStudentModalLabel">➕ Thêm học sinh mới</h5>
+                        <h5 class="modal-title" id="addStudentModalLabel">Thêm học sinh mới</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -117,21 +118,17 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="addClassName" class="form-label">Lớp học</label>
-                                <input type="text" class="form-control" id="addClassName" name="className" required>
-                                <div class="invalid-feedback">Vui lòng nhập lớp học.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="addStatus" class="form-label">Trạng thái</label>
-                                <select id="addStatus" name="status" class="form-select" required>
-                                    <option value="1" selected>Hoạt động</option>
-                                    <option value="0">Không hoạt động</option>
+                                <select id="addClassName" name="classId" class="form-select" required>
+                                    <c:forEach items="${classes}" var="clazz">
+                                        <option value="${clazz.classId}">${clazz.className}</option>
+                                    </c:forEach>
                                 </select>
-                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
+                                <div class="invalid-feedback">Vui lòng nhập lớp học.</div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -146,7 +143,7 @@
                 <form action="${basePath}/admin?page=updateStudent" method="post" class="needs-validation" novalidate>
                     <input type="hidden" id="editId" name="id"/>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editStudentModalLabel">✏️ Cập nhật học sinh</h5>
+                        <h5 class="modal-title" id="editStudentModalLabel">Cập nhật học sinh</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -187,22 +184,20 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="editClassName" class="form-label">Lớp học</label>
-                                <input type="text" class="form-control" id="editClassName" name="className" required>
-                                <div class="invalid-feedback">Vui lòng nhập lớp học.</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="editStatus" class="form-label">Trạng thái</label>
-                                <select id="editStatus" name="status" class="form-select" required>
-                                    <option value="1">Hoạt động</option>
-                                    <option value="0">Không hoạt động</option>
+                                <select id="editClassName" name="class" class="form-select" required>
+                                    <c:forEach items="${classes}" var="clazz">
+                                        <option value="${clazz.classId}">${clazz.className}</option>
+                                    </c:forEach>
+<%--                                    <c:if test="${empty classes}">--%>
+<%--                                        <option disabled>Không có lớp học</option>--%>
+<%--                                    </c:if>--%>
                                 </select>
-                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
+                                <div class="invalid-feedback">Vui lòng chọn lớp học.</div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Cập nhật</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -224,7 +219,7 @@
                         Bạn có chắc chắn muốn xóa học sinh này không?
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Xác nhận</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -251,8 +246,7 @@
             document.getElementById('editAddress').value = btn.dataset.address;
             document.getElementById('editEmail').value = btn.dataset.email;
             document.getElementById('editPhone').value = btn.dataset.phone;
-            document.getElementById('editClassName').value = btn.dataset.classname;
-            document.getElementById('editStatus').value = btn.dataset.status;
+            document.getElementById('editClassName').value = btn.dataset.classid;
             modal.show();
         });
     });

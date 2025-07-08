@@ -22,13 +22,13 @@
         <!-- Phần còn lại bên phải -->
         <div class="d-flex align-items-center">
             <!-- Icon thông báo -->
-            <a href="#" class="text-dark position-relative me-3">
-                <i class="bi bi-bell fs-5"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    3
-                    <span class="visually-hidden">unread messages</span>
-                </span>
-            </a>
+<%--            <a href="#" class="text-dark position-relative me-3">--%>
+<%--                <i class="bi bi-bell fs-5"></i>--%>
+<%--                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">--%>
+<%--                    3--%>
+<%--                    <span class="visually-hidden">unread messages</span>--%>
+<%--                </span>--%>
+<%--            </a>--%>
 
             <!-- Tên người dùng -->
             <span class="fw-semibold text-dark me-3">Admin</span>
