@@ -225,6 +225,12 @@ public class AdminController extends HttpServlet {
             case "addStudent":
 //                handleAddStudent(req, resp);
                 break;
+            case "addCourse":
+                handleAddCourse(req, resp);
+                break;
+            case "addModule":
+                handleAddModule(req, resp);
+                break;
             case "updateStudent":
                 handleUpdateStudent(req, resp);
                 break;
@@ -235,7 +241,10 @@ public class AdminController extends HttpServlet {
                 handleUpdateClass(req, resp);
                 break;
             case "updateCourse":
-//                handleUpdateCourse(req, resp);
+                handleUpdateCourse(req, resp);
+                break;
+            case "updateModule":
+                handleUpdateModule(req, resp);
                 break;
             case "deleteStudent":
                 handleDeleteStudent(req, resp);
@@ -249,11 +258,42 @@ public class AdminController extends HttpServlet {
             case "deleteCourse":
                 handleDeleteCourse(req, resp);
                 break;
-            
+            case "deleteModule":
+                handleDeleteModule(req, resp);
+                break;
             default:
                 resp.sendRedirect("/admin?page=students");
         }
     }
+
+    private void handleAddCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+
+        if (name != null && !name.trim().isEmpty()) {
+            Course course = new Course();
+            course.setCourseName(name.trim());
+
+            courseService.add(course);
+            resp.sendRedirect("/admin?page=courses");
+        } else {
+            resp.sendRedirect("/admin?page=courses&error=emptyName");
+        }
+    }
+
+    private void handleAddModule(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+
+        if (name != null && !name.trim().isEmpty()) {
+            Module module = new Module();
+            module.setModuleName(name.trim());
+
+            moduleService.add(module);
+            resp.sendRedirect("/admin?page=modules");
+        } else {
+            resp.sendRedirect("/admin?page=modules&error=emptyName");
+        }
+    }
+
 
     private void handleUpdateStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
@@ -353,6 +393,38 @@ public class AdminController extends HttpServlet {
         }
     }
 
+    private void handleUpdateCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id")) ;
+        String name = req.getParameter("name");
+        
+        Course course = new Course();
+        course.setCourseId(id);
+        course.setCourseName(name);
+
+        boolean isUpdated = courseService.update(course);
+        if (isUpdated) {
+            resp.sendRedirect("/admin?page=courses");
+        } else {
+            resp.sendRedirect("/admin?page=courses&error=updateFailed");
+        }
+    }
+
+    private void handleUpdateModule(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id")) ;
+        String name = req.getParameter("name");
+
+        Module module = new Module();
+        module.setModuleId(id);
+        module.setModuleName(name);
+
+        boolean isUpdated = moduleService.update(module);
+        if (isUpdated) {
+            resp.sendRedirect("/admin?page=modules");
+        } else {
+            resp.sendRedirect("/admin?page=modules&error=updateFailed");
+        }
+    }
+
 
     private void handleDeleteStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
@@ -425,6 +497,28 @@ public class AdminController extends HttpServlet {
             }
         } else {
             resp.sendRedirect("/admin?page=courses&error=invalidId");
+        }
+    }
+
+    private void handleDeleteModule(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String idParam = req.getParameter("id");
+
+        if (idParam != null && !idParam.isEmpty()) {
+            try {
+                int id = Integer.parseInt(idParam); // chuyển sang int sau khi kiểm tra null & empty
+                boolean deleted = moduleService.deleteById(id); // gọi hàm xóa từ service
+
+                if (deleted) {
+                    resp.sendRedirect("/admin?page=modules");
+                } else {
+                    resp.sendRedirect("/admin?page=modules&error=deleteFailed");
+                }
+            } catch (NumberFormatException e) {
+                // xử lý trường hợp id không phải là số hợp lệ
+                resp.sendRedirect("/admin?page=modules&error=invalidIdFormat");
+            }
+        } else {
+            resp.sendRedirect("/admin?page=modules&error=invalidId");
         }
     }
 

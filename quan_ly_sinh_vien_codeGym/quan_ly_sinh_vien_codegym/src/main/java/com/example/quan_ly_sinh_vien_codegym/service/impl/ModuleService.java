@@ -24,7 +24,7 @@ public class ModuleService implements IModuleService {
 
     @Override
     public boolean update(Module module) {
-        return false;
+        return moduleRepository.update(module);
     }
 
     @Override
@@ -34,11 +34,11 @@ public class ModuleService implements IModuleService {
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return moduleRepository.deleteById(id);
     }
 
     @Override
     public void add(Module module) {
-
+        moduleRepository.add(module);
     }
 }

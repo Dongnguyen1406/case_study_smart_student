@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class StudentRepository implements IStudentRepository {
     private final String SELECT_STUDENT = "select s.student_id,s.student_name,s.dob,s.gender,s.address,s.number_phone,s.email,s.start_learn_date, c.class_name from students s join classes c on s.class_id=c.class_id WHERE s.is_delete = 0;";
     private final String SELECT_STUDENT_USERNAME = "select s.student_name,s.dob,s.gender,s.address,s.number_phone,s.email,s.start_learn_date, c.class_name from students s join classes c on s.class_id=c.class_id join accounts a on s.student_id=a.student_id where a.username=?;";
@@ -25,6 +26,7 @@ public class StudentRepository implements IStudentRepository {
     private final String UPDATE_STUDENT_S =
             "UPDATE students SET student_name=?, dob=?, gender=?, address=?, number_phone=?, email=?, status=? WHERE student_id=?";
 
+    private final String SELECT_BY_CLASS = "SELECT s.student_id, s.student_name, s.dob, s.gender, s.address, s.number_phone, s.email, s.start_learn_date, c.class_name FROM students s JOIN classes c ON s.class_id = c.class_id WHERE s.is_delete = 0 AND c.class_id = ?;";
 
     private final String SELECT_MODULE_ATTENDANCE = "elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
             "join attendance a on s.student_id=a.student_id \n" +
@@ -60,6 +62,31 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public Student select(int id) {
         return null;
+    }
+
+    @Override
+    public List<Student> findByClassId(int classId) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_CLASS)) {
+            preparedStatement.setInt(1, classId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String studentId = resultSet.getString("student_id");
+                String studentName = resultSet.getString("student_name");
+                LocalDate dob = LocalDate.parse(resultSet.getString("dob"));
+                String gender = resultSet.getString("gender");
+                String address = resultSet.getString("address");
+                String numberPhone = resultSet.getString("number_phone");
+                String email = resultSet.getString("email");
+                LocalDate startLearnDate = LocalDate.parse(resultSet.getString("start_learn_date"));
+                String className = resultSet.getString("class_name");
+                students.add(new Student(studentId, studentName, dob, gender, address, numberPhone, email, startLearnDate, className));
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi tìm học sinh theo lớp: " + e.getMessage());
+        }
+        return students;
     }
 
     @Override
@@ -103,6 +130,7 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void add(Student student) {
+
     }
 
     public Student displayStudent(String username) {

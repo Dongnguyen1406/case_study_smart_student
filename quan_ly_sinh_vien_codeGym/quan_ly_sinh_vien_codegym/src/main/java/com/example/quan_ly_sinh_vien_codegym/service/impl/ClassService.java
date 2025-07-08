@@ -10,8 +10,7 @@ import com.example.quan_ly_sinh_vien_codegym.service.IClassService;
 import java.util.List;
 
 public class ClassService implements IClassService {
-    private static final IClassRepository classRepository= new ClassRepository();
-
+    private static final IClassRepository classRepository = new ClassRepository();
 
     @Override
     public List<ClassResponseDto> findAll() {
@@ -41,5 +40,10 @@ public class ClassService implements IClassService {
     @Override
     public void add(ClassResponseDto classResponseDto) {
         classRepository.add(classResponseDto);
+    }
+
+    @Override
+    public List<ClassResponseDto> findByTeacherId(String teacherId) {
+        return classRepository.findByTeacherId(teacherId);
     }
 }
