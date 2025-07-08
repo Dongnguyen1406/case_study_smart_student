@@ -11,6 +11,6 @@ public interface IStudentRepository extends IRepository<Student> {
     boolean updateStudent(Student student);
 
     ModuleScore displayScore(String userName);
-    AttendanceDateDto displayAttendanceDate(String id);
+    AttendanceDateDto displayAttendanceDate(String idStudent);
     ModuleAttendance displayAttendance(String userName);
 }

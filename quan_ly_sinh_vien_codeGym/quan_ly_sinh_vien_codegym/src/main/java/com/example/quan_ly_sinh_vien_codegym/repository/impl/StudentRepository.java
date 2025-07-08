@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class StudentRepository implements IStudentRepository {
     private final String SELECT_STUDENT = "select s.student_id,s.student_name,s.dob,s.gender,s.address,s.number_phone,s.email,s.start_learn_date, c.class_name from students s join classes c on s.class_id=c.class_id WHERE s.is_delete = 0;";
     private final String SELECT_STUDENT_USERNAME = "select s.student_name,s.dob,s.gender,s.address,s.number_phone,s.email,s.start_learn_date, c.class_name from students s join classes c on s.class_id=c.class_id join accounts a on s.student_id=a.student_id where a.username=?;";
@@ -27,11 +26,11 @@ public class StudentRepository implements IStudentRepository {
             "UPDATE students SET student_name=?, dob=?, gender=?, address=?, number_phone=?, email=?, status=? WHERE student_id=?";
 
 
-    private final String SELECT_MODULE_ATTENDANCE ="elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
+    private final String SELECT_MODULE_ATTENDANCE = "elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
             "join attendance a on s.student_id=a.student_id \n" +
             "join student_modules st  on s.student_id=st.student_id\n" +
             "join modules m on st.module_id=m.module_id\n" +
-            "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? and  m.module_id=? ;";
+            "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? ;";
 
     @Override
     public List<Student> findAll() {
@@ -161,11 +160,11 @@ public class StudentRepository implements IStudentRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-               String module= resultSet.getString("module_name");
-             Double quizScore=resultSet.getDouble("quiz_score");
-             Double practiceScore=resultSet.getDouble("practice_score");
-             Double averageScore=resultSet.getDouble("average_score");
-             moduleScore =new ModuleScore(module,quizScore,practiceScore,averageScore);
+                String module = resultSet.getString("module_name");
+                Double quizScore = resultSet.getDouble("quiz_score");
+                Double practiceScore = resultSet.getDouble("practice_score");
+                Double averageScore = resultSet.getDouble("average_score");
+                moduleScore = new ModuleScore(module, quizScore, practiceScore, averageScore);
             }
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");
@@ -175,11 +174,30 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public AttendanceDateDto displayAttendanceDate(String id) {
-        return null;
+    public AttendanceDateDto displayAttendanceDate(String idStudent) {
+        AttendanceDateDto attendanceDateDto = null;
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MODULE_ATTENDANCE)) {
+            preparedStatement.setString(1, idStudent);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String moduleName = resultSet.getString("module_name");
+                LocalDate attendanceDate = LocalDate.parse(resultSet.getString("attendance_date"));
+                String statusName = resultSet.getString("status_name");
+                String studentId = resultSet.getString("student_id");
+
+                int moduleId = resultSet.getInt("module_id");
+                 attendanceDateDto = new AttendanceDateDto(moduleName, moduleId, studentId, attendanceDate, statusName);
+            }
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+
+        return attendanceDateDto;
     }
 
-    public ModuleAttendance displayAttendance(String userName){
+    public ModuleAttendance displayAttendance(String userName) {
         ModuleAttendance moduleAttendance = null;
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ATTENDANCE)) {
@@ -188,13 +206,13 @@ public class StudentRepository implements IStudentRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                String studentId= resultSet.getString("student_id");
-                int moduleId=resultSet.getInt("module_id");
-                String moduleName=resultSet.getString("module_name");
-                LocalDate registrationDate= LocalDate.parse(resultSet.getString("registration_date"));
-                int unexcusedAbsences=resultSet.getInt("unexcused_absences");
-                String result=resultSet.getString("result");
-                moduleAttendance =new ModuleAttendance(studentId,moduleId,moduleName,registrationDate,unexcusedAbsences,result);
+                String studentId = resultSet.getString("student_id");
+                int moduleId = resultSet.getInt("module_id");
+                String moduleName = resultSet.getString("module_name");
+                LocalDate registrationDate = LocalDate.parse(resultSet.getString("registration_date"));
+                int unexcusedAbsences = resultSet.getInt("unexcused_absences");
+                String result = resultSet.getString("result");
+                moduleAttendance = new ModuleAttendance(studentId, moduleId, moduleName, registrationDate, unexcusedAbsences, result);
             }
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");
