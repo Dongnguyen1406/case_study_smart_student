@@ -11,12 +11,11 @@ public class StudentDto {
     private String numberPhone;
     private String email;
     private String className;
-    private int classId;
 
     public StudentDto(String id, String fullName, LocalDate parsedDob, String gender, String address, String email, String phone, int classId) {
     }
 
-    public StudentDto(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, String className, int classId) {
+    public StudentDto(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, String className) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.dob = dob;
@@ -25,7 +24,6 @@ public class StudentDto {
         this.numberPhone = numberPhone;
         this.email = email;
         this.className = className;
-        this.classId = classId;
     }
     
     public String getStudentId() {
@@ -90,13 +88,5 @@ public class StudentDto {
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    public int getClassId() {
-        return classId;
-    }
-
-    public void setClassId(int classId) {
-        this.classId = classId;
     }
 }

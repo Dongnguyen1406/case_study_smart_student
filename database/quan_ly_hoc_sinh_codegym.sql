@@ -8,7 +8,6 @@ create table modules(
 
 create table courses(
 	course_id int primary key auto_increment,
-	course_id int primary key auto_increment,
     course_name varchar(100) not null
 );
 create table roles(
@@ -397,4 +396,4 @@ where c.is_delete = 0;
 select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, c.class_name, c.class_id
 from students s
 join classes c on c.class_id = s.class_id
-where c.is_delete = false and s.is_delete = false;
+where c.is_delete = 0 and s.is_delete = 0;

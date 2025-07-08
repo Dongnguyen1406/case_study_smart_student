@@ -40,12 +40,12 @@
                     <input type="hidden" name="action" value="login"/>
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="user name" required>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="tên người dùng" required>
                     </div>
 
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="mật khẩu" required>
                     </div>
 
                     <div class="mb-3 d-flex justify-content-between align-items-center">
