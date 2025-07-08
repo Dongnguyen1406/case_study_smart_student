@@ -72,31 +72,31 @@ public class AdminController extends HttpServlet {
         }
     }
     private void displayStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int pageSize = 5; // mỗi trang 5 học sinh
-        int currentPage = 1;
-
-        String pageParam = req.getParameter("currentPage");
-        if (pageParam != null) {
-            currentPage = Integer.parseInt(pageParam);
-        }
-
-        List<StudentDto> allStudents = iStudentService.findAll();
-
-        List<StudentDto> allStudents = iStudentService.findAllDto();
-        int totalStudents = allStudents.size();
-        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
-
-        int startIndex = (currentPage - 1) * pageSize;
-        req.setAttribute("startIndex", startIndex);
-        int endIndex = Math.min(startIndex + pageSize, totalStudents);
-        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
-
-        req.setAttribute("students", paginatedList);
-        req.setAttribute("classes", classService.findAll());
-        req.setAttribute("totalPages", totalPages);
-        req.setAttribute("currentPage", currentPage);
-        req.setAttribute("pageType", "students");
-        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
+//        int pageSize = 5; // mỗi trang 5 học sinh
+//        int currentPage = 1;
+//
+//        String pageParam = req.getParameter("currentPage");
+//        if (pageParam != null) {
+//            currentPage = Integer.parseInt(pageParam);
+//        }
+//
+//        List<StudentDto> allStudents = iStudentService.findAll();
+//
+//        List<StudentDto> allStudents = iStudentService.findAllDto();
+//        int totalStudents = allStudents.size();
+//        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
+//
+//        int startIndex = (currentPage - 1) * pageSize;
+//        req.setAttribute("startIndex", startIndex);
+//        int endIndex = Math.min(startIndex + pageSize, totalStudents);
+//        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
+//
+//        req.setAttribute("students", paginatedList);
+//        req.setAttribute("classes", classService.findAll());
+//        req.setAttribute("totalPages", totalPages);
+//        req.setAttribute("currentPage", currentPage);
+//        req.setAttribute("pageType", "students");
+//        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
 
 //        int pageSize = 5; // mỗi trang 5 học sinh
 //        int currentPage = 1;
