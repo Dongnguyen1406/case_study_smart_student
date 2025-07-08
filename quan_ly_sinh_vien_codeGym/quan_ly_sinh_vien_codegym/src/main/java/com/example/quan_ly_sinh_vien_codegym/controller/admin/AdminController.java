@@ -211,6 +211,15 @@ public class AdminController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        String role = null;
+        if (session != null) {
+            role = (String) session.getAttribute("role");
+        }
+        if (role == null || !role.equals("admin")) {
+            resp.sendRedirect("/access-denied.jsp");
+            return;
+        }
         String page = req.getParameter("page");
         if (page == null) page = "";
 

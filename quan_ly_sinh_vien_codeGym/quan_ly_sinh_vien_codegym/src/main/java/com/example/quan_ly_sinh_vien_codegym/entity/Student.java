@@ -1,6 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Student {
     String studentId;
@@ -141,5 +142,15 @@ public class Student {
 
     public void setDelete(Boolean delete) {
         isDelete = delete;
+    }
+
+    public String getDobFormatted() {
+        return dob.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public String getStartLearnDateFormatted() {
+        return startLearnDate != null
+                ? startLearnDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                : "";
     }
 }

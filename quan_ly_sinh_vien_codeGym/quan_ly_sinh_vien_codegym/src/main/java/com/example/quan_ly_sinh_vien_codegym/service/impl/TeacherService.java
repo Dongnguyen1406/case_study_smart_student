@@ -8,8 +8,8 @@ import com.example.quan_ly_sinh_vien_codegym.service.ITeacherService;
 import java.util.List;
 
 public class TeacherService implements ITeacherService {
-    private static ITeacherRepository teacherRepository = new TeacherRepository(); 
-    
+    private static ITeacherRepository teacherRepository = new TeacherRepository();
+
     @Override
     public List<Teacher> findAll() {
         return teacherRepository.findAll();
@@ -18,6 +18,11 @@ public class TeacherService implements ITeacherService {
     @Override
     public Teacher select(int id) {
         return null;
+    }
+
+    @Override
+    public Teacher findById(String teacherId) {
+        return teacherRepository.findById(teacherId);
     }
 
     @Override
@@ -37,7 +42,5 @@ public class TeacherService implements ITeacherService {
 
     @Override
     public void add(Teacher teacher) {
-
     }
 }
-

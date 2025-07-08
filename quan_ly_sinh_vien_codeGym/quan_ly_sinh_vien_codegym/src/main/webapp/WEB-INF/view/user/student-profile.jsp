@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 
 <div class="container mt-4">
@@ -84,7 +85,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="dob" class="form-label">Ngày sinh</label>
-                            <input type="text" class="form-control" id="dob" readonly value="${student.dob}" >
+                            <input type="text" class="form-control" id="dob" readonly value="${student.dobFormatted}">
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Giới tính</label>
@@ -106,8 +107,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="startLearnDate" class="form-label"> Ngày bắt đầu nhập học</label>
-                            <input type="text" class="form-control" id="startLearnDate" readonly
-                                   value="${student.startLearnDate}">
+                            <input type="text" id = "startLearnDate" class="form-control" readonly value="${student.startLearnDateFormatted}">
                         </div>
                         <div class="mb-3">
                             <label for="className" class="form-label">Tên lớp</label>
@@ -115,7 +115,7 @@
                                    value="${student.className}">
                         </div>
 
-                        <div class="d-flex flex-column align-items-start gap-2 mt-3">
+                        <div >
                             <button type="button"
                                     onclick="window.location.href='${basePath}/student?page=updatePassword'"
                                     class="btn btn-light px-4">
@@ -127,10 +127,6 @@
                                 Thay đổi thông tin
                             </button>
                         </div>
-
-
-
-
                     </form>
                 </div>
             </div>
@@ -138,3 +134,30 @@
     </div>
 </div>
 
+<!-- Modal Cập Nhật Khóa Học -->
+<%--<div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content">--%>
+<%--            <form action="${basePath}/admin?page=updateCourse" method="post" class="needs-validation" novalidate>--%>
+<%--                <input type="hidden" name="id" id="editCourseId">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <h5 class="modal-title">✏️ Cập nhật khóa học</h5>--%>
+<%--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--                </div>--%>
+
+<%--                <div class="modal-body">--%>
+<%--                    <div class="mb-3">--%>
+<%--                        <label class="form-label">Tên khóa học</label>--%>
+<%--                        <input type="text" name="name" id="editCourseName" class="form-control" required>--%>
+<%--                        <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="submit" class="btn btn-success">Cập nhật</button>--%>
+<%--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>--%>
+<%--                </div>--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
