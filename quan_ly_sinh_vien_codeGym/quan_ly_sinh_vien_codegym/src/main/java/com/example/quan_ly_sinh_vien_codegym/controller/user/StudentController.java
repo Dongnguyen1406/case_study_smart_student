@@ -98,7 +98,6 @@ public class StudentController extends HttpServlet {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
             req.setAttribute("attendanceDate", iStudentService.displayAttendanceDate(account.getStudentId()));
-            req.setAttribute("module", moduleService.findAll());
             req.setAttribute("moduleAttendance", iStudentService.displayAttendance(account.getUsername()));
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=attendance").forward(req, resp);
         }
@@ -122,7 +121,7 @@ public class StudentController extends HttpServlet {
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        if (role == null || !role.equals("user") || !role.equals("admin")) {
+        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }

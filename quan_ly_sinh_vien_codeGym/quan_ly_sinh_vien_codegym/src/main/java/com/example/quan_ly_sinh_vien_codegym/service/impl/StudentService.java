@@ -68,7 +68,7 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public AttendanceDateDto displayAttendanceDate(String idStudent) {
+    public List<AttendanceDateDto> displayAttendanceDate(String idStudent) {
         return  iStudentRepository.displayAttendanceDate(idStudent);
     }
 }
