@@ -57,8 +57,8 @@
 <div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="${basePath}/admin?page=addCourse" method="post" class="needs-validation" novalidate>
-                <div class="modal-header">
+            <form action="${basePath}/admin?page=addCourse" method="post" class="needs-validation">
+            <div class="modal-header">
                     <h5 class="modal-title">Thêm khóa học</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -99,8 +99,9 @@
                     <div class="mb-3">
                         <label class="form-label">Tên khóa học</label>
                         <input type="text" name="name" id="editCourseName" class="form-control"
+                               pattern="^[a-zA-Z0-9\s]{3,50}$"
+                               title="Tên khóa học chỉ được chứa chữ, số và khoảng trắng. Tối thiểu 3 ký tự."
                                required>
-
                         <div class="invalid-feedback">Vui lòng nhập tên khóa học.</div>
                     </div>
                 </div>
@@ -164,6 +165,22 @@
         });
     });
 </script>
+<script>
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+
 
 
 
