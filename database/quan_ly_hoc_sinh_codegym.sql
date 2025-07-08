@@ -387,6 +387,14 @@ join courses co on co.course_id = c.course_id
 join teachers t on t.teacher_id = c.teacher_id
 where c.is_delete = false and t.is_delete = false;
 
+select c.class_id, c.class_name, m.module_name, co.course_name, t.teacher_name , c.start_date, c.quantity_student
+from classes c
+join modules m on c.module_id = m.module_id
+join courses co on co.course_id = c.course_id
+join teachers t on t.teacher_id = c.teacher_id
+where c.is_delete = 0;
 
-
-
+select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, c.class_name, c.class_id
+from students s
+join classes c on c.class_id = s.class_id
+where c.is_delete = false and s.is_delete = false;

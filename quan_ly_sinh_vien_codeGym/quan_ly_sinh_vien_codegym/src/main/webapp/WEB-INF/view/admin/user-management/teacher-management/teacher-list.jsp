@@ -46,7 +46,7 @@
                     <%--                    <span class="badge" style="background-color: #272882;">Hoạt động</span>--%>
                     <%--                </td>--%>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-warning btn-edit"
+                    <button type="button" class="btn btn-sm  btn-edit"
                             data-id="${teacher.teacherId}"
                             data-fullname="${teacher.teacherName}"
                             data-gender="${teacher.gender}"
@@ -55,11 +55,11 @@
                             data-email="${teacher.email}"
                             data-phone="${teacher.numberPhone}"
                             data-status="${teacher.status ? 1 : 0}">
-                        ✏️
+                        <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                    <button type="button" class="btn btn-sm btn-delete"
                             data-id="${teacher.teacherId}">
-                        🗑️
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </td>
             </tr>
@@ -75,7 +75,7 @@
             <div class="modal-content">
                 <form action="${basePath}/admin?page=addTeacher" method="post" class="needs-validation" novalidate>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addTeacherModalLabel">➕ Thêm giáo viên mới</h5>
+                        <h5 class="modal-title" id="addTeacherModalLabel">Thêm giáo viên mới</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -141,7 +141,7 @@
                 <form action="${basePath}/admin?page=updateTeacher" method="post" class="needs-validation" novalidate>
                     <input type="hidden" id="editId" name="id"/>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editTeacherModalLabel">✏️ Cập nhật giáo viên</h5>
+                        <h5 class="modal-title" id="editTeacherModalLabel">Cập nhật giáo viên</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Cập nhật</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -213,7 +213,7 @@
                         Bạn có chắc chắn muốn xóa giáo viên này không?
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Xác nhận</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
