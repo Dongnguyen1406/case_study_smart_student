@@ -2,6 +2,7 @@ package com.example.quan_ly_sinh_vien_codegym.service;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
+import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
 
@@ -13,5 +14,12 @@ public interface IStudentService extends IService<Student> {
      ModuleScore displayScore(String userName);
      ModuleAttendance displayAttendance(String userName);
      List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
+<<<<<<< Updated upstream
      AttendanceDateDto displayAttendanceDate(String idStudent);
+=======
+     List<AttendanceDateDto> displayAttendanceDate(String idStudent);
+
+     List<StudentDto> findAllDto();
+
+>>>>>>> Stashed changes
 }

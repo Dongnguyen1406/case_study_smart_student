@@ -48,7 +48,7 @@
 <div class="modal fade" id="addModuleModal" tabindex="-1" aria-labelledby="addModuleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="${basePath}/admin?page=addModule" method="post">
+            <form action="${basePath}/admin?page=addModule" method="post" class="needs-validation">
                 <div class="modal-header">
                     <h5 class="modal-title">Thêm học phần</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -57,7 +57,10 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Tên học phần</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control" required
+                               pattern="^[A-Za-zÀ-ỹ0-9 ]{3,50}$"
+                               title="Tên học phần phải từ 3 đến 50 ký tự, chỉ chứa chữ cái, số và khoảng trắng">
+                        <div class="invalid-feedback">Vui lòng nhập tên học phần hợp lệ (ít nhất 3 ký tự, không chứa ký tự đặc biệt).</div>
                     </div>
                 </div>
 
@@ -84,7 +87,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Tên học phần</label>
-                        <input type="text" name="name" id="editModuleName" class="form-control" required>
+                        <input type="text" name="name" id="editModuleName" class="form-control" required
+                               pattern="^[A-Za-zÀ-ỹ0-9 ]{3,50}$"
+                               title="Tên học phần phải từ 3 đến 50 ký tự, chỉ chứa chữ cái, số và khoảng trắng">
+                        <div class="invalid-feedback">Vui lòng nhập tên học phần hợp lệ (ít nhất 3 ký tự, không chứa ký tự đặc biệt).</div>
+
                     </div>
                 </div>
 

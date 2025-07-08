@@ -2,6 +2,7 @@ package com.example.quan_ly_sinh_vien_codegym.repository.impl;
 
 import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
+import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.repository.IStudentRepository;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleScore;
@@ -24,7 +25,7 @@ public class StudentRepository implements IStudentRepository {
     private final String SELECT_ATTENDANCE = "CALL check_exam_eligibility(?);";
     private final String DELETE_STUDENT = "UPDATE students SET is_delete = 1 WHERE student_id = ?";
     private final String UPDATE_STUDENT_S =
-            "UPDATE students SET student_name=?, dob=?, gender=?, address=?, number_phone=?, email=?, status=? WHERE student_id=?";
+            "UPDATE students SET student_name=?, dob=?, gender=?, address=?, number_phone=?, email=?, start_learn_Date=?, class_id=? WHERE student_id=?";
 
     private final String SELECT_BY_CLASS = "SELECT s.student_id, s.student_name, s.dob, s.gender, s.address, s.number_phone, s.email, s.start_learn_date, c.class_name FROM students s JOIN classes c ON s.class_id = c.class_id WHERE s.is_delete = 0 AND c.class_id = ?;";
 
@@ -32,7 +33,20 @@ public class StudentRepository implements IStudentRepository {
             "join attendance a on s.student_id=a.student_id \n" +
             "join student_modules st  on s.student_id=st.student_id\n" +
             "join modules m on st.module_id=m.module_id\n" +
+<<<<<<< Updated upstream
             "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? ;";
+=======
+            "join attendance_statuses ast on a.status_id=ast.status_id " +
+            "join accounts acc on s.student_id=acc.student_id where s.student_id=? ;";
+    
+    private final String SELECT_STUDENT_DTO = "select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, c.class_name\n" +
+            "from students s\n" +
+            "join classes c on c.class_id = s.class_id\n" +
+            "where c.is_delete = false and s.is_delete = false;";
+
+    private final String INSERT_STUDENT = "INSERT INTO students (student_id, student_name, dob, gender, address, number_phone, email, start_learn_date, class_id, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2);";
+
+>>>>>>> Stashed changes
 
     @Override
     public List<Student> findAll() {
@@ -58,6 +72,8 @@ public class StudentRepository implements IStudentRepository {
         }
         return students;
     }
+    
+    
 
     @Override
     public Student select(int id) {
@@ -90,6 +106,30 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
+    public List<StudentDto> findAllDto() {
+        List<StudentDto> studentDtos = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STUDENT_DTO)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String studentId = resultSet.getString("student_id");
+                String studentName = resultSet.getString("student_name");
+                LocalDate dob = LocalDate.parse(resultSet.getString("dob"));
+                String gender = resultSet.getString("gender");
+                String address = resultSet.getString("address");
+                String numberPhone = resultSet.getString("number_phone");
+                String email = resultSet.getString("email");
+                String className = resultSet.getString("class_name");
+                studentDtos.add(new StudentDto(studentId, studentName, dob, gender, address, numberPhone, email, className));
+
+            }
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+        return studentDtos;
+    }
+
+    @Override
     public boolean update(Student student) {
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STUDENT_S)) {
@@ -99,8 +139,9 @@ public class StudentRepository implements IStudentRepository {
             preparedStatement.setString(4, student.getAddress());
             preparedStatement.setString(5, student.getNumberPhone());
             preparedStatement.setString(6, student.getEmail());
-            preparedStatement.setBoolean(7, student.getStatus()); // thêm dòng này nếu có cột status
-            preparedStatement.setString(8, student.getStudentId());
+            preparedStatement.setDate(7, java.sql.Date.valueOf(student.getStartLearnDate()));
+            preparedStatement.setInt(8, student.getClassId());
+            preparedStatement.setString(9, student.getStudentId());
 
             int effectRow = preparedStatement.executeUpdate();
             return effectRow == 1;
@@ -130,7 +171,27 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void add(Student student) {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_STUDENT)) {
 
+            preparedStatement.setString(1, student.getStudentId());
+            preparedStatement.setString(2, student.getStudentName());
+            preparedStatement.setDate(3, java.sql.Date.valueOf(student.getDob()));
+            preparedStatement.setString(4, student.getGender());
+            preparedStatement.setString(5, student.getAddress());
+            preparedStatement.setString(6, student.getNumberPhone());
+            preparedStatement.setString(7, student.getEmail());
+            preparedStatement.setDate(8, java.sql.Date.valueOf(student.getStartLearnDate()));
+            preparedStatement.setInt(9, student.getClassId()); 
+
+            int rows = preparedStatement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("✅ Thêm học sinh thành công!");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm học sinh: " + e.getMessage());
+        }
     }
 
     public Student displayStudent(String username) {

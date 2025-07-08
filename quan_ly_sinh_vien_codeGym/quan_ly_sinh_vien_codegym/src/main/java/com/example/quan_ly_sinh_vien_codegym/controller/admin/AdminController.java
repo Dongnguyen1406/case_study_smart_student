@@ -80,7 +80,11 @@ public class AdminController extends HttpServlet {
             currentPage = Integer.parseInt(pageParam);
         }
 
+<<<<<<< Updated upstream
         List<StudentDto> allStudents = iStudentService.findAll();
+=======
+        List<StudentDto> allStudents = iStudentService.findAllDto();
+>>>>>>> Stashed changes
         int totalStudents = allStudents.size();
         int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
 
@@ -96,6 +100,7 @@ public class AdminController extends HttpServlet {
         req.setAttribute("pageType", "students");
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
     }
+    
 
     private void displayTeacher(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageSize = 5; // mỗi trang 5 học sinh
@@ -225,7 +230,7 @@ public class AdminController extends HttpServlet {
 
         switch (page) {
             case "addStudent":
-//                handleAddStudent(req, resp);
+                handleAddStudent(req, resp);
                 break;
             case "addCourse":
                 handleAddCourse(req, resp);
@@ -234,7 +239,7 @@ public class AdminController extends HttpServlet {
                 handleAddModule(req, resp);
                 break;
             case "updateStudent":
-                handleUpdateStudent(req, resp);
+//                handleUpdateStudent(req, resp);
                 break;
             case "updateTeacher":
                 handleUpdateTeacher(req, resp);
@@ -268,6 +273,35 @@ public class AdminController extends HttpServlet {
         }
     }
 
+    private void handleAddStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String studentId = req.getParameter("studentId");
+        String studentName = req.getParameter("studentName");
+        String dobStr = req.getParameter("dob");
+        String gender = req.getParameter("gender");
+        String address = req.getParameter("address");
+        String numberPhone = req.getParameter("numberPhone");
+        String email = req.getParameter("email");
+        String startLearnDateStr = req.getParameter("startLearnDate");
+        String classIdStr = req.getParameter("classId");
+
+        try {
+            LocalDate dob = LocalDate.parse(dobStr);
+            LocalDate startLearnDate = LocalDate.parse(startLearnDateStr);
+            int classId = Integer.parseInt(classIdStr);
+
+            Student student = new Student(studentId, studentName, dob, gender, address, numberPhone, email, startLearnDate, classId);
+
+            iStudentService.add(student);
+
+            resp.sendRedirect("/admin?page=students");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect("/admin?page=students&error=invalidInput");
+        }
+    }
+
+
     private void handleAddCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
 
@@ -298,6 +332,7 @@ public class AdminController extends HttpServlet {
 
 
     private void handleUpdateStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+<<<<<<< Updated upstream
         String id = req.getParameter("id");
         String fullName = req.getParameter("fullname");
         String gender = req.getParameter("gender");
@@ -325,7 +360,45 @@ public class AdminController extends HttpServlet {
         } else {
             resp.sendRedirect("/admin?page=students&error=updateFailed");
         }
+=======
+//        try {
+//            String studentId = req.getParameter("studentId");
+//            String fullName = req.getParameter("fullname");
+//            String gender = req.getParameter("gender");
+//            String dob = req.getParameter("dob");
+//            String address = req.getParameter("address");
+//            String email = req.getParameter("email");
+//            String phone = req.getParameter("phone");
+//            String startLearnDateStr = req.getParameter("startLearnDate");
+//            int classId = Integer.parseInt(req.getParameter("classId"));
+//
+//            LocalDate parsedDob = LocalDate.parse(dob);
+//            LocalDate parsedStartDate = LocalDate.parse(startLearnDateStr);
+//
+//            Student student = new Student();
+//            student.setStudentId(studentId);
+//            student.setStudentName(fullName);
+//            student.setGender(gender);
+//            student.setDob(parsedDob);
+//            student.setAddress(address);
+//            student.setEmail(email);
+//            student.setNumberPhone(phone);
+//            student.setStartLearnDate(parsedStartDate);
+//            student.setClassId(classId);
+//
+//            boolean isUpdated = iStudentService.update(student);
+//            if (isUpdated) {
+//                resp.sendRedirect("/admin?page=students");
+//            } else {
+//                resp.sendRedirect("/admin?page=students&error=updateFailed");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            resp.sendRedirect("/admin?page=students&error=invalidInput");
+//        }
+>>>>>>> Stashed changes
     }
+
 
     private void handleUpdateTeacher(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
