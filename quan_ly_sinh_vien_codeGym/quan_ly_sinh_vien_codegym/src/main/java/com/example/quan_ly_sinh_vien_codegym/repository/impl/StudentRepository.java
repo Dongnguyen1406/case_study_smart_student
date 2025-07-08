@@ -22,16 +22,17 @@ public class StudentRepository implements IStudentRepository {
     private final String UPDATE_STUDENT = " update students  set student_name=?, dob=? ,gender=?,address=?,number_phone=?,email=?where student_id=?";
     private final String SELECT_SCORE = "select s.student_id,m.module_name, sc.quiz_score, sc.practice_score,sc.average_score from students s join student_modules sm on s.student_id= sm.student_id join modules m on sm.module_id=m.module_id join scores sc on sm.student_module_id=sc.student_module_id join accounts a on s.student_id=a.student_id where a.username=?;";
     private final String SELECT_ATTENDANCE = "CALL check_exam_eligibility(?);";
-   private final String SELECT_MODULE_ATTENDANCE ="elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
-            "join attendance a on s.student_id=a.student_id \n" +
-            "join student_modules st  on s.student_id=st.student_id\n" +
-            "join modules m on st.module_id=m.module_id\n" +
-            "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? and  m.module_id=? ;";
-
     private final String DELETE_STUDENT = "UPDATE students SET is_delete = 1 WHERE student_id = ?";
     private final String UPDATE_STUDENT_S =
             "UPDATE students SET student_name=?, dob=?, gender=?, address=?, number_phone=?, email=?, status=? WHERE student_id=?";
 
+    private final String SELECT_BY_CLASS = "SELECT s.student_id, s.student_name, s.dob, s.gender, s.address, s.number_phone, s.email, s.start_learn_date, c.class_name FROM students s JOIN classes c ON s.class_id = c.class_id WHERE s.is_delete = 0 AND c.class_id = ?;";
+
+    private final String SELECT_MODULE_ATTENDANCE = "elect s.student_id,  m.module_id,a.attendance_date,ast.status_name  from students s \n" +
+            "join attendance a on s.student_id=a.student_id \n" +
+            "join student_modules st  on s.student_id=st.student_id\n" +
+            "join modules m on st.module_id=m.module_id\n" +
+            "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? ;";
 
     @Override
     public List<Student> findAll() {
@@ -61,6 +62,31 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public Student select(int id) {
         return null;
+    }
+
+    @Override
+    public List<Student> findByClassId(int classId) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_CLASS)) {
+            preparedStatement.setInt(1, classId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String studentId = resultSet.getString("student_id");
+                String studentName = resultSet.getString("student_name");
+                LocalDate dob = LocalDate.parse(resultSet.getString("dob"));
+                String gender = resultSet.getString("gender");
+                String address = resultSet.getString("address");
+                String numberPhone = resultSet.getString("number_phone");
+                String email = resultSet.getString("email");
+                LocalDate startLearnDate = LocalDate.parse(resultSet.getString("start_learn_date"));
+                String className = resultSet.getString("class_name");
+                students.add(new Student(studentId, studentName, dob, gender, address, numberPhone, email, startLearnDate, className));
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi tìm học sinh theo lớp: " + e.getMessage());
+        }
+        return students;
     }
 
     @Override
@@ -104,6 +130,7 @@ public class StudentRepository implements IStudentRepository {
 
     @Override
     public void add(Student student) {
+
     }
 
     public Student displayStudent(String username) {
@@ -161,11 +188,11 @@ public class StudentRepository implements IStudentRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-               String module= resultSet.getString("module_name");
-             Double quizScore=resultSet.getDouble("quiz_score");
-             Double practiceScore=resultSet.getDouble("practice_score");
-             Double averageScore=resultSet.getDouble("average_score");
-             moduleScore =new ModuleScore(module,quizScore,practiceScore,averageScore);
+                String module = resultSet.getString("module_name");
+                Double quizScore = resultSet.getDouble("quiz_score");
+                Double practiceScore = resultSet.getDouble("practice_score");
+                Double averageScore = resultSet.getDouble("average_score");
+                moduleScore = new ModuleScore(module, quizScore, practiceScore, averageScore);
             }
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");
@@ -175,11 +202,30 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public AttendanceDateDto displayAttendanceDate(String id) {
-        return null;
+    public AttendanceDateDto displayAttendanceDate(String idStudent) {
+        AttendanceDateDto attendanceDateDto = null;
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MODULE_ATTENDANCE)) {
+            preparedStatement.setString(1, idStudent);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String moduleName = resultSet.getString("module_name");
+                LocalDate attendanceDate = LocalDate.parse(resultSet.getString("attendance_date"));
+                String statusName = resultSet.getString("status_name");
+                String studentId = resultSet.getString("student_id");
+
+                int moduleId = resultSet.getInt("module_id");
+                 attendanceDateDto = new AttendanceDateDto(moduleName, moduleId, studentId, attendanceDate, statusName);
+            }
+        } catch (SQLException e) {
+            System.out.println("lỗi kết nối database");
+        }
+
+        return attendanceDateDto;
     }
 
-    public ModuleAttendance displayAttendance(String userName){
+    public ModuleAttendance displayAttendance(String userName) {
         ModuleAttendance moduleAttendance = null;
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ATTENDANCE)) {
@@ -188,13 +234,13 @@ public class StudentRepository implements IStudentRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                String studentId= resultSet.getString("student_id");
-                int moduleId=resultSet.getInt("module_id");
-                String moduleName=resultSet.getString("module_name");
-                LocalDate registrationDate= LocalDate.parse(resultSet.getString("registration_date"));
-                int unexcusedAbsences=resultSet.getInt("unexcused_absences");
-                String result=resultSet.getString("result");
-                moduleAttendance =new ModuleAttendance(studentId,moduleId,moduleName,registrationDate,unexcusedAbsences,result);
+                String studentId = resultSet.getString("student_id");
+                int moduleId = resultSet.getInt("module_id");
+                String moduleName = resultSet.getString("module_name");
+                LocalDate registrationDate = LocalDate.parse(resultSet.getString("registration_date"));
+                int unexcusedAbsences = resultSet.getInt("unexcused_absences");
+                String result = resultSet.getString("result");
+                moduleAttendance = new ModuleAttendance(studentId, moduleId, moduleName, registrationDate, unexcusedAbsences, result);
             }
         } catch (SQLException e) {
             System.out.println("lỗi kết nối database");

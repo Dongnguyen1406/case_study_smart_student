@@ -2,14 +2,17 @@ package com.example.quan_ly_sinh_vien_codegym.entity;
 
 public class Assessment {
     int assessmentId;
-    Boolean averageId;
+    double averageScore;
     String studentId;
     int moduleId;
     Boolean status;
 
-    public Assessment(int assessmentId, Boolean averageId, String studentId, int moduleId, Boolean status) {
+    public Assessment() {
+    }
+
+    public Assessment(int assessmentId, double averageScore, String studentId, int moduleId, Boolean status) {
         this.assessmentId = assessmentId;
-        this.averageId = averageId;
+        this.averageScore = averageScore;
         this.studentId = studentId;
         this.moduleId = moduleId;
         this.status = status;
@@ -23,12 +26,12 @@ public class Assessment {
         this.assessmentId = assessmentId;
     }
 
-    public Boolean getAverageId() {
-        return averageId;
+    public double getAverageScore() {
+        return averageScore;
     }
 
-    public void setAverageId(Boolean averageId) {
-        this.averageId = averageId;
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
     }
 
     public String getStudentId() {
