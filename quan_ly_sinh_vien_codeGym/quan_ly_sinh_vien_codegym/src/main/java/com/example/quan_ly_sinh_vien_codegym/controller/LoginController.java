@@ -73,6 +73,8 @@ public class LoginController extends HttpServlet {
                     req.getRequestDispatcher("WEB-INF/view/login/login.jsp").forward(req, resp);
                 }
             } else if (account.getRoleId() == 3) {
+
+
                 String teacherId = account.getTeacherId();
                 System.out.println("TeacherId from account: " + teacherId); // Debug
                 if (teacherId != null && !teacherId.isEmpty()) {

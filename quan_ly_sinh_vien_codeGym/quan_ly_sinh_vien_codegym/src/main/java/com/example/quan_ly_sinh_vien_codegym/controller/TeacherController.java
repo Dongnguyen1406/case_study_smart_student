@@ -42,12 +42,12 @@ public class TeacherController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
         String role = null;
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+        if (role == null || (!role.equals("teacher") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
@@ -169,12 +169,12 @@ public class TeacherController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
         String role = null;
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+        if (role == null || (!role.equals("teacher") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
