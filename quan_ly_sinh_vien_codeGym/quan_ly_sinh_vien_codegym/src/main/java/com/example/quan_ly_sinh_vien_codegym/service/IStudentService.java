@@ -13,5 +13,5 @@ public interface IStudentService extends IService<Student> {
      ModuleScore displayScore(String userName);
      ModuleAttendance displayAttendance(String userName);
      List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
-     AttendanceDateDto displayAttendanceDate(String idStudent);
+     List<AttendanceDateDto> displayAttendanceDate(String idStudent);
 }

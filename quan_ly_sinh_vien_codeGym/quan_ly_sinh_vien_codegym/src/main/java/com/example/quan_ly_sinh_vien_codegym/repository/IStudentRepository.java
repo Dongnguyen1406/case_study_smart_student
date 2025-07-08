@@ -11,7 +11,7 @@ public interface IStudentRepository extends IRepository<Student> {
     Student displayStudent(String username);
     boolean updateStudent(Student student);
     ModuleScore displayScore(String userName);
-    AttendanceDateDto displayAttendanceDate(String idStudent);
+    List<AttendanceDateDto> displayAttendanceDate(String idStudent);
     ModuleAttendance displayAttendance(String userName);
     List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
 }
