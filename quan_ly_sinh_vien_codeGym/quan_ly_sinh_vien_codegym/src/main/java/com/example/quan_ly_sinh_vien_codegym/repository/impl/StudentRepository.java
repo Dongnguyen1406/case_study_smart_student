@@ -35,23 +35,15 @@ public class StudentRepository implements IStudentRepository {
             "join modules m on st.module_id=m.module_id\n" +
 
             "join attendance_statuses ast on a.status_id=ast.status_id where s.student_id=? ;";
-
-            "join attendance_statuses ast on a.status_id=ast.status_id " +
-            "join accounts acc on s.student_id=acc.student_id where s.student_id=? ;";
     
-    private final String SELECT_STUDENT_DTO = "select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, c.class_name\n" +
+    
+    private final String SELECT_STUDENT_DTO = "select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, start_learn_date, c.class_id, c.class_name\n" +
             "from students s\n" +
             "join classes c on c.class_id = s.class_id\n" +
             "where c.is_delete = false and s.is_delete = false;";
 
     private final String INSERT_STUDENT = "INSERT INTO students (student_id, student_name, dob, gender, address, number_phone, email, start_learn_date, class_id, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2);";
-
-
-
-            "join attendance_statuses ast on a.status_id=ast.status_id " +
-            "join accounts acc on s.student_id=acc.student_id where s.student_id=? ;";
-
-
+    
     @Override
     public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
@@ -123,8 +115,10 @@ public class StudentRepository implements IStudentRepository {
                 String address = resultSet.getString("address");
                 String numberPhone = resultSet.getString("number_phone");
                 String email = resultSet.getString("email");
+                LocalDate startLearnDate = LocalDate.parse(resultSet.getString("start_learn_date"));
+                Integer classId = resultSet.getInt("class_id");
                 String className = resultSet.getString("class_name");
-                studentDtos.add(new StudentDto(studentId, studentName, dob, gender, address, numberPhone, email, className));
+                studentDtos.add(new StudentDto(studentId, studentName, dob, gender, address, numberPhone, email, classId, startLearnDate,className));
 
             }
         } catch (SQLException e) {
@@ -194,7 +188,12 @@ public class StudentRepository implements IStudentRepository {
             }
 
         } catch (SQLException e) {
-            System.out.println("Lỗi khi thêm học sinh: " + e.getMessage());
+//            System.out.println("Lỗi khi thêm học sinh: " + e.getMessage());
+            if (e.getMessage().contains("Duplicate entry")) {
+                System.out.println("Học sinh đã tồn tại!");
+            } else {
+                e.printStackTrace(); // In chi tiết hơn
+            }
         }
     }
 

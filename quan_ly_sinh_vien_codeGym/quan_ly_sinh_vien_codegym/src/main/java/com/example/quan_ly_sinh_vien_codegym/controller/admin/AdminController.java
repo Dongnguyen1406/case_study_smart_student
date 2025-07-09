@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @WebServlet(value = "/admin")
@@ -44,14 +45,14 @@ public class AdminController extends HttpServlet {
             return;
         }
 
-        if (account == null){
+        if (account == null) {
             resp.sendRedirect("/login");
         }
         String page = req.getParameter("page");
-        if (page == null){
+        if (page == null) {
             page = "";
         }
-        switch (page){
+        switch (page) {
             case "students":
                 displayStudent(req, resp);
                 break;
@@ -71,6 +72,7 @@ public class AdminController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/view/admin/admin.jsp").forward(req, resp);
         }
     }
+
     private void displayStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageSize = 5; // mỗi trang 5 học sinh
         int currentPage = 1;
@@ -79,8 +81,6 @@ public class AdminController extends HttpServlet {
         if (pageParam != null) {
             currentPage = Integer.parseInt(pageParam);
         }
-
-        List<StudentDto> allStudents = iStudentService.findAll();
 
         List<StudentDto> allStudents = iStudentService.findAllDto();
         int totalStudents = allStudents.size();
@@ -97,32 +97,8 @@ public class AdminController extends HttpServlet {
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("pageType", "students");
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
-
-//        int pageSize = 5; // mỗi trang 5 học sinh
-//        int currentPage = 1;
-//
-//        String pageParam = req.getParameter("currentPage");
-//        if (pageParam != null) {
-//            currentPage = Integer.parseInt(pageParam);
-//        }
-//
-//        List<StudentDto> allStudents = iStudentService.findAll();
-//        int totalStudents = allStudents.size();
-//        int totalPages = (int) Math.ceil((double) totalStudents / pageSize);
-//
-//        int startIndex = (currentPage - 1) * pageSize;
-//        req.setAttribute("startIndex", startIndex);
-//        int endIndex = Math.min(startIndex + pageSize, totalStudents);
-//        List<StudentDto> paginatedList = allStudents.subList(startIndex, endIndex);
-//
-//        req.setAttribute("students", paginatedList);
-//        req.setAttribute("classes", classService.findAll());
-//        req.setAttribute("totalPages", totalPages);
-//        req.setAttribute("currentPage", currentPage);
-//        req.setAttribute("pageType", "students");
-//        req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=students").forward(req, resp);
     }
-    
+
 
     private void displayTeacher(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageSize = 5; // mỗi trang 5 học sinh
@@ -141,9 +117,8 @@ public class AdminController extends HttpServlet {
         req.setAttribute("startIndex", startIndex);
         int endIndex = Math.min(startIndex + pageSize, totalTeachers);
         List<Teacher> paginatedList = allTeachers.subList(startIndex, endIndex);
-        
+
         req.setAttribute("teachers", paginatedList);
-        req.setAttribute("classes", classService.findAll());
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("pageType", "teachers");
@@ -152,7 +127,7 @@ public class AdminController extends HttpServlet {
     }
 
     private void displayClass(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int pageSize = 5; 
+        int pageSize = 5;
         int currentPage = 1;
 
         String pageParam = req.getParameter("currentPage");
@@ -179,8 +154,7 @@ public class AdminController extends HttpServlet {
 
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=classes").forward(req, resp);
     }
-    
-    
+
 
     private void displayCourse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageSize = 5;
@@ -206,7 +180,7 @@ public class AdminController extends HttpServlet {
         req.setAttribute("pageType", "courses");
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=courses").forward(req, resp);
     }
-    
+
 
     private void displayModule(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageSize = 5;
@@ -229,12 +203,11 @@ public class AdminController extends HttpServlet {
         req.setAttribute("modules", paginatedList);
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("currentPage", currentPage);
-        req.setAttribute("pageType", "modules"); 
+        req.setAttribute("pageType", "modules");
 
         req.getRequestDispatcher("WEB-INF/view/admin/admin.jsp?page=modules").forward(req, resp);
     }
-    
-    
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -254,6 +227,9 @@ public class AdminController extends HttpServlet {
             case "addStudent":
                 handleAddStudent(req, resp);
                 break;
+            case "addTeacher":
+                handleAddTeacher(req, resp);
+                break;
             case "addCourse":
                 handleAddCourse(req, resp);
                 break;
@@ -261,7 +237,7 @@ public class AdminController extends HttpServlet {
                 handleAddModule(req, resp);
                 break;
             case "updateStudent":
-//                handleUpdateStudent(req, resp);
+                handleUpdateStudent(req, resp);
                 break;
             case "updateTeacher":
                 handleUpdateTeacher(req, resp);
@@ -306,20 +282,66 @@ public class AdminController extends HttpServlet {
         String startLearnDateStr = req.getParameter("startLearnDate");
         String classIdStr = req.getParameter("classId");
 
+        // Kiểm tra dữ liệu đầu vào
+        if (studentId == null || studentId.trim().isEmpty()) {
+            resp.sendRedirect("/admin?page=students&error=missingStudentId");
+            return;
+        }
+
+        if (studentName == null || studentName.trim().isEmpty()) {
+            resp.sendRedirect("/admin?page=students&error=missingStudentName");
+            return;
+        }
+
+        if (email == null || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            resp.sendRedirect("/admin?page=students&error=invalidEmail");
+            return;
+        }
+
+        if (numberPhone == null || !numberPhone.matches("^[0-9]{9,11}$")) {
+            resp.sendRedirect("/admin?page=students&error=invalidPhone");
+            return;
+        }
+
         try {
             LocalDate dob = LocalDate.parse(dobStr);
             LocalDate startLearnDate = LocalDate.parse(startLearnDateStr);
             int classId = Integer.parseInt(classIdStr);
 
             Student student = new Student(studentId, studentName, dob, gender, address, numberPhone, email, startLearnDate, classId);
-
             iStudentService.add(student);
 
             resp.sendRedirect("/admin?page=students");
 
+        } catch (DateTimeParseException e) {
+            resp.sendRedirect("/admin?page=students&error=invalidDate");
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/admin?page=students&error=invalidClassId");
         } catch (Exception e) {
-            e.printStackTrace();
-            resp.sendRedirect("/admin?page=students&error=invalidInput");
+            e.printStackTrace(); // Ghi log lỗi
+            resp.sendRedirect("/admin?page=students&error=internalError");
+        }
+    }
+
+    private void handleAddTeacher(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String teacherId = req.getParameter("teacherId");
+        String teacherName = req.getParameter("teacherName");
+        String dobStr = req.getParameter("dob");
+        String gender = req.getParameter("gender");
+        String address = req.getParameter("address");
+        String numberPhone = req.getParameter("numberPhone");
+        String email = req.getParameter("email");
+
+        try {
+            LocalDate dob = LocalDate.parse(dobStr);
+            Teacher teacher = new Teacher(teacherId, teacherName, dob, gender, address, numberPhone, email);
+            teacherService.add(teacher);
+            resp.sendRedirect("/admin?page=teachers");
+        } catch (DateTimeParseException e) {
+            resp.sendRedirect("/admin?page=teachers&error=invalidDate");
+        } catch (Exception e) {
+            e.printStackTrace(); // Ghi log lỗi
+            resp.sendRedirect("/admin?page=teachers&error=internalError");
         }
     }
 
@@ -354,7 +376,29 @@ public class AdminController extends HttpServlet {
 
 
     private void handleUpdateStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            String studentId = req.getParameter("studentId");
+            String studentName = req.getParameter("studentName");
+            LocalDate dob = LocalDate.parse(req.getParameter("dob"));
+            String gender = req.getParameter("gender");
+            String address = req.getParameter("address");
+            String numberPhone = req.getParameter("numberPhone");
+            String email = req.getParameter("email");
+            LocalDate startLearnDate = LocalDate.parse(req.getParameter("startLearnDate"));
+            Integer classId = Integer.parseInt(req.getParameter("classId"));
 
+            Student student = new Student(studentId, studentName, dob, gender, address, numberPhone, email, startLearnDate, classId);
+            boolean updated = iStudentService.update(student);
+
+            if (updated) {
+                resp.sendRedirect("/admin?page=students&msg=updateSuccess");
+            } else {
+                resp.sendRedirect("/admin?page=students&error=updateFailed");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect("/admin?page=students&error=updateFailed");
+        }
     }
 
 
@@ -423,9 +467,9 @@ public class AdminController extends HttpServlet {
     }
 
     private void handleUpdateCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int id = Integer.parseInt(req.getParameter("id")) ;
+        int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
-        
+
         Course course = new Course();
         course.setCourseId(id);
         course.setCourseName(name);
@@ -439,7 +483,7 @@ public class AdminController extends HttpServlet {
     }
 
     private void handleUpdateModule(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int id = Integer.parseInt(req.getParameter("id")) ;
+        int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
 
         Module module = new Module();
@@ -550,8 +594,6 @@ public class AdminController extends HttpServlet {
             resp.sendRedirect("/admin?page=modules&error=invalidId");
         }
     }
-
-
 
 
 }

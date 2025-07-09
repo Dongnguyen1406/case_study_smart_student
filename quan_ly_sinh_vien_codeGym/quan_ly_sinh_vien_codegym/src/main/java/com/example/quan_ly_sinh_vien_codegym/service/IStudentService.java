@@ -10,18 +10,17 @@ import java.util.List;
 
 public interface IStudentService extends IService<Student> {
      Student displayStudent(String username);
-     boolean updateStudent(Student student);
-     ModuleScore displayScore(String userName);
-     ModuleAttendance displayAttendance(String userName);
-     List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
 
-     AttendanceDateDto displayAttendanceDate(String idStudent);
+     boolean updateStudent(Student student);
+
+     ModuleScore displayScore(String userName);
+
+     ModuleAttendance displayAttendance(String userName);
+
+     List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
 
      List<AttendanceDateDto> displayAttendanceDate(String idStudent);
 
      List<StudentDto> findAllDto();
-
-
-
-     List<AttendanceDateDto> displayAttendanceDate(String idStudent);
-
+     
+}

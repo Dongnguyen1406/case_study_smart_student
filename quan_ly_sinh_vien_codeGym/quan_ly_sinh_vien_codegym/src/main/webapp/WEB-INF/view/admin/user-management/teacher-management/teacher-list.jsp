@@ -53,8 +53,7 @@
                             data-dob="${teacher.dob}"
                             data-address="${teacher.address}"
                             data-email="${teacher.email}"
-                            data-phone="${teacher.numberPhone}"
-                            data-status="${teacher.status ? 1 : 0}">
+                            data-phone="${teacher.numberPhone}">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button type="button" class="btn btn-sm btn-delete"
@@ -81,8 +80,13 @@
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
+                                <label for="addTeacherId" class="form-label">Nhập mã</label>
+                                <input type="text" id="addTeacherId" name="teacherId" required>
+                                <div class="invalid-feedback">Vui lòng nhập mã.</div>
+                            </div>
+                            <div class="col-md-6">
                                 <label for="addFullname" class="form-label">Họ tên</label>
-                                <input type="text" class="form-control" id="addFullname" name="fullname" required>
+                                <input type="text" id="addFullname" name="teacherName" required>
                                 <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
                             </div>
                             <div class="col-md-3">
@@ -111,16 +115,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="addPhone" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="addPhone" name="phone" required>
+                                <input type="tel" id="addPhone" name="numberPhone" required>
                                 <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="addStatus" class="form-label">Trạng thái</label>
-                                <select id="addStatus" name="status" class="form-select" required>
-                                    <option value="1" selected>Hoạt động</option>
-                                    <option value="0">Không hoạt động</option>
-                                </select>
-                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
                             </div>
                         </div>
                     </div>
@@ -180,14 +176,6 @@
                                 <input type="text" class="form-control" id="editAddress" name="address" required>
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="editStatus" class="form-label">Trạng thái</label>
-                                <select id="editStatus" name="status" class="form-select" required>
-                                    <option value="1">Hoạt động</option>
-                                    <option value="0">Không hoạt động</option>
-                                </select>
-                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -241,8 +229,7 @@
             document.getElementById('editAddress').value = btn.dataset.address;
             document.getElementById('editEmail').value = btn.dataset.email;
             document.getElementById('editPhone').value = btn.dataset.phone;
-            document.getElementById('editStatus').value = btn.dataset.status;
-
+            
             modal.show();
         });
     });
