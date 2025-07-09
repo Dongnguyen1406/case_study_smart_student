@@ -56,6 +56,9 @@ public class StudentController extends HttpServlet {
             case "attendance":
                 displayAttendance(req, resp);
                 break;
+            case "assessment":
+                displayAssessment(req, resp);
+                break;
             case "display":
                 displayStudent(req, resp);
                 break;
@@ -101,6 +104,14 @@ public class StudentController extends HttpServlet {
             req.setAttribute("attendanceDate", iStudentService.displayAttendanceDate(account.getStudentId()));
             req.setAttribute("moduleAttendance", iStudentService.displayAttendance(account.getUsername()));
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=attendance").forward(req, resp);
+        }
+    }
+
+    private void displayAssessment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = (Account) SessionUtil.get(req, "account");
+        if (account != null) {
+            req.setAttribute("assessments", iStudentService.displayAssessments(account.getUsername()));
+            req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=assessment").forward(req, resp);
         }
     }
 

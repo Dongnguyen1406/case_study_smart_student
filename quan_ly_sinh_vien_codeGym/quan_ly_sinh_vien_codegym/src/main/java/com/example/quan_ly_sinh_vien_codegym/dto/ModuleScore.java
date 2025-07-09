@@ -8,6 +8,14 @@ public class ModuleScore {
     String studentId; // Thêm
     int moduleId;     // Thêm
 
+    public ModuleScore(String studentId, int moduleId, double quizScore, double practiceScore) {
+        this.studentId = studentId;
+        this.moduleId = moduleId;
+        this.quizScore = quizScore;
+        this.practiceScore = practiceScore;
+        this.averageScore = (quizScore + practiceScore) / 2;
+    }
+
     public ModuleScore(String module, double quizScore, double practiceScore, double averageScore) {
         this.module = module;
         this.quizScore = quizScore;

@@ -14,6 +14,7 @@
                 <th>Khóa học</th>
                 <th>Giáo viên</th>
                 <th>Ngày bắt đầu</th>
+                <th>Thao tác</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,11 @@
                     <td>${classItem.courseName}</td>
                     <td>${classItem.teacherName}</td>
                     <td>${classItem.startDate}</td>
+                    <td>
+                        <a href="${basePath}/teacher?page=attendance&classId=${classItem.classId}" class="btn btn-primary btn-sm">Điểm danh</a>
+                        <a href="${basePath}/teacher?page=score&classId=${classItem.classId}&moduleId=${classItem.moduleId}" class="btn btn-success btn-sm">Nhập điểm</a>
+                        <a href="${basePath}/teacher?page=assessment&classId=${classItem.classId}&moduleId=${classItem.moduleId}" class="btn btn-info btn-sm">Đánh giá</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

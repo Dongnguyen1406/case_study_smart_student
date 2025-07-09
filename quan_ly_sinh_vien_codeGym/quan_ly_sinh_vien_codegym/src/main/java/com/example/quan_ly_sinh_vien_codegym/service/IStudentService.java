@@ -1,5 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.service;
 
+
+import com.example.quan_ly_sinh_vien_codegym.dto.AssessmentDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
@@ -18,9 +20,8 @@ public interface IStudentService extends IService<Student> {
      ModuleAttendance displayAttendance(String userName);
 
      List<Student> findByClassId(int classId); // Thêm phương thức findByClassId
-
+     List<AssessmentDto> displayAssessments(String userName);
      List<AttendanceDateDto> displayAttendanceDate(String idStudent);
-
      List<StudentDto> findAllDto();
-     
+    
 }

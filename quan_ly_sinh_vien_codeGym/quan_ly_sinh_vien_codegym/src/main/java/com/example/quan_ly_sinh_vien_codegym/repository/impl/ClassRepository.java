@@ -76,7 +76,7 @@ public class ClassRepository implements IClassRepository {
     public void add(ClassResponseDto classResponseDto) {
     }
 
-    private static final String SELECT_BY_TEACHER = "SELECT c.class_id, c.class_name, m.module_name, co.course_name, t.teacher_name, c.start_date, c.quantity_student " +
+    private static final String SELECT_BY_TEACHER = "SELECT c.class_id, c.class_name, m.module_id, m.module_name, co.course_id, co.course_name, t.teacher_name, c.start_date, c.quantity_student " +
             "FROM classes c " +
             "JOIN modules m ON c.module_id = m.module_id " +
             "JOIN courses co ON c.course_id = co.course_id " +
@@ -94,10 +94,13 @@ public class ClassRepository implements IClassRepository {
                 ClassResponseDto dto = new ClassResponseDto();
                 dto.setClassId(resultSet.getInt("class_id"));
                 dto.setClassName(resultSet.getString("class_name"));
+                dto.setModuleId(resultSet.getInt("module_id"));
                 dto.setModuleName(resultSet.getString("module_name"));
+                dto.setCourseId(resultSet.getInt("course_id"));
                 dto.setCourseName(resultSet.getString("course_name"));
                 dto.setTeacherName(resultSet.getString("teacher_name"));
                 dto.setStartDate(resultSet.getDate("start_date").toLocalDate());
+                dto.setQuantity(resultSet.getInt("quantity_student"));
                 classes.add(dto);
             }
         } catch (SQLException e) {

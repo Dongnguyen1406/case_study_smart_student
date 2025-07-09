@@ -1,5 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.service.impl;
 
+
+import com.example.quan_ly_sinh_vien_codegym.dto.AssessmentDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.AttendanceDateDto;
 import com.example.quan_ly_sinh_vien_codegym.dto.ModuleAttendance;
 import com.example.quan_ly_sinh_vien_codegym.dto.StudentDto;
@@ -70,6 +72,11 @@ public class StudentService implements IStudentService {
     }
 
     @Override
+    public List<AssessmentDto> displayAssessments(String userName) {
+        return iStudentRepository.displayAssessments(userName);
+    }
+
+    @Override
     public List<AttendanceDateDto> displayAttendanceDate(String idStudent) {
         return  iStudentRepository.displayAttendanceDate(idStudent);
     }
@@ -79,3 +86,4 @@ public class StudentService implements IStudentService {
         return iStudentRepository.findAllDto();
     }
 }
+
