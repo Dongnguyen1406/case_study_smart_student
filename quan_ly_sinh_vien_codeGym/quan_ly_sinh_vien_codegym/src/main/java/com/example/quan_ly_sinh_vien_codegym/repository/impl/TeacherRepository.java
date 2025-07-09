@@ -16,7 +16,9 @@ public class TeacherRepository implements ITeacherRepository {
     private final String SELECT_TEACHER_BY_ID = "SELECT teacher_id, teacher_name, dob, gender, address, number_phone, email, status FROM teachers WHERE is_delete = 0 AND teacher_id = ?;";
     private final String UPDATE_TEACHER = "UPDATE teachers SET teacher_name = ?, dob = ?, gender = ?, address = ?, number_phone = ?, email = ?, status = ? WHERE teacher_id = ?;";
     private final String DELETE_TEACHER = "UPDATE teachers SET is_delete = 1 WHERE teacher_id = ?;";
+    private final String INSERT_TEACHER = "INSERT INTO teachers (teacher_id, teacher_name, dob, gender, address, number_phone, email, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, 3);";
 
+    
     @Override
     public List<Teacher> findAll() {
         List<Teacher> teachers = new ArrayList<>();
@@ -110,5 +112,28 @@ public class TeacherRepository implements ITeacherRepository {
 
     @Override
     public void add(Teacher teacher) {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TEACHER)) {
+
+            preparedStatement.setString(1, teacher.getTeacherId());
+            preparedStatement.setString(2, teacher.getTeacherName());
+            preparedStatement.setDate(3, java.sql.Date.valueOf(teacher.getDob()));
+            preparedStatement.setString(4, teacher.getGender());
+            preparedStatement.setString(5, teacher.getAddress());
+            preparedStatement.setString(6, teacher.getNumberPhone());
+            preparedStatement.setString(7, teacher.getEmail());
+            
+            int rows = preparedStatement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("✅ Thêm giáo viên thành công!");
+            }
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate entry")) {
+                System.out.println("giáo viên đã tồn tại!");
+            } else {
+                e.printStackTrace(); // In chi tiết hơn
+            }
+        }
     }
 }
