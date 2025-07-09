@@ -48,7 +48,7 @@ public class TeacherController extends HttpServlet {
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+        if (role == null || (!role.equals("teacher") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
@@ -194,7 +194,7 @@ public class TeacherController extends HttpServlet {
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+        if (role == null || (!role.equals("teacher") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
