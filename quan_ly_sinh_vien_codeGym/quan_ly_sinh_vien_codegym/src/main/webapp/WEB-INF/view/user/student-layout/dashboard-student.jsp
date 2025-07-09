@@ -93,12 +93,12 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/Spring 1.png');">
                     <div class="card-overlay">Front-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/softskills-man-icon-1.jpg');">
                     <div class="card-overlay">Back-End</div>
                 </div>
             </div>
@@ -120,12 +120,12 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/Spring 1.png');">
                     <div class="card-overlay">Front-End</div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="course-card" style="background-image: url('/assets/user/img/course3.png');">
+                <div class="course-card" style="background-image: url('/assets/user/img/softskills-man-icon-1.jpg');">
                     <div class="card-overlay">Back-End</div>
                 </div>
             </div>

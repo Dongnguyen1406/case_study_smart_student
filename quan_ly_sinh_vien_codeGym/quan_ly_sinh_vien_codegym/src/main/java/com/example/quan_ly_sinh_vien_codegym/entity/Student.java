@@ -1,6 +1,7 @@
 package com.example.quan_ly_sinh_vien_codegym.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Student {
     String studentId;
@@ -14,10 +15,24 @@ public class Student {
     String className;
     Boolean status;
     Boolean isDelete;
+    Integer classId;
 
     public Student() {
     }
 
+    public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, Integer classId) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.email = email;
+        this.startLearnDate = startLearnDate;
+        this.classId = classId;
+    }
+
+    
     public Student(String studentId, String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className, Boolean status, Boolean isDelete) {
         this.studentId = studentId;
         this.studentName = studentName;
@@ -30,6 +45,18 @@ public class Student {
         this.className = className;
         this.status = status;
         this.isDelete = isDelete;
+    }
+
+    public Student(String studentId, String studentName, String gender, LocalDate dob, String address, String numberPhone, String email, LocalDate startLearnDate, Integer classId) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.gender = gender;
+        this.dob = dob;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.email = email;
+        this.startLearnDate = startLearnDate;
+        this.classId = classId;
     }
 
     public Student(String studentName, LocalDate dob, String gender, String address, String numberPhone, String email, LocalDate startLearnDate, String className) {
@@ -142,4 +169,27 @@ public class Student {
     public void setDelete(Boolean delete) {
         isDelete = delete;
     }
+
+    public String getDobFormatted() {
+        return dob.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public String getStartLearnDateFormatted() {
+        return startLearnDate != null
+                ? startLearnDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                : "";
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    public String getClassIdSafe() {
+        return classId == null ? "" : String.valueOf(classId);
+    }
+
 }

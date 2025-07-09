@@ -45,7 +45,7 @@
                 <td class="text-center">${clazz.startDate}</td>
                 <td class="text-center">${clazz.quantity}</td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-warning btn-edit-class"
+                    <button type="button" class="btn btn-sm btn-edit-class"
                             data-id="${clazz.classId}"
                             data-name="${clazz.className}"
                             data-module="${clazz.moduleName}"
@@ -53,11 +53,11 @@
                             data-teacher="${clazz.teacherName}"
                             data-start="${clazz.startDate}"
                             data-size="${clazz.quantity}">
-                        ✏️
+                        <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-delete"
+                    <button type="button" class="btn btn-smbtn-delete"
                             data-id="${clazz.classId}">
-                        🗑️
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </td>
             </tr>
@@ -73,19 +73,19 @@
             <div class="modal-content">
                 <form action="${basePath}/admin?page=addClass" method="post" class="needs-validation" novalidate>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addClassModalLabel">➕ Thêm lớp học mới</h5>
+                        <h5 class="modal-title" id="addClassModalLabel">Thêm lớp học mới</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="addClassCode" class="form-label">Mã lớp</label>
-                                <input type="text" class="form-control" id="addClassCode" name="classCode" required>
+                                <input type="text" class="form-control" id="addClassCode" name="classCode" required pattern="^C\d{4}G1$">
                                 <div class="invalid-feedback">Vui lòng nhập mã lớp.</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="addClassName" class="form-label">Tên lớp</label>
-                                <input type="text" class="form-control" id="addClassName" name="className" required>
+                                <input type="text" class="form-control" id="addClassName" name="className" required pattern="^[A-Za-z0-9 ]{3,50}$">
                                 <div class="invalid-feedback">Vui lòng nhập tên lớp.</div>
                             </div>
                             <div class="col-md-3">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -143,14 +143,14 @@
                 <form action="${basePath}/admin?page=updateClass" method="post" class="needs-validation" novalidate>
                     <input type="hidden" id="editClassId" name="id"/>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editClassModalLabel">✏️ Cập nhật lớp học</h5>
+                        <h5 class="modal-title" id="editClassModalLabel">Cập nhật lớp học</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="editClassName" class="form-label">Tên lớp</label>
-                                <input type="text" class="form-control" id="editClassName" name="className" required>
+                                <input type="text" class="form-control" id="editClassName" name="className" required pattern="^[A-Za-z0-9 ]{3,50}$">
                                 <div class="invalid-feedback">Vui lòng nhập tên lớp.</div>
                             </div>
                             <div class="col-md-3">
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Lưu</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
@@ -215,7 +215,7 @@
                         Bạn có chắc chắn muốn xóa module này không?
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                        <button type="submit" class="btn" style="background-color: #272882; color: #ffffff">Xác nhận</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>

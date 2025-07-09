@@ -3,8 +3,10 @@ package com.example.quan_ly_sinh_vien_codegym.controller.user;
 import com.example.quan_ly_sinh_vien_codegym.entity.Account;
 import com.example.quan_ly_sinh_vien_codegym.entity.Student;
 import com.example.quan_ly_sinh_vien_codegym.service.IAccountService;
+import com.example.quan_ly_sinh_vien_codegym.service.IModuleService;
 import com.example.quan_ly_sinh_vien_codegym.service.IStudentService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.AccountService;
+import com.example.quan_ly_sinh_vien_codegym.service.impl.ModuleService;
 import com.example.quan_ly_sinh_vien_codegym.service.impl.StudentService;
 import com.example.quan_ly_sinh_vien_codegym.util.PasswordEncodeUtil;
 import com.example.quan_ly_sinh_vien_codegym.util.SessionUtil;
@@ -20,8 +22,10 @@ import java.time.LocalDate;
 
 @WebServlet(urlPatterns = "/student")
 public class StudentController extends HttpServlet {
-    private static IStudentService iStudentService = new StudentService();
-private static IAccountService iAccountService= new AccountService();
+    private static final IStudentService iStudentService = new StudentService();
+    private static final IAccountService iAccountService = new AccountService();
+    private static final IModuleService moduleService = new ModuleService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
@@ -30,8 +34,7 @@ private static IAccountService iAccountService= new AccountService();
         if (session != null) {
             role = (String) session.getAttribute("role");
         }
-        // thêm access quyền admin
-        if (role == null || !role.equals("user")) {
+        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
@@ -60,7 +63,7 @@ private static IAccountService iAccountService= new AccountService();
                 displayStudent(req, resp);
                 break;
             case "updatePassword":
-                updatePassword(req,resp);
+                updatePassword(req, resp);
                 break;
             default:
                 Student student = iStudentService.displayStudent(account.getUsername());
@@ -88,6 +91,7 @@ private static IAccountService iAccountService= new AccountService();
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
             Student student = iStudentService.displayStudent(account.getUsername());
+
             req.setAttribute("student", student);
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=display").forward(req, resp);
         }
@@ -97,6 +101,7 @@ private static IAccountService iAccountService= new AccountService();
     private void displayAttendance(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
         if (account != null) {
+            req.setAttribute("attendanceDate", iStudentService.displayAttendanceDate(account.getStudentId()));
             req.setAttribute("moduleAttendance", iStudentService.displayAttendance(account.getUsername()));
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=attendance").forward(req, resp);
         }
@@ -123,6 +128,15 @@ private static IAccountService iAccountService= new AccountService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String role = null;
+        if (session != null) {
+            role = (String) session.getAttribute("role");
+        }
+        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+            resp.sendRedirect("/access-denied.jsp");
+            return;
+        }
         String page = req.getParameter("page");
         if (page == null) {
             page = "";
@@ -132,7 +146,7 @@ private static IAccountService iAccountService= new AccountService();
                 edit(req, resp);
                 break;
             case "updatePassword":
-                savePassword(req,resp);
+                savePassword(req, resp);
                 break;
         }
     }
@@ -145,7 +159,7 @@ private static IAccountService iAccountService= new AccountService();
         Account account = (Account) SessionUtil.get(req, "account");
         System.out.println(account.getUsername());
         System.out.println(account.getPassword());
-        if (account.getPassword()==null||!PasswordEncodeUtil.check(currentPassword, account.getPassword())) {
+        if (account.getPassword() == null || !PasswordEncodeUtil.check(currentPassword, account.getPassword())) {
             req.setAttribute("error", "Mật khẩu hiện tại không đúng");
             req.getRequestDispatcher("WEB-INF/view/user/student.jsp?page=updatePassword").forward(req, resp);
             return;
@@ -167,15 +181,11 @@ private static IAccountService iAccountService= new AccountService();
         // --- HOẶC ---
         // Cách 2: Chuyển về trang chính
 
-    HttpSession session = req.getSession();
-    session.setAttribute("successMessage", "Cập nhật mật khẩu thành công!");
-    resp.sendRedirect(req.getContextPath() + "/student?page=display");
+        HttpSession session = req.getSession();
+        session.setAttribute("successMessage", "Cập nhật mật khẩu thành công!");
+        resp.sendRedirect(req.getContextPath() + "/student?page=display");
 
     }
-
-
-
-
 
 
     private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

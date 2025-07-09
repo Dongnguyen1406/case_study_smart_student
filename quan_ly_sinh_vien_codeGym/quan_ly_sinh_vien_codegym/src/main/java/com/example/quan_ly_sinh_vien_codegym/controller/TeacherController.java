@@ -44,13 +44,14 @@ public class TeacherController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) SessionUtil.get(req, "account");
         HttpSession session = req.getSession();
-        String role = (String) session.getAttribute("role");
-
-        if (account == null || !role.equals("teacher")) {
+        String role = null;
+        if (session != null) {
+            role = (String) session.getAttribute("role");
+        }
+        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
             resp.sendRedirect("/access-denied.jsp");
             return;
         }
-
         String page = req.getParameter("page");
         if (page == null) page = "dashboard";
 
@@ -189,6 +190,14 @@ public class TeacherController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        String role = null;
+        if (session != null) {
+            role = (String) session.getAttribute("role");
+        }
+        if (role == null || (!role.equals("user") && !role.equals("admin"))) {
+            resp.sendRedirect("/access-denied.jsp");
+            return;
+        }
         @SuppressWarnings("unchecked")
         List<ClassResponseDto> managedClasses = (List<ClassResponseDto>) session.getAttribute("managedClasses");
         if (managedClasses == null) {

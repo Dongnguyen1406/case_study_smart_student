@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 public class ClassResponseDto {
     private int classId;
+    private int moduleId;
+    private int courseId;
+    private String teacherId;
     private String className;
     private String moduleName;
     private String courseName;
@@ -41,6 +44,30 @@ public class ClassResponseDto {
 
     public void setClassId(int classId) {
         this.classId = classId;
+    }
+
+    public int getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(int moduleId) {
+        this.moduleId = moduleId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getClassName() {

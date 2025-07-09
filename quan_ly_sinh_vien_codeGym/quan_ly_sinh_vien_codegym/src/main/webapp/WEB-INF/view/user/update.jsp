@@ -29,7 +29,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title mb-4 fw-semibold">Thông tin cá nhân</h5>
-                    <form action="${basePath}/student" method="post">
+                    <form action="${basePath}/student" method="post" class="needs-validation">
                         <input type="hidden" name="page" value="update"/>
                         <div class="mb-3">
                             <label for="studentName" class="form-label">Họ và tên <span style="color:red">*</span></label>

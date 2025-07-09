@@ -8,7 +8,6 @@ create table modules(
 
 create table courses(
 	course_id int primary key auto_increment,
-	course_id int primary key auto_increment,
     course_name varchar(100) not null
 );
 create table roles(
@@ -323,7 +322,13 @@ select s.student_name, atts.status_name,ass.status  from students s
  join attendance_statuses atts on att.status_id=atts.status_id
  join assessments ass on s.student_id=ass.student_id;
 
- 
+   select s.student_id,  m.module_name,a.attendance_date,ast.status_name  from students s 
+            join attendance a on s.student_id=a.student_id 
+            join student_modules st  on s.student_id=st.student_id
+            join modules m on st.module_id=m.module_id
+            join attendance_statuses ast on a.status_id=ast.status_id 
+            join accounts acc on s.student_id=acc.student_id where s.student_id='HS001';
+
  select s.student_id,m.module_name, sc.quiz_score, sc.practice_score,sc.average_score 
  from students s 
  join student_modules sm on s.student_id= sm.student_id
@@ -381,6 +386,14 @@ join courses co on co.course_id = c.course_id
 join teachers t on t.teacher_id = c.teacher_id
 where c.is_delete = false and t.is_delete = false;
 
+select c.class_id, c.class_name, m.module_name, co.course_name, t.teacher_name , c.start_date, c.quantity_student
+from classes c
+join modules m on c.module_id = m.module_id
+join courses co on co.course_id = c.course_id
+join teachers t on t.teacher_id = c.teacher_id
+where c.is_delete = 0;
 
-
-
+select s.student_id, s.student_name, s.gender, s.dob, s.address, s.email, s.number_phone, c.class_name, c.class_id
+from students s
+join classes c on c.class_id = s.class_id
+where c.is_delete = 0 and s.is_delete = 0;

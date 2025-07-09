@@ -17,6 +17,14 @@ public class AttendanceDateDto {
         this.status = status;
     }
 
+    public AttendanceDateDto(String moduleName,String studentId, LocalDate attendanceDate, String status ) {
+        this.moduleName = moduleName;
+        this.studentId = studentId;
+        this.attendanceDate = attendanceDate;
+        this.status = status;
+
+    }
+
     public String getModuleName() {
         return moduleName;
     }
